@@ -1,114 +1,131 @@
 import React, { useContext, useEffect, useState } from "react"
 import { GameContext } from "./GameInformationProvider"
 import SpotifyPlayer from 'react-spotify-web-playback';
-
-
+import { useHistory } from "react-router-dom";
+import {Timer} from "./GameTimer"
 
   export const GameScreen = () =>{
+    const history = useHistory();
 
-      const {playerId, getPlayerIdStartPlayer, nextTrack, getTrackInfo, trackInfo} = useContext(GameContext)
+    const {getPlayerIdStartPlayer, nextTrack, getTrackInfo, trackInfo} = useContext(GameContext)
+    
+    const [answerState, setAnswerState] = useState({
+      answerSong: ' ',
+      answerArtist: ' '
+    })
+    const [currentScore, setCurrentScore] = useState(0)
 
-      const [answerState, setAnswerState] = useState({
-        answerSong: ' ',
-        answerArtist: ' '
-      })
-
-      const handleControlledInputChange = (event) => {
-        const newAnswer = { ...answerState }
-        newAnswer[event.target.name] = event.target.value
-        setAnswerState(newAnswer)
+    const handleControlledInputChange = (event) => {
+      const newAnswer = { ...answerState }
+      newAnswer[event.target.name] = event.target.value
+      setAnswerState(newAnswer)
     }
-      const compareTrackAnswer=(trackInfo,answerState )=>{
-        if (trackInfo.songName === answerState.answerSong){
-          correctTrackAnswer()
-        }else{
-          incorrectTrackAnswer()
-        }
+    
+    const compareTrackAnswer=(trackInfo,answerState )=>{
+      let userAnswer = trackInfo.songName.toLowerCase()
+      let correctAnswer = answerState.answerSong.toLowerCase()
+      if (userAnswer.includes(correctAnswer)||correctAnswer.includes(userAnswer) === answerState.answerArtist){
+        correctTrackAnswer()
+      }else{
+        incorrectTrackAnswer()
       }
+    }
 
-      const compareArtistAnswer=(trackInfo,answerState )=>{
-        if (trackInfo.artistName === answerState.answerArtist){
-          correctArtistAnswer()
-        }else{
-          incorrectArtistAnswer()
-        }
-      }
-    const handleAnswerSubmit = () => {
-      
-      // check answer
-      //handle stats/saving
-      //fast forward next track
+    const compareArtistAnswer=(trackInfo,answerState )=>{
       getTrackInfo()
+      let userAnswer = trackInfo.artistName.toLowerCase()
+      let correctAnswer = answerState.answerArtist.toLowerCase()
+      if (userAnswer.includes(correctAnswer)||correctAnswer.includes(userAnswer) === answerState.answerArtist){
+        correctArtistAnswer()
+      }else{
+        incorrectArtistAnswer()
+      }
+    }
+    
+    const handleAnswerSubmit = () => {
       compareTrackAnswer(trackInfo, answerState)
       compareArtistAnswer(trackInfo, answerState)
       nextTrack()
-      }
-      
-       
-  
-
-  const correctTrackAnswer = () =>{
-      console.log(`Thats it!!!! the song is  ${trackInfo.songName}`);
-  }
-  const incorrectTrackAnswer = ()=>{
-    console.log(`Better luck next time! The name of this song is ${trackInfo.songName}`)
-  }
-  const correctArtistAnswer = () =>{
-    console.log(`Thats right! This song was performed by ${trackInfo.artistName}`);
-  }
-  const incorrectArtistAnswer = ()=>{
-  console.log(`You'll do better next time. That was a song by ${trackInfo.artistName}`)
-  }
-
+    }
     
-    const startPlayer = () =>{
-      getPlayerIdStartPlayer()
+    const correctTrackAnswer = () =>{
+      console.log(`Thats it!!!! the song is ${trackInfo.songName}`);
+      setCurrentScore(currentScore => currentScore + 1)
     }
 
+    const incorrectTrackAnswer = ()=>{
+      console.log(`Better luck next time! The name of this song is ${trackInfo.songName}`)
+    }
+    
+    const correctArtistAnswer = () =>{
+      console.log(`Thats it!!!! the song is ${trackInfo.songName}`);
+      setCurrentScore(currentScore => currentScore + 1)
+    }
+    
+    const incorrectArtistAnswer = ()=>{
+    console.log(`Maybe next time. That was a song by ${trackInfo.artistName}`)
+    }
 
+    const startPlayer = () =>{
+      getPlayerIdStartPlayer()
+      getTrackInfo()
+      
+      //future//a put call will be made creating a new game in the db. A variable will be created that will keep track of the users points scored
+    }
+
+    const endGame = () =>{
+      console.log(currentScore);
+      history.push("/select");
+    }
+
+    useEffect(() => {
+      console.log(currentScore);
+  },[])
+  
     return(
       <>
         <form className="guessForm">
-            <h2 className="">Enter your guess</h2>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="trackName">Song Name</label>
-                    <input type="text" id="answerSong" name="answerSong" required autoFocus className="form-control"
-                        placeholder="Track Name"
-                        onChange={handleControlledInputChange}
-                         
-                        />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="artistName">Artist Name</label>
-                    <input type="text" id="answerArtist" name="answerArtist" required autoFocus className="form-control"
-                        placeholder="Artist Name"
-                        onChange={handleControlledInputChange}
-                         
-                        />
-                </div>
-            </fieldset>
-            
-            {/* //saving/updting */}
-            <button className="btn btn-primary"
-                // disabled={isLoading}
-                onClick={event => {
-                    event.preventDefault()
-                    handleAnswerSubmit()
-                }}>
-                
-                <>Submit</></button>
-            {/* //cancelling a save/update */}
-                <button className="btn btn-primary"
-                // disabled={isLoading}
-                onClick={event => {
-                    event.preventDefault()
-                    //handleCancelEvent()
-                }}>
-                {/* {EventId ? <>Save Event</> :  */}
-                <>Cancel</></button>
+          <h2 className="">Enter your guess</h2>
+          <fieldset>
+            <div className="form-group">
+              <label htmlFor="trackName">Song Name</label>
+              <input type="text" 
+                id="answerSong" 
+                name="answerSong" 
+                required autoFocus     
+                className="form-control"
+                placeholder="Track Name"
+                onChange={handleControlledInputChange}
+              />
+
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <div className="form-group">
+              <label htmlFor="artistName">Artist Name</label>
+                  <input type="text" 
+                    id="answerArtist" 
+                    name="answerArtist" 
+                    required autoFocus 
+                    className="form-control"
+                    placeholder="Artist Name"
+                    onChange={handleControlledInputChange}
+                  />
+            </div>
+          </fieldset>
+          <button className="btn btn-primary"
+            onClick={event => {
+              event.preventDefault()
+              handleAnswerSubmit()
+            }}><>Submit</>
+          </button>
+          
+          <button className="btn btn-primary"
+            onClick={event => {
+              event.preventDefault()
+            }}><>Cancel</>
+          </button>
 
         </form >
         <br/>
@@ -116,7 +133,7 @@ import SpotifyPlayer from 'react-spotify-web-playback';
         <br/>
         <br/>
         <div>
-            <SpotifyPlayer
+          <SpotifyPlayer
             token= {localStorage.getItem("spotifyAuthToken")}
             uris={[`spotify:playlist:6TeyryiZ2UEf3CbLXyztFA`]}
             styles={{
@@ -131,37 +148,47 @@ import SpotifyPlayer from 'react-spotify-web-playback';
               trackNameColor: '#fff',
               height: 1,
             }}
-            /> 
-            </div>
-            <div>
-            <br/>
-            <br/>
-            
-            <button className="btn btn-primary"
-                onClick={event => {
-                    event.preventDefault()
-                    getPlayerIdStartPlayer()
-                    
-                     // Prevent browser from submitting the form and refreshing the page
-                }}>Play
-            </button>
-            <button className="btn btn-primary"
-                onClick={event => {
-                    event.preventDefault()
-                    nextTrack()
-                    
-                     // Prevent browser from submitting the form and refreshing the page
-                }}>Next
-            </button>
-            <button className="btn btn-primary"
-                onClick={event => {
-                    event.preventDefault()
-                    getTrackInfo()
-                    
-                     // Prevent browser from submitting the form and refreshing the page
-                }}>info
-            </button>
+          /> 
         </div>
-        </>
-        )
+        <Timer
+          endGame = {endGame}
+        />
+        <div>
+        <br/>
+        <br/>
+          
+        <button className="btn btn-primary"
+          onClick={event => {
+            event.preventDefault()
+            startPlayer()
+          }}>Play
+        </button>
+        <button className="btn btn-primary"
+          onClick={event => {
+            event.preventDefault()
+            nextTrack()
+          }}>Next
+        </button>
+        <button className="btn btn-primary"
+          onClick={event => {
+            event.preventDefault()
+            getTrackInfo()
+          }}>info
+        </button>
+        <button className="btn btn-primary"
+          onClick={event => {
+            event.preventDefault()
+            endGame()
+          }}>endGame
+        </button>
+        </div>
+      </>
+    )
   }
+//1: help getting current song info to update accordingly
+//2: help getting system to check for spotify auth and react accodingly
+
+//4: get application register/login together
+
+//conditional to check local storage token for def
+//keep in local storage
