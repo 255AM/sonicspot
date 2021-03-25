@@ -21,3 +21,26 @@ loop until time is gone
 
 rock playlist
 6TeyryiZ2UEf3CbLXyztFA
+
+Things to add 3.24
+
+circular countdown timer to game screen
+rename components to include main screen being /
+music starts immediately on game screen load()
+visualize the music playing or add a looping space video in a modal that only runs as music plays 
+redesign end game modal
+add dark background colors to app components
+Do something with the select screen
+revisit the login and register and not registered error
+add other playlists for other categories
+shuffle the playlists (may need to create a custom array of songs instead of relying on the actual playlist)
+create a high score list
+create a username field to use instead of email
+create a right or wrong answer feedback for user
+
+
+Bonus **
+track players games
+track player starts
+enable "add to playlist " fx
+

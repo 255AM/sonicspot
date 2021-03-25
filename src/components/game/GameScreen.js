@@ -3,7 +3,7 @@ import { GameContext } from "./GameInformationProvider"
 import SpotifyPlayer from 'react-spotify-web-playback';
 import { useHistory, Link } from "react-router-dom";
 import {Timer} from "./GameTimer"
-import { Form, Container, Modal, Button, Image, Header, Grid, Message, Segment} from 'semantic-ui-react'
+import { Form, Container, Modal, Button, Image, Header, Grid, Icon, Segment} from 'semantic-ui-react'
 
 
 
@@ -116,38 +116,24 @@ import { Form, Container, Modal, Button, Image, Header, Grid, Message, Segment} 
                 id='answerArtist'
                 onChange={handleControlledInputChange}
               />
-              <Button 
+              <Button animated
                 size='huge'
-                content='Submit' 
                 onClick={event => {
-                event.preventDefault()
-                handleAnswerSubmit()
-                
-              }}  />
-            </Segment>
-          </Form>
+                  event.preventDefault()
+                  handleAnswerSubmit()
+                }}>
+              <Button.Content visible>Next Song</Button.Content>
+              <Button.Content hidden>
+              <Icon name='fast forward' />
+              </Button.Content>
+              </Button>
+              </Segment>
+              </Form>
+              </Grid.Column>
+              </Grid>
          
-        </Grid.Column>
-        </Grid>
-
-
-
-
-
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         <div>
-        <br/>
-        <br/>
+        
           
         <button className="btn btn-primary"
           onClick={event => {

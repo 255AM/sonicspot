@@ -1,5 +1,5 @@
 import React, { useState, useContext, createContext, useEffect } from "react"
-import { Progress } from 'semantic-ui-react'
+import { Progress, Container, Icon, Header } from 'semantic-ui-react'
 
 export const Timer = ({endGame}) =>{
         const [seconds, setSeconds] = useState(120)
@@ -36,9 +36,19 @@ export const Timer = ({endGame}) =>{
           }
         })
         return (
+            <>
             
-            <p>
-            Remaining: {seconds}
-            </p>);
+                
+                <Header size='huge'><Icon bordered name='clock outline' />Remaining: {seconds}</Header>
+                
+                
+            
+            
+            
+</>
+        )
+
+
+            
 }
 
