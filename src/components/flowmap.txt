@@ -1,0 +1,23 @@
+Load Home Page
+presetn get auth button
+on button press
+send to spotify auth 
+return to Home
+present categories
+on slecection
+init player(with no tracks loaded) & getPlayerId fetch & getPlaylist ftech 
+draw start button
+on button press
+init loaded player & getTrackInfo fetch & draw buzzer button
+on press
+stop playback fetch & draw anser form with submit button
+on submit
+compare input answer to track info retrieved on 10
+inform weather right or wrong with modal
+on close button press
+go to 9
+loop until time is gone
+
+
+rock playlist
+6TeyryiZ2UEf3CbLXyztFA
