@@ -8,13 +8,13 @@ import { useHistory } from "react-router-dom"
 //present user a series of boxes that represent categories. Each categories will have a unique id. Each unique id will have an associated uri to use for playlist retrieval from spotify.
     export const GameSelect = () => {
         const history  = useHistory()
-        const {uri, getUri, categoryId, getCategoryId} = useContext(GameContext)
-        const handleCatgoryChoice = () => {
-            getCategoryId(1)
+        const {uri, getUri} = useContext(GameContext)
+        const handleCatgoryChoice = (x) => {
+            getUri(x)
             history.push("/game")
         }
         useEffect(() => {
-            getUri(1)
+                
         },[])
 
         return(
@@ -46,12 +46,12 @@ import { useHistory } from "react-router-dom"
                         <Card
                                 width= '5px'
                                 color='blue'
-                                header="Rock 'N Roll"
+                                header="80s country"
                                 meta='Friend'
-                                description=" Rock 'N Roll "
+                                description=" 80s country "
                                 onClick={event => {
                                     event.preventDefault() // Prevent browser from submitting the form and refreshing the page
-                                    handleCatgoryChoice(1)
+                                    handleCatgoryChoice(2)
                                 }}
                             />
                         </Grid.Column>
@@ -59,12 +59,12 @@ import { useHistory } from "react-router-dom"
                         <Card
                                 width= '5px'
                                 color='blue'
-                                header="Rock 'N Roll"
+                                header="Hot Country Hits"
                                 meta='Friend'
-                                description=" Rock 'N Roll "
+                                description=" Hot Country Hits "
                                 onClick={event => {
                                     event.preventDefault() // Prevent browser from submitting the form and refreshing the page
-                                    handleCatgoryChoice(1)
+                                    handleCatgoryChoice(3)
                                 }}
                             />
                          </Grid.Column>
@@ -72,12 +72,12 @@ import { useHistory } from "react-router-dom"
                         <Card
                                 width= '5px'
                                 color='blue'
-                                header="Rock 'N Roll"
+                                header="Best of the 90s"
                                 meta='Friend'
-                                description=" Rock 'N Roll "
+                                description=" Best of the 90s "
                                 onClick={event => {
                                     event.preventDefault() // Prevent browser from submitting the form and refreshing the page
-                                    handleCatgoryChoice(1)
+                                    handleCatgoryChoice(4)
                                 }}
                             />
                         </Grid.Column>

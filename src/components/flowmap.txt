@@ -24,20 +24,21 @@ rock playlist
 
 Things to add 3.24
 
-circular countdown timer to game screen
-rename components to include main screen being /
-music starts immediately on game screen load()
-visualize the music playing or add a looping space video in a modal that only runs as music plays 
+revisit the login and register and not registered error
+**rename components to include main screen being /**3.25
+**music starts immediately on game screen load()** complications with library spotify player. Instead. Defined another modal to start game on click.Timer as well******3.25
+***create a right and wrong answer feedback for user****BONUS Cleared inpouts on submits(3.25)
 redesign end game modal
+add other playlists for other categories
+
+create a username field to use instead of email
+create a high score list
 add dark background colors to app components
 Do something with the select screen
-revisit the login and register and not registered error
-add other playlists for other categories
+visualize the music playing or add a looping space video in a modal that only runs as music plays 
 shuffle the playlists (may need to create a custom array of songs instead of relying on the actual playlist)
-create a high score list
-create a username field to use instead of email
-create a right or wrong answer feedback for user
-
+add carousel at select page
+circular countdown timer to game screen
 
 Bonus **
 track players games

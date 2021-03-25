@@ -20,15 +20,13 @@ export const GameInformationProvider = (props) => {
         .then(res => res.json())
         .then(res => res.spotifyPlaylistUri)
         .then(setUri)
-        .then(console.log(uri));
+        
     }
 
-    const getCategoryId = (value) =>{
-      setCategoryId(value)
-    }
+    
 
     //Call gets spotify sdk player id and uses that id to start album playback
-    const getPlayerIdStartPlayer = () => {
+    const getPlayerIdStartPlayer = (uri) => {
       var myHeaders = new Headers();
       let toker = localStorage.getItem('spotifyAuthToken')
       myHeaders.append("Authorization", `Bearer ${toker}`);
@@ -39,20 +37,25 @@ export const GameInformationProvider = (props) => {
         redirect: 'follow'
       };
       
+      
       fetch("https://api.spotify.com/v1/me/player/devices", requestOptions)
         .then(response => response.json())
-        .then(result => startAlbum(result.devices[0].id))
+        .then(result => {
+          console.log(result)
+          console.log(result.devices)
+          startAlbum(result.devices[0].id, uri)
+        })
         
     }
     
     
-    const startAlbum = (deviceId) =>{
+    const startAlbum = (deviceId, uri) =>{
       let toker = localStorage.getItem('spotifyAuthToken')
       var myHeaders = new Headers();
       myHeaders.append("Authorization",  `Bearer ${toker}`);
       myHeaders.append("Content-Type", "text/plain");
         
-      var raw = "{\r\n  \"context_uri\": \"spotify:playlist:6TeyryiZ2UEf3CbLXyztFA\",\r\n  \"offset\": {\r\n    \"position\": 0\r\n  },\r\n   \"position_ms\": 0\r\n}";
+      var raw = `"{\r\n  \"context_uri\": \"${uri}\",\r\n  \"offset\": {\r\n    \"position\": 0\r\n  },\r\n   \"position_ms\": 0\r\n}"`;
 
       var requestOptions = {
         method: 'PUT',
@@ -109,7 +112,7 @@ export const GameInformationProvider = (props) => {
           uri, 
           getUri, 
           categoryId, 
-          getCategoryId, 
+           
           playerId, 
           getPlayerIdStartPlayer, 
           startAlbum, 

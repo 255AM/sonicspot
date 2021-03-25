@@ -3,12 +3,12 @@ import { Progress, Container, Icon, Header } from 'semantic-ui-react'
 
 export const Timer = ({endGame}) =>{
         const [seconds, setSeconds] = useState(120)
-        const [minutes, setMinutes] = useState()
+        const [minutes, setMinutes] = useState(0)
         
         function updateTime() {
           if (minutes == 0 && seconds == 0) {
             endGame()
-            //console.log(endGame);
+            
           }
           else {
             if (seconds == 0) {
@@ -18,11 +18,7 @@ export const Timer = ({endGame}) =>{
               setSeconds(seconds => seconds - 1);
             }
           }
-          const ProgressExampleActive = () => (
-            <Progress percent={60} active>
-              Active
-            </Progress>
-          )
+          
         }
       
         useEffect(() => {
@@ -37,15 +33,8 @@ export const Timer = ({endGame}) =>{
         })
         return (
             <>
-            
-                
                 <Header size='huge'><Icon bordered name='clock outline' />Remaining: {seconds}</Header>
-                
-                
-            
-            
-            
-</>
+            </>
         )
 
 
