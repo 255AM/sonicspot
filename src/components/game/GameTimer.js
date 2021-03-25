@@ -1,8 +1,9 @@
 import React, { useState, useContext, createContext, useEffect } from "react"
+import { Progress } from 'semantic-ui-react'
 
 export const Timer = ({endGame}) =>{
-        const [seconds, setSeconds] = useState(0)
-        const [minutes, setMinutes] = useState(2)
+        const [seconds, setSeconds] = useState(120)
+        const [minutes, setMinutes] = useState()
         
         function updateTime() {
           if (minutes == 0 && seconds == 0) {
@@ -17,6 +18,11 @@ export const Timer = ({endGame}) =>{
               setSeconds(seconds => seconds - 1);
             }
           }
+          const ProgressExampleActive = () => (
+            <Progress percent={60} active>
+              Active
+            </Progress>
+          )
         }
       
         useEffect(() => {
@@ -29,7 +35,10 @@ export const Timer = ({endGame}) =>{
             clearTimeout(token);
           }
         })
-        return (<p>
-            time: {minutes}:{seconds}
+        return (
+            
+            <p>
+            Remaining: {seconds}
             </p>);
 }
+

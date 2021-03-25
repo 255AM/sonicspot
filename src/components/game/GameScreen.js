@@ -1,11 +1,17 @@
 import React, { useContext, useEffect, useState } from "react"
 import { GameContext } from "./GameInformationProvider"
 import SpotifyPlayer from 'react-spotify-web-playback';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import {Timer} from "./GameTimer"
+import { Form, Container, Modal, Button, Image, Header, Grid, Message, Segment} from 'semantic-ui-react'
+
+
+
+
 
   export const GameScreen = () =>{
     const history = useHistory();
+    const [open, setOpen] = React.useState(false)
 
     const {getPlayerIdStartPlayer, nextTrack, getTrackInfo, trackInfo} = useContext(GameContext)
     
@@ -75,7 +81,7 @@ import {Timer} from "./GameTimer"
 
     const endGame = () =>{
       console.log(currentScore);
-      history.push("/select");
+      setOpen(true)
     }
 
     useEffect(() => {
@@ -84,75 +90,61 @@ import {Timer} from "./GameTimer"
   
     return(
       <>
-        <form className="guessForm">
-          <h2 className="">Enter your guess</h2>
-          <fieldset>
-            <div className="form-group">
-              <label htmlFor="trackName">Song Name</label>
-              <input type="text" 
-                id="answerSong" 
-                name="answerSong" 
-                required autoFocus     
-                className="form-control"
-                placeholder="Track Name"
-                onChange={handleControlledInputChange}
-              />
 
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <div className="form-group">
-              <label htmlFor="artistName">Artist Name</label>
-                  <input type="text" 
-                    id="answerArtist" 
-                    name="answerArtist" 
-                    required autoFocus 
-                    className="form-control"
-                    placeholder="Artist Name"
-                    onChange={handleControlledInputChange}
-                  />
-            </div>
-          </fieldset>
-          <button className="btn btn-primary"
-            onClick={event => {
-              event.preventDefault()
-              handleAnswerSubmit()
-            }}><>Submit</>
-          </button>
-          
-          <button className="btn btn-primary"
-            onClick={event => {
-              event.preventDefault()
-            }}><>Cancel</>
-          </button>
-
-        </form >
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <div>
-          <SpotifyPlayer
-            token= {localStorage.getItem("spotifyAuthToken")}
-            uris={[`spotify:playlist:6TeyryiZ2UEf3CbLXyztFA`]}
-            styles={{
-              activeColor: '#fff',
-              bgColor: '#fff',
-              color: '#fff',
-              loaderColor: '#fff',
-              sliderColor: '#fff',
-              sliderTrackColor: '#fff',
-              sliderHandleColor: '#fff',
-              trackArtistColor: '#fff',
-              trackNameColor: '#fff',
-              height: 1,
-            }}
-          /> 
-        </div>
+        
+        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+        <Grid.Column style={{ maxWidth: 900 }}>
+        <Container>
         <Timer
           endGame = {endGame}
         />
+        </Container>
+          
+          <Form size='large'>
+            <Segment stacked>
+              <Form.Input
+                size='big' 
+                placeholder='Song Title'
+                name='answerSong'
+                id='answerSong'
+                onChange={handleControlledInputChange} 
+              />
+              <Form.Input
+                size='big'
+                placeholder='Artist Name'
+                name='answerArtist'
+                id='answerArtist'
+                onChange={handleControlledInputChange}
+              />
+              <Button 
+                size='huge'
+                content='Submit' 
+                onClick={event => {
+                event.preventDefault()
+                handleAnswerSubmit()
+                
+              }}  />
+            </Segment>
+          </Form>
+         
+        </Grid.Column>
+        </Grid>
+
+
+
+
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         <div>
         <br/>
         <br/>
@@ -181,6 +173,60 @@ import {Timer} from "./GameTimer"
             endGame()
           }}>endGame
         </button>
+        </div>
+
+        <Modal
+                  onClose={() => setOpen(false)}
+                  onOpen={() => setOpen(true)}
+                  open={open}
+                  trigger={<Button>Show Modal</Button>}
+                >
+                  <Modal.Header>Select a Photo</Modal.Header>
+                  <Modal.Content image>
+                    <Image size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' wrapped />
+                    <Modal.Description>
+                      <Header>Game Over!!!</Header>
+                      <p>
+                        You're out of time!!
+                        Youre final score is {currentScore}
+                      </p>
+                      
+                    </Modal.Description>
+                  </Modal.Content>
+                  <Modal.Actions>
+                    <Button color='black' onClick={() => setOpen(false)}>
+                      Nope
+                    </Button>
+                    <Button
+                      content="Yep, that's me"
+                      labelPosition='right'
+                      icon='checkmark'
+
+                      onClick={
+                        () => setOpen(false),
+                        () => history.push('/select')
+                      }
+                      positive
+                    />
+                  </Modal.Actions>
+                </Modal>
+                <div>
+          <SpotifyPlayer
+            token= {localStorage.getItem("spotifyAuthToken")}
+            uris={[`spotify:playlist:6TeyryiZ2UEf3CbLXyztFA`]}
+            styles={{
+              activeColor: '#fff',
+              bgColor: '#fff',
+              color: '#fff',
+              loaderColor: '#fff',
+              sliderColor: '#fff',
+              sliderTrackColor: '#fff',
+              sliderHandleColor: '#fff',
+              trackArtistColor: '#fff',
+              trackNameColor: '#fff',
+              height: 1,
+            }}
+          /> 
         </div>
       </>
     )

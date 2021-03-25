@@ -1,16 +1,10 @@
-
-
-
-
-
-
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter as Router } from "react-router-dom"
 import { SonicSpot } from './components/SonicSpot';
 import reportWebVitals from './reportWebVitals';
+import 'semantic-ui-css/semantic.min.css'
 
 ReactDOM.render(
   <React.StrictMode>
