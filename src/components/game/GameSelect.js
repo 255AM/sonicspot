@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, createContext } from "react"
 import { GameContext } from './GameInformationProvider'
-import { Card, Container, Divider, Grid, Header, Image } from 'semantic-ui-react'
+import { Card, Menu, Divider, Grid, Header, Image } from 'semantic-ui-react'
 import './GameSelect.css'
 import { useHistory } from "react-router-dom"
 
@@ -19,6 +19,23 @@ import { useHistory } from "react-router-dom"
 
         return(
             <>
+
+               < Menu>
+                <Menu.Menu position='right'>
+                    
+                    <Menu.Item
+                        name='Welcome user'
+                        //active={activeItem === 'logout'}
+                        //onClick={this.handleItemClick}
+                    />
+                    <Menu.Item
+                        name='logout'
+                        //active={activeItem === 'logout'}
+                        //onClick={this.handleItemClick}
+                    />
+                    </Menu.Menu>
+                    
+                </Menu>
             
                 <Grid columns={5} textAlign='center'  style={{ height: '100vh' }}          verticalAlign='middle' >
                     <Grid.Row >
