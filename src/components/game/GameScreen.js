@@ -39,7 +39,7 @@ export const GameScreen = () =>{
     }
 
     const compareArtistAnswer=(trackInfo,answerState )=>{
-      getTrackInfo()
+      console.log(getTrackInfo())
       let userAnswer = trackInfo.artistName.toLowerCase()
       let correctAnswer = answerState.answerArtist.toLowerCase()
       if (userAnswer.includes(correctAnswer)||correctAnswer.includes(userAnswer) === answerState.answerArtist){
@@ -59,9 +59,6 @@ export const GameScreen = () =>{
         nextTrack()
       }
       
-      
-    
-    
     const correctTrackAnswer = () =>{
       setCurrentScore(currentScore => currentScore + 1)
       setSongResponse(`Thats it!!!! the song is "${trackInfo.songName}". You earn 1 point!`)
@@ -82,6 +79,7 @@ export const GameScreen = () =>{
 
     const startPlayer = () =>{
       getPlayerIdStartPlayer()
+      console.log('here');
     }
 
     const endGame = () =>{
@@ -211,7 +209,7 @@ export const GameScreen = () =>{
                 <div>
           <SpotifyPlayer
             token= {localStorage.getItem("spotifyAuthToken")}
-            uris={[`spotify:playlist:${uri}`]}
+            uris={["spotify:playlist:6TeyryiZ2UEf3CbLXyztFA"]}
             styles={{
               activeColor: '#fff',
               bgColor: '#fff',
@@ -274,3 +272,5 @@ export const GameScreen = () =>{
 
 //conditional to check local storage token for def
 //keep in local storage
+
+// "spotify:playlist:6TeyryiZ2UEf3CbLXyztFA"

@@ -14,7 +14,7 @@ import { useHistory } from "react-router-dom"
             history.push("/game")
         }
         useEffect(() => {
-                
+            
         },[])
 
         return(
@@ -102,38 +102,6 @@ import { useHistory } from "react-router-dom"
                 
                 
            </>     
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
         )
     }
 

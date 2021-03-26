@@ -28,8 +28,9 @@ revisit the login and register and not registered error
 **rename components to include main screen being /**3.25
 **music starts immediately on game screen load()** complications with library spotify player. Instead. Defined another modal to start game on click.Timer as well******3.25
 ***create a right and wrong answer feedback for user****BONUS Cleared inpouts on submits(3.25)
-redesign end game modal
-add other playlists for other categories
+****redesign end game modal*********
+*****add other playlists for other categories(in place, having trouble adding variables to body of put however, seek asistance)
+add input labels
 
 create a username field to use instead of email
 create a high score list
