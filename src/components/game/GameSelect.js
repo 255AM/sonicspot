@@ -20,76 +20,71 @@ import { useHistory } from "react-router-dom"
         return(
             <>
             
-                <Grid centered >
-                    <Grid.Row centered columns={1}>
-                        <Container className = 'game-select-title' textAlign= 'center'> 
-                            Game To Play Music
-                        </Container>
+                <Grid columns={5} textAlign='center'  style={{ height: '100vh' }}          verticalAlign='middle' >
+                    <Grid.Row >
+                        <h1 className='selectHeader' color='black'>    Game that plays music
+                        </h1>
                     </Grid.Row>
-
-                    <Grid.Row centered columns={5}>
+                
+                    <Grid.Row >
                         <Grid.Column>
-                        <Card
-                                width= '5px'
-                                color='blue'
-                                header="Rock 'N Roll"
-                                meta='Friend'
-                                description=" Rock 'N Roll "
-                                onClick={event => {
-                                    event.preventDefault() // Prevent browser from submitting the form and 
-                                    handleCatgoryChoice(1)
+                                <Card
                                     
-                                }}
-                            />
+                                    
+                                    color='blue'
+                                    header="Classic Rock's Greatest"
+                                    onClick={event => {
+                                        event.preventDefault() // Prevent browser from submitting the form and 
+                                        handleCatgoryChoice(1)
+                                        
+                                    }}
+                                />
+                            </Grid.Column>
+                        <Grid.Column>
+                            <Card
+                                    
+                                    color='blue'
+                                    header="80s Country Hits"
+                                    
+                                    onClick={event => {
+                                        event.preventDefault() // Prevent browser from submitting the form and refreshing the page
+                                        handleCatgoryChoice(2)
+                                    }}
+                                />
                         </Grid.Column>
                         <Grid.Column>
-                        <Card
-                                width= '5px'
-                                color='blue'
-                                header="80s country"
-                                meta='Friend'
-                                description=" 80s country "
-                                onClick={event => {
-                                    event.preventDefault() // Prevent browser from submitting the form and refreshing the page
-                                    handleCatgoryChoice(2)
-                                }}
-                            />
-                        </Grid.Column>
-                        <Grid.Column>
-                        <Card
-                                width= '5px'
-                                color='blue'
-                                header="Hot Country Hits"
-                                meta='Friend'
-                                description=" Hot Country Hits "
-                                onClick={event => {
-                                    event.preventDefault() // Prevent browser from submitting the form and refreshing the page
-                                    handleCatgoryChoice(3)
-                                }}
-                            />
+                            <Card
+                                    
+                                    color='blue'
+                                    header="Hot Country Hits"
+                                    
+                                    onClick={event => {
+                                        event.preventDefault() // Prevent browser from submitting the form and refreshing the page
+                                        handleCatgoryChoice(3)
+                                    }}
+                                />
                          </Grid.Column>
                         <Grid.Column>
-                        <Card
-                                width= '5px'
-                                color='blue'
-                                header="Best of the 90s"
-                                meta='Friend'
-                                description=" Best of the 90s "
-                                onClick={event => {
-                                    event.preventDefault() // Prevent browser from submitting the form and refreshing the page
-                                    handleCatgoryChoice(4)
-                                }}
-                            />
+                            <Card
+                                    
+                                    color='blue'
+                                    header="Hits of the 90s"
+                                    
+                                    onClick={event => {
+                                        event.preventDefault() // Prevent browser from submitting the form and refreshing the page
+                                        handleCatgoryChoice(4)
+                                    }}
+                                />
                         </Grid.Column>
                     </Grid.Row>
-                    <Grid.Row centered columns={5}>
+                    <Grid.Row  >
                         <Grid.Column >
                             <Card
-                                width= '5px'
+                                
                                 color='blue'
-                                header="Rock 'N Roll"
-                                meta='Friend'
-                                description=" Rock 'N Roll "
+                                header="Leaderboard"
+                                meta='Leaderboard'
+                                description="Leaderboard"
                                 onClick={event => {
                                     event.preventDefault() // Prevent browser from submitting the form and refreshing the page
                                     handleCatgoryChoice(1)
@@ -98,10 +93,7 @@ import { useHistory } from "react-router-dom"
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
-            
-                
-                
-           </>     
+            </>     
         )
     }
 

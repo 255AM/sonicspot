@@ -1,5 +1,6 @@
 
-.game-select-title{
+.selectHeader{
     font-size: 5rem;
-
+    color:black;
+    padding-top: 1em;
 }

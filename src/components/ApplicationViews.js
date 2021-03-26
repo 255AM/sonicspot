@@ -8,13 +8,12 @@ import {GameScreen} from './game/GameScreen'
 import {GameSelect} from './game/GameSelect'
 import {Login} from './auth/Login'
 
-
 export const ApplicationViews = () => {
     return (
         <>
             <GameInformationProvider>
                     <Route exact path="/login">
-                        <SpotifyAuth />
+                        <Login/>
                     </Route>
                 <Route exact path="/">
                     <GameSelect />
@@ -26,3 +25,4 @@ export const ApplicationViews = () => {
         </>
     )
 }
+
