@@ -23,7 +23,7 @@ export const Login = props => {
             .then(exists => {
                 if (exists) {
                     localStorage.setItem("sonic_user", exists.id)
-                    history.push("/select")
+                    history.push("/")
                 } else {
                     existDialog.current.showModal()
                 }
@@ -42,7 +42,7 @@ export const Login = props => {
                 <div></div>
             </address>
 
-            <button onClick={() => history.push("/select")}>
+            <button onClick={() => history.push("/")}>
             Trigger Authed
             </button>
             </>  

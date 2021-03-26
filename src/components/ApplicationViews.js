@@ -16,12 +16,11 @@ export const ApplicationViews = () => {
                     <Route exact path="/login">
                         <SpotifyAuth />
                     </Route>
-                <Route exact path="/select">
+                <Route exact path="/">
                     <GameSelect />
                 </Route>
                 <Route exact path="/game">
                     <GameScreen />
-                    
                 </Route>
             </GameInformationProvider> 
         </>

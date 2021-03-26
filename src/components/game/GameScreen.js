@@ -3,17 +3,18 @@ import { GameContext } from "./GameInformationProvider"
 import SpotifyPlayer from 'react-spotify-web-playback';
 import { useHistory, Link } from "react-router-dom";
 import {Timer} from "./GameTimer"
-import { Form, Container, Modal, Button, Image, Header, Grid, Message, Segment} from 'semantic-ui-react'
+import { Form, Container, Modal, Button, Image, Header, Grid, Icon, Segment} from 'semantic-ui-react'
+import { AnswerCard } from "./AnswerResponse";
 
-
-
-
-
-  export const GameScreen = () =>{
+export const GameScreen = () =>{
     const history = useHistory();
-    const [open, setOpen] = React.useState(false)
-
-    const {getPlayerIdStartPlayer, nextTrack, getTrackInfo, trackInfo} = useContext(GameContext)
+    const [open1, setOpen1] = React.useState(false)
+    const [open2, setOpen2] = React.useState(true)
+    const [game, setGame] = React.useState(false)
+    const [songResponse, setSongResponse] = React.useState(' ')
+    const [artistResponse, setArtistResponse] = React.useState(' ')
+    
+    const {getPlayerIdStartPlayer, nextTrack, getTrackInfo, trackInfo, uri} = useContext(GameContext)
     
     const [answerState, setAnswerState] = useState({
       answerSong: ' ',
@@ -38,7 +39,7 @@ import { Form, Container, Modal, Button, Image, Header, Grid, Message, Segment} 
     }
 
     const compareArtistAnswer=(trackInfo,answerState )=>{
-      getTrackInfo()
+      console.log(getTrackInfo())
       let userAnswer = trackInfo.artistName.toLowerCase()
       let correctAnswer = answerState.answerArtist.toLowerCase()
       if (userAnswer.includes(correctAnswer)||correctAnswer.includes(userAnswer) === answerState.answerArtist){
@@ -51,62 +52,66 @@ import { Form, Container, Modal, Button, Image, Header, Grid, Message, Segment} 
     const handleAnswerSubmit = () => {
       compareTrackAnswer(trackInfo, answerState)
       compareArtistAnswer(trackInfo, answerState)
-      nextTrack()
-    }
-    
+      setAnswerState({
+          answerSong: ' ',
+          answerArtist: ' '
+        });
+        nextTrack()
+      }
+      
     const correctTrackAnswer = () =>{
-      console.log(`Thats it!!!! the song is ${trackInfo.songName}`);
       setCurrentScore(currentScore => currentScore + 1)
+      setSongResponse(`Thats it!!!! the song is "${trackInfo.songName}". You earn 1 point!`)
     }
 
     const incorrectTrackAnswer = ()=>{
-      console.log(`Better luck next time! The name of this song is ${trackInfo.songName}`)
+      setSongResponse( `Better luck next time. The name of this song is "${trackInfo.songName}"`)
     }
     
     const correctArtistAnswer = () =>{
-      console.log(`Thats it!!!! the song is ${trackInfo.songName}`);
       setCurrentScore(currentScore => currentScore + 1)
+      setArtistResponse( `Thats it!!!! the song is "${trackInfo.artistName}" You earn 1 point!`)
     }
     
     const incorrectArtistAnswer = ()=>{
-    console.log(`Maybe next time. That was a song by ${trackInfo.artistName}`)
+      setArtistResponse( `Wrong. That was a song by "${trackInfo.artistName}"`)
     }
 
     const startPlayer = () =>{
       getPlayerIdStartPlayer()
-      getTrackInfo()
-      
-      //future//a put call will be made creating a new game in the db. A variable will be created that will keep track of the users points scored
+      console.log('here');
     }
 
     const endGame = () =>{
       console.log(currentScore);
-      setOpen(true)
+      setOpen1(true)
     }
 
     useEffect(() => {
-      console.log(currentScore);
-  },[])
+      
+    },[])
   
     return(
       <>
-
-        
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 900 }}>
         <Container>
-        <Timer
+        {game?<Timer
           endGame = {endGame}
         />
+        :
+        ""}
         </Container>
           
           <Form size='large'>
             <Segment stacked>
               <Form.Input
+                
                 size='big' 
                 placeholder='Song Title'
                 name='answerSong'
                 id='answerSong'
+                value={answerState.answerSong}
                 onChange={handleControlledInputChange} 
               />
               <Form.Input
@@ -114,45 +119,39 @@ import { Form, Container, Modal, Button, Image, Header, Grid, Message, Segment} 
                 placeholder='Artist Name'
                 name='answerArtist'
                 id='answerArtist'
+                value={answerState.answerArtist}
                 onChange={handleControlledInputChange}
               />
-              <Button 
+              <Button animated
                 size='huge'
-                content='Submit' 
                 onClick={event => {
-                event.preventDefault()
-                handleAnswerSubmit()
-                
-              }}  />
-            </Segment>
-          </Form>
-         
-        </Grid.Column>
-        </Grid>
+                  event.preventDefault()
+                  handleAnswerSubmit()
+                }}>
+              <Button.Content visible>Next Song</Button.Content>
+              <Button.Content hidden>
+              <Icon name='fast forward' />
+              </Button.Content>
+              </Button>
+              </Segment>
+              <AnswerCard 
+                songResponse = {songResponse}
+                artistResponse = {artistResponse}
+              />
+              </Form>
+              </Grid.Column>
+              
+              </Grid>
+        
 
-
-
-
-
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         <div>
-        <br/>
-        <br/>
+        
           
         <button className="btn btn-primary"
           onClick={event => {
             event.preventDefault()
             startPlayer()
+            
           }}>Play
         </button>
         <button className="btn btn-primary"
@@ -176,35 +175,32 @@ import { Form, Container, Modal, Button, Image, Header, Grid, Message, Segment} 
         </div>
 
         <Modal
-                  onClose={() => setOpen(false)}
-                  onOpen={() => setOpen(true)}
-                  open={open}
-                  trigger={<Button>Show Modal</Button>}
+                  onClose={() => setOpen1(false)}
+                  onOpen={() => setOpen1(true)}
+                  open={open1}
+                  trigger={<Button>Show Modal End</Button>}
                 >
-                  <Modal.Header>Select a Photo</Modal.Header>
+                  <Modal.Header ><h2 class="ui block blue header">It's all over now</h2></Modal.Header>
                   <Modal.Content image>
-                    <Image size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' wrapped />
+                    <Image size='medium' src='https://cdn.mos.cms.futurecdn.net/Er7f2aS9ukBKBsVfR2Z9uE.jpg' wrapped />
                     <Modal.Description>
-                      <Header>Game Over!!!</Header>
-                      <p>
-                        You're out of time!!
-                        Youre final score is {currentScore}
-                      </p>
+                      <Header>This is the end</Header>
+                      <h2 class="ui block header">
+                        You're out of time
+                        Your final score is {currentScore}
+                      </h2>
                       
                     </Modal.Description>
                   </Modal.Content>
                   <Modal.Actions>
-                    <Button color='black' onClick={() => setOpen(false)}>
-                      Nope
-                    </Button>
                     <Button
-                      content="Yep, that's me"
+                      content="Take me Back"
                       labelPosition='right'
                       icon='checkmark'
 
                       onClick={
-                        () => setOpen(false),
-                        () => history.push('/select')
+                        () => setOpen1(false),
+                        () => history.push('/')
                       }
                       positive
                     />
@@ -213,7 +209,7 @@ import { Form, Container, Modal, Button, Image, Header, Grid, Message, Segment} 
                 <div>
           <SpotifyPlayer
             token= {localStorage.getItem("spotifyAuthToken")}
-            uris={[`spotify:playlist:6TeyryiZ2UEf3CbLXyztFA`]}
+            uris={["spotify:playlist:6TeyryiZ2UEf3CbLXyztFA"]}
             styles={{
               activeColor: '#fff',
               bgColor: '#fff',
@@ -227,6 +223,44 @@ import { Form, Container, Modal, Button, Image, Header, Grid, Message, Segment} 
               height: 1,
             }}
           /> 
+
+<Modal
+                  onClose={() => setOpen2(false)}
+                  onOpen={() => setOpen2(true)}
+                  open={open2}
+                  trigger={<Button>Show Modal Start</Button>}
+                >
+                  <Modal.Header>Are You ready?</Modal.Header>
+                  <Modal.Content image>
+                    <Image size='medium' src='https://cdn.playlists.net/images/playlists/image/medium/be12e4184e26063a2e68c1accad6f370.jpg' wrapped />
+                    <Modal.Description>
+                      <Header>Come on it's time to go</Header>
+                      <h2 class="ui block header">
+                        Begin
+                      </h2>
+                      
+                    </Modal.Description>
+                  </Modal.Content>
+                  <Modal.Actions>
+                    
+                    <Button
+                      content="Enter"
+                      labelPosition='right'
+                      icon='checkmark'
+
+                      onClick={event=>{
+                        event.preventDefault()
+                        setOpen2(false)
+                        startPlayer()
+                        setGame(true)
+                      }
+                        
+                      }
+                      positive
+                    />
+                  </Modal.Actions>
+                </Modal>
+                
         </div>
       </>
     )
@@ -238,3 +272,5 @@ import { Form, Container, Modal, Button, Image, Header, Grid, Message, Segment} 
 
 //conditional to check local storage token for def
 //keep in local storage
+
+// "spotify:playlist:6TeyryiZ2UEf3CbLXyztFA"
