@@ -7,6 +7,7 @@ import {GameInformationProvider} from './game/GameInformationProvider'
 import {GameScreen} from './game/GameScreen'
 import {GameSelect} from './game/GameSelect'
 import {Login} from './auth/Login'
+import {Register} from './auth/Register'
 
 export const ApplicationViews = () => {
     return (
@@ -20,6 +21,9 @@ export const ApplicationViews = () => {
                 </Route>
                 <Route exact path="/game">
                     <GameScreen />
+                </Route>
+                <Route exact path="/register">
+                    <Register />
                 </Route>
             </GameInformationProvider> 
         </>

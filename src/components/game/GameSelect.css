@@ -1,4 +1,6 @@
-
+body{
+    overflow: hidden;
+}
 .selectHeader{
     font-size: 5rem;
     color:black;
