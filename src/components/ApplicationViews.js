@@ -13,18 +13,14 @@ export const ApplicationViews = () => {
     return (
         <>
             <GameInformationProvider>
-                    <Route exact path="/login">
-                        <Login/>
-                    </Route>
+                    
                 <Route exact path="/">
                     <GameSelect />
                 </Route>
                 <Route exact path="/game">
                     <GameScreen />
                 </Route>
-                <Route exact path="/register">
-                    <Register />
-                </Route>
+                
             </GameInformationProvider> 
         </>
     )

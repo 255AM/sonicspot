@@ -1,4 +1,5 @@
 import React, { useState, useContext, createContext } from "react"
+import { useHistory } from "react-router-dom"
 
 // The context is imported and used by individual components that need data. ie gameselect/gamescreen. Info can be passed down to child elements through props at the bottom of the page
 
@@ -11,7 +12,10 @@ export const GameInformationProvider = (props) => {
     const [playerId, setPlayerId] = useState('')
     const [trackInfo, setTrackInfo] = useState({})
     const [userName, setUserName] = useState('')
+    const [currentUserObject, setCurrentUserObject]=useState({})
     let id = localStorage.getItem('sonic_user')
+    let gameObject = {}
+    const history = useHistory()
 
     //category id unique id hard coded to each button choice. THis fetch will use that Id to return a URI that spotify will recognize as a playlist
     
@@ -19,8 +23,8 @@ export const GameInformationProvider = (props) => {
         return fetch(`http://localhost:8088/categories/${categoryId}`)
         .then(res => res.json())
         .then(res => res.spotifyPlaylistUri)
-         .then(setUri)
-         .then(console.log(uri));
+        .then(setUri)
+         
     }
 
     //Call gets spotify sdk player id and uses that id to start album playback
@@ -44,7 +48,7 @@ export const GameInformationProvider = (props) => {
     //actual album start call. is called above in getPlayerIdStartPlayer
     const startAlbum = (deviceId) =>{
       console.log(uri);
-      // let uri = "spotify:playlist:6TeyryiZ2UEf3CbLXyztFA"
+      
       let toker = localStorage.getItem('spotifyAuthToken')
       var myHeaders = new Headers();
         
@@ -112,11 +116,35 @@ export const GameInformationProvider = (props) => {
            
       }
 
-      
+      const handleLogoutClick = () =>{
+        localStorage.setItem('sonic_user', 'undefined')
+        history.push('/login')
+    }
+    
+    const getCurrentUserObject = (currentUserId)=>{
+     return fetch(`http://localhost:8088/users/${currentUserId}`)
+        .then(res => res.json())
+        .then(setCurrentUserObject)
+        
+    }
 
+    
+    const setCurrentGameRecord = (gameObject)=>{
+    fetch("http://localhost:8088/games", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            score: gameObject.score,
+                            category: gameObject.category,
+                        })
+                    })
+                  }
+                  
     return (
         <GameContext.Provider value={{
-            uri, getUri, categoryId, playerId, getPlayerIdStartPlayer, startAlbum, nextTrack, getTrackInfo, trackInfo, getUserName, userName
+            uri, getUri, categoryId, playerId, getPlayerIdStartPlayer, startAlbum, nextTrack, getTrackInfo, trackInfo, getUserName, userName, handleLogoutClick, getCurrentUserObject, currentUserObject, setCurrentGameRecord
         }}>
             {props.children}
         </GameContext.Provider>

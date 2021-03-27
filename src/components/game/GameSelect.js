@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, createContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import { GameContext } from './GameInformationProvider'
 import { Card, Menu, Divider, Grid, Header, Image } from 'semantic-ui-react'
 import './GameSelect.css'
@@ -8,30 +8,32 @@ import { useHistory } from "react-router-dom"
 //present user a series of boxes that represent categories. Each categories will have a unique id. Each unique id will have an associated uri to use for playlist retrieval from spotify.
     export const GameSelect = () => {
         const history  = useHistory()
-        const {uri, getUri} = useContext(GameContext)
+        const {getUri, handleLogoutClick, currentUserObject, getCurrentUserObject} = useContext(GameContext)
         const handleCatgoryChoice = (x) => {
             getUri(x)
             history.push("/game")
         }
+        
+        
         useEffect(() => {
-            
+           getCurrentUserObject(localStorage.getItem("sonic_user")) 
         },[])
 
         return(
             <>
-
-               < Menu>
-                <Menu.Menu position='right'>
+                < Menu>
+                    <Menu.Menu position='right'>
                     
                     <Menu.Item
-                        name='Welcome user'
-                        //active={activeItem === 'logout'}
-                        //onClick={this.handleItemClick}
-                    />
+                    name= 'user'
+                    >
+                    Welcome {currentUserObject.userName}
+                        
+                        
+                    </Menu.Item>
                     <Menu.Item
                         name='logout'
-                        //active={activeItem === 'logout'}
-                        //onClick={this.handleItemClick}
+                        onClick={handleLogoutClick}
                     />
                     </Menu.Menu>
                     
