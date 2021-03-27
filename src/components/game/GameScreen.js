@@ -3,7 +3,7 @@ import { GameContext } from "./GameInformationProvider"
 import SpotifyPlayer from 'react-spotify-web-playback';
 import { useHistory, Link } from "react-router-dom";
 import {Timer} from "./GameTimer"
-import { Form, Container, Modal, Button, Image, Header, Grid, Icon, Segment} from 'semantic-ui-react'
+import { Form, Container, Modal, Button, Image, Header, Grid, Icon, Segment, Menu} from 'semantic-ui-react'
 import { AnswerCard } from "./AnswerResponse";
 
 export const GameScreen = () =>{
@@ -14,7 +14,8 @@ export const GameScreen = () =>{
     const [songResponse, setSongResponse] = React.useState(' ')
     const [artistResponse, setArtistResponse] = React.useState(' ')
     
-    const {getPlayerIdStartPlayer, nextTrack, getTrackInfo, trackInfo, uri} = useContext(GameContext)
+    
+    const {getPlayerIdStartPlayer, nextTrack, getTrackInfo, trackInfo, uri, handleLogoutClick, setCurrentGameRecord, categoryId} = useContext(GameContext)
     
     const [answerState, setAnswerState] = useState({
       answerSong: ' ',
@@ -83,9 +84,17 @@ export const GameScreen = () =>{
     }
 
     const endGame = () =>{
-      console.log(currentScore);
+      console.log('endgame');
+      setCurrentGameRecord({
+        score:currentScore,
+        category:categoryId,
+        userId: localStorage.getItem('sonic_user')
+
+      })
       setOpen1(true)
     }
+
+    
 
     useEffect(() => {
       
@@ -93,6 +102,17 @@ export const GameScreen = () =>{
   
     return(
       <>
+        < Menu>
+                    <Menu.Menu position='right'>
+                    
+                    <Menu.Item
+                        name='logout'
+                        onClick={handleLogoutClick}
+                    />
+                    </Menu.Menu>
+                    
+                </Menu>
+
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 900 }}>
         <Container>
@@ -140,39 +160,10 @@ export const GameScreen = () =>{
               />
               </Form>
               </Grid.Column>
-              
               </Grid>
         
 
-        <div>
         
-          
-        <button className="btn btn-primary"
-          onClick={event => {
-            event.preventDefault()
-            startPlayer()
-            
-          }}>Play
-        </button>
-        <button className="btn btn-primary"
-          onClick={event => {
-            event.preventDefault()
-            nextTrack()
-          }}>Next
-        </button>
-        <button className="btn btn-primary"
-          onClick={event => {
-            event.preventDefault()
-            getTrackInfo()
-          }}>info
-        </button>
-        <button className="btn btn-primary"
-          onClick={event => {
-            event.preventDefault()
-            endGame()
-          }}>endGame
-        </button>
-        </div>
 
         <Modal
                   onClose={() => setOpen1(false)}
@@ -224,7 +215,7 @@ export const GameScreen = () =>{
             }}
           /> 
 
-<Modal
+          <Modal
                   onClose={() => setOpen2(false)}
                   onOpen={() => setOpen2(true)}
                   open={open2}
@@ -260,9 +251,8 @@ export const GameScreen = () =>{
                     />
                   </Modal.Actions>
                 </Modal>
-                
-        </div>
-      </>
+            </div>
+          </>
     )
   }
 //1: help getting current song info to update accordingly

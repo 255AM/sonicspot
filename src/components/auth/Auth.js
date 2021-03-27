@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Button} from 'semantic-ui-react'
 
 
 
@@ -88,9 +89,12 @@ class SpotifyAuth extends Component {
             <h1 className="title is-4"><font color="neonyellow">Welcome</font></h1>
             <h3 className="title is-4"><font color="purple">Please log into a premium Spotify account to play</font></h3>
             <div className="Line" /><br/>
-              <button className="sp_button" onClick={(event) => this.handleRedirect(event)}>
-                <strong>LINK YOUR SPOTIFY ACCOUNT</strong>
-              </button>
+            <Button color='green' fluid size='large' type="submit" onClick={(event) => this.handleRedirect(event)}>
+            LINK YOUR SPOTIFY ACCOUNT
+            </Button>
+              
+              
+              
         </div>
       )
   }
