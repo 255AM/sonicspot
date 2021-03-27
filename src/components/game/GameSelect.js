@@ -13,8 +13,7 @@ import { useHistory } from "react-router-dom"
             getUri(x)
             history.push("/game")
         }
-        
-        
+        //on each render, get current users dataObject
         useEffect(() => {
            getCurrentUserObject(localStorage.getItem("sonic_user")) 
         },[])
@@ -23,13 +22,10 @@ import { useHistory } from "react-router-dom"
             <>
                 < Menu>
                     <Menu.Menu position='right'>
-                    
                     <Menu.Item
                     name= 'user'
                     >
                     Welcome {currentUserObject.userName}
-                        
-                        
                     </Menu.Item>
                     <Menu.Item
                         name='logout'
@@ -39,58 +35,46 @@ import { useHistory } from "react-router-dom"
                     
                 </Menu>
             
-                <Grid columns={5} textAlign='center'  style={{ height: '100vh' }}          verticalAlign='middle' >
+                <Grid columns={5} textAlign='center'  style={{ height: '100vh' }}verticalAlign='middle' >
                     <Grid.Row >
-                        <h1 className='selectHeader' color='black'>    Game that plays music
+                        <h1 className='selectHeader' color='black'>
+                            Game that plays music
                         </h1>
                     </Grid.Row>
                 
                     <Grid.Row >
                         <Grid.Column>
                                 <Card
-                                    
-                                    
                                     color='blue'
                                     header="Classic Rock's Greatest"
                                     onClick={event => {
-                                        event.preventDefault() // Prevent browser from submitting the form and 
-                                        handleCatgoryChoice(1)
-                                        
+                                       handleCatgoryChoice(1)
                                     }}
                                 />
                             </Grid.Column>
                         <Grid.Column>
                             <Card
-                                    
                                     color='blue'
                                     header="80s Country Hits"
-                                    
                                     onClick={event => {
-                                        event.preventDefault() // Prevent browser from submitting the form and refreshing the page
                                         handleCatgoryChoice(2)
                                     }}
                                 />
                         </Grid.Column>
                         <Grid.Column>
                             <Card
-                                    
                                     color='blue'
                                     header="Hot Country Hits"
-                                    
                                     onClick={event => {
-                                        event.preventDefault() // Prevent browser from submitting the form and refreshing the page
                                         handleCatgoryChoice(3)
                                     }}
                                 />
                          </Grid.Column>
                         <Grid.Column>
                             <Card
-                                    
                                     color='blue'
                                     header="Hits of the 90s"
-                                    
                                     onClick={event => {
-                                        event.preventDefault() // Prevent browser from submitting the form and refreshing the page
                                         handleCatgoryChoice(4)
                                     }}
                                 />
@@ -99,14 +83,12 @@ import { useHistory } from "react-router-dom"
                     <Grid.Row  >
                         <Grid.Column >
                             <Card
-                                
                                 color='blue'
                                 header="Leaderboard"
                                 meta='Leaderboard'
                                 description="Leaderboard"
                                 onClick={event => {
-                                    event.preventDefault() // Prevent browser from submitting the form and refreshing the page
-                                    handleCatgoryChoice(1)
+                                    history.push('/leaderboard')
                                 }}
                             />
                         </Grid.Column>
@@ -116,11 +98,5 @@ import { useHistory } from "react-router-dom"
         )
     }
 
-    // <button className="btn btn-primary"
-    //                 onClick={event => {
-    //                 event.preventDefault() // Prevent browser from submitting the form and refreshing the page
-    //                 handleCatgoryChoice(1)
-    //                    }}>Classic Rock
-    //             </button>
-
+   
     
