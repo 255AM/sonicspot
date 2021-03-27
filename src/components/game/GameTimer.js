@@ -1,13 +1,17 @@
 import React, { useState, useContext, createContext, useEffect } from "react"
 import { Progress, Container, Icon, Header } from 'semantic-ui-react'
 
-export const Timer = ({endGame}) =>{
+
+export const Timer = ({endGame}, x) =>{
+  
         const [seconds, setSeconds] = useState(10)
         const [minutes, setMinutes] = useState(0)
         
         function updateTime() {
           if (minutes == 0 && seconds == 0) {
             endGame()
+            console.log('run now end game');
+           
             
           }
           else {

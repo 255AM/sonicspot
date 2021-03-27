@@ -8,27 +8,33 @@ import { AnswerCard } from "./AnswerResponse";
 
 export const GameScreen = () =>{
     const history = useHistory();
+    //flag to control a modal
     const [open1, setOpen1] = React.useState(false)
+    //flag to control a modal
     const [open2, setOpen2] = React.useState(true)
+    //set a game object to state. Keeping track of game stats
     const [game, setGame] = React.useState(false)
-    const [songResponse, setSongResponse] = React.useState(' ')
-    const [artistResponse, setArtistResponse] = React.useState(' ')
+    //determines the feedback a user recieves after guessing. right or wrong
+    const [songResponse, setSongResponse] = React.useState('')
+    const [artistResponse, setArtistResponse] = React.useState('')
+    //keeping current score in state
+    const [currentScore, setCurrentScore] = useState(0)
+    //get userOBject to set userName to gameObject
     
     
-    const {getPlayerIdStartPlayer, nextTrack, getTrackInfo, trackInfo, uri, handleLogoutClick, setCurrentGameRecord, categoryId} = useContext(GameContext)
-    
+    const {getPlayerIdStartPlayer,nextTrack,trackInfo,handleLogoutClick,setCurrentGameRecord,categoryId}=useContext(GameContext)
+    //data that is being entered by user at form inputs is set to state
     const [answerState, setAnswerState] = useState({
       answerSong: ' ',
       answerArtist: ' '
     })
-    const [currentScore, setCurrentScore] = useState(0)
-
+    //handling form inputs(user guess)
     const handleControlledInputChange = (event) => {
       const newAnswer = { ...answerState }
       newAnswer[event.target.name] = event.target.value
       setAnswerState(newAnswer)
     }
-    
+    //on submit, compare guesses to actual data
     const compareTrackAnswer=(trackInfo,answerState )=>{
       let userAnswer = trackInfo.songName.toLowerCase()
       let correctAnswer = answerState.answerSong.toLowerCase()
@@ -38,9 +44,9 @@ export const GameScreen = () =>{
         incorrectTrackAnswer()
       }
     }
-
+    //on submit, compare guesses to actual data    ***look into combining this and previous fx*****
     const compareArtistAnswer=(trackInfo,answerState )=>{
-      console.log(getTrackInfo())
+      
       let userAnswer = trackInfo.artistName.toLowerCase()
       let correctAnswer = answerState.answerArtist.toLowerCase()
       if (userAnswer.includes(correctAnswer)||correctAnswer.includes(userAnswer) === answerState.answerArtist){
@@ -53,9 +59,10 @@ export const GameScreen = () =>{
     const handleAnswerSubmit = () => {
       compareTrackAnswer(trackInfo, answerState)
       compareArtistAnswer(trackInfo, answerState)
+      //reset form to empty after guess submit
       setAnswerState({
-          answerSong: ' ',
-          answerArtist: ' '
+          answerSong: '',
+          answerArtist: ''
         });
         nextTrack()
       }
@@ -85,16 +92,18 @@ export const GameScreen = () =>{
 
     const endGame = () =>{
       console.log('endgame');
+      
+      setOpen1(true)
+    }
+    //This could and was done on the endGame fx above, but a timer glitch was running it 2x. Here for now on button press
+    const recordGame = () =>{
+      console.log('im runnign');
       setCurrentGameRecord({
         score:currentScore,
         category:categoryId,
         userId: localStorage.getItem('sonic_user')
-
       })
-      setOpen1(true)
     }
-
-    
 
     useEffect(() => {
       
@@ -102,102 +111,132 @@ export const GameScreen = () =>{
   
     return(
       <>
-        < Menu>
-                    <Menu.Menu position='right'>
-                    
-                    <Menu.Item
-                        name='logout'
-                        onClick={handleLogoutClick}
-                    />
-                    </Menu.Menu>
-                    
-                </Menu>
+        <Menu>
+          <Menu.Menu position='right'>
+            <Menu.Item
+              name='logout'
+              onClick={handleLogoutClick}
+            />
+          </Menu.Menu>
+        </Menu>
 
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-        <Grid.Column style={{ maxWidth: 900 }}>
-        <Container>
-        {game?<Timer
-          endGame = {endGame}
-        />
-        :
-        ""}
-        </Container>
+          <Grid.Column style={{ maxWidth: 900 }}>
+            <Container>
+              {/* //on game start(triggered by start modal button) start timer// If no game, no timer */}
+              {game?
+              <Timer endGame = {endGame}
+              />
+              :
+              ""}
+            </Container>
           
-          <Form size='large'>
-            <Segment stacked>
-              <Form.Input
-                
-                size='big' 
-                placeholder='Song Title'
-                name='answerSong'
-                id='answerSong'
-                value={answerState.answerSong}
-                onChange={handleControlledInputChange} 
-              />
-              <Form.Input
-                size='big'
-                placeholder='Artist Name'
-                name='answerArtist'
-                id='answerArtist'
-                value={answerState.answerArtist}
-                onChange={handleControlledInputChange}
-              />
-              <Button animated
-                size='huge'
-                onClick={event => {
-                  event.preventDefault()
-                  handleAnswerSubmit()
-                }}>
-              <Button.Content visible>Next Song</Button.Content>
-              <Button.Content hidden>
-              <Icon name='fast forward' />
-              </Button.Content>
-              </Button>
+            <Form size='large'>
+              <Segment stacked>
+                <Form.Input
+                  size='big' 
+                  placeholder='Song Title'
+                  name='answerSong'
+                  id='answerSong'
+                  value={answerState.answerSong}
+                  onChange={handleControlledInputChange} 
+                />
+                <Form.Input
+                  size='big'
+                  placeholder='Artist Name'
+                  name='answerArtist'
+                  id='answerArtist'
+                  value={answerState.answerArtist}
+                  onChange={handleControlledInputChange}
+                />
+                <Button animated
+                  size='huge'
+                  onClick={event => {
+                    event.preventDefault()
+                    handleAnswerSubmit()
+                  }}>
+                <Button.Content visible>Next Song</Button.Content>
+                <Button.Content hidden>
+                <Icon name='fast forward' />
+                </Button.Content>
+                </Button>
               </Segment>
               <AnswerCard 
                 songResponse = {songResponse}
                 artistResponse = {artistResponse}
               />
-              </Form>
-              </Grid.Column>
-              </Grid>
-        
-
-        
-
+            </Form>
+          </Grid.Column>
+        </Grid>
+        {/* //Modal that opens on game start//timer begins after start button pressed//strectch goal, random photos from spotify album covers */}
         <Modal
-                  onClose={() => setOpen1(false)}
-                  onOpen={() => setOpen1(true)}
-                  open={open1}
-                  trigger={<Button>Show Modal End</Button>}
-                >
-                  <Modal.Header ><h2 class="ui block blue header">It's all over now</h2></Modal.Header>
-                  <Modal.Content image>
-                    <Image size='medium' src='https://cdn.mos.cms.futurecdn.net/Er7f2aS9ukBKBsVfR2Z9uE.jpg' wrapped />
-                    <Modal.Description>
-                      <Header>This is the end</Header>
-                      <h2 class="ui block header">
-                        You're out of time
-                        Your final score is {currentScore}
-                      </h2>
-                      
-                    </Modal.Description>
-                  </Modal.Content>
-                  <Modal.Actions>
-                    <Button
-                      content="Take me Back"
-                      labelPosition='right'
-                      icon='checkmark'
+          onClose={() => setOpen2(false)}
+          onOpen={() => setOpen2(true)}
+          open={open2}
+          trigger={<Button>Show Modal Start</Button>}
+        >
+          <Modal.Header>Are You ready?</Modal.Header>
+          <Modal.Content image>
+            <Image size='medium' src='https://cdn.playlists.net/images/playlists/image/medium/be12e4184e26063a2e68c1accad6f370.jpg' wrapped />
+            <Modal.Description>
+              <Header>Come on it's time to go</Header>
+                <h2 class="ui block header">
+                  Begin
+                </h2>
+            </Modal.Description>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button
+              content="Enter"
+              labelPosition='right'
+              icon='checkmark'
 
-                      onClick={
-                        () => setOpen1(false),
-                        () => history.push('/')
-                      }
-                      positive
-                    />
-                  </Modal.Actions>
-                </Modal>
-                <div>
+              onClick={event=>{
+                event.preventDefault()
+                setOpen2(false)
+                startPlayer()
+                setGame(true)
+              }}
+                positive
+            />
+          </Modal.Actions>
+        </Modal>
+        
+        {/* //Modal on game end// in future add song stop when show modal true */}
+        <Modal
+          onClose={() => setOpen1(false)}
+          onOpen={() => setOpen1(true)}
+          open={open1}
+          trigger={<Button>Show Modal End</Button>}
+        >
+          <Modal.Header ><h2 class="ui block blue header">It's all over now</h2></Modal.Header>
+          <Modal.Content image>
+            <Image size='medium' src='https://cdn.mos.cms.futurecdn.net/Er7f2aS9ukBKBsVfR2Z9uE.jpg' wrapped />
+            <Modal.Description>
+              <Header>This is the end</Header>
+                <h2 class="ui block header">
+                  You're out of time
+                  Your final score is {currentScore}
+                </h2>
+            </Modal.Description>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button
+              content="Take me Back"
+              labelPosition='right'
+              icon='checkmark'
+
+              onClick={event=>{
+                recordGame()
+                setOpen1(false)
+                history.push('/')
+              }}
+              positive
+            />
+          </Modal.Actions>
+        </Modal>
+                
+        <div>
           <SpotifyPlayer
             token= {localStorage.getItem("spotifyAuthToken")}
             uris={["spotify:playlist:6TeyryiZ2UEf3CbLXyztFA"]}
@@ -215,52 +254,8 @@ export const GameScreen = () =>{
             }}
           /> 
 
-          <Modal
-                  onClose={() => setOpen2(false)}
-                  onOpen={() => setOpen2(true)}
-                  open={open2}
-                  trigger={<Button>Show Modal Start</Button>}
-                >
-                  <Modal.Header>Are You ready?</Modal.Header>
-                  <Modal.Content image>
-                    <Image size='medium' src='https://cdn.playlists.net/images/playlists/image/medium/be12e4184e26063a2e68c1accad6f370.jpg' wrapped />
-                    <Modal.Description>
-                      <Header>Come on it's time to go</Header>
-                      <h2 class="ui block header">
-                        Begin
-                      </h2>
-                      
-                    </Modal.Description>
-                  </Modal.Content>
-                  <Modal.Actions>
-                    
-                    <Button
-                      content="Enter"
-                      labelPosition='right'
-                      icon='checkmark'
-
-                      onClick={event=>{
-                        event.preventDefault()
-                        setOpen2(false)
-                        startPlayer()
-                        setGame(true)
-                      }
-                        
-                      }
-                      positive
-                    />
-                  </Modal.Actions>
-                </Modal>
-            </div>
-          </>
+          
+        </div>
+      </>
     )
-  }
-//1: help getting current song info to update accordingly
-//2: help getting system to check for spotify auth and react accodingly
-
-//4: get application register/login together
-
-//conditional to check local storage token for def
-//keep in local storage
-
-// "spotify:playlist:6TeyryiZ2UEf3CbLXyztFA"
+}
