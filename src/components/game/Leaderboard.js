@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, Component } from "react"
 import { GameContext } from "./GameInformationProvider"
-import {Button, Container,} from "semantic-ui-react"
+import {Button, Container,GridColumn,Table} from "semantic-ui-react"
 
 import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -18,13 +18,13 @@ import { useHistory } from "react-router-dom"
 
 
     export const Leaderboard = ()=>{
-        
+        let i=0
         const history  = useHistory()
         const {getUri, handleLogoutClick, currentUserObject, getCurrentUserObject} = useContext(GameContext)   
         const {getGames, games} = useContext(GameContext)
-
-        const [top10, setTop10] = React.useState()
-
+         
+        
+        let sGames = games.sort((a, b) => (a.score > b.score) ? -1 : 1)
         
         useEffect(() =>{
             getGames()
@@ -37,7 +37,7 @@ import { useHistory } from "react-router-dom"
             <Menu className = "menu">
                 <Menu.Menu position='right'>
                 </Menu.Menu>
-                    <Header size='huge'>A game that is a game</Header>
+                    <Header style={{ marginLeft:150, fontSize:50}} textAlign="center" size='huge'>A game that is a game</Header>
                 <Menu.Menu position='right'>
                     <Menu.Item
                      name= 'user'
@@ -52,18 +52,55 @@ import { useHistory } from "react-router-dom"
                 
                 </Menu.Menu>
                 </Menu>
-                <Header size='huge'>Top 10 scores</Header>
-                <Container>
-                    {games.map((game) => {
-                        console.log('l');
+                <Grid style={{ backgroundColor: 'black', height: '100vh', fontSize:23}}>
+                    <GridColumn>
+                <Container >
+                <Header textAlign='center' style={{  backgroundColor: 'black', color:'white'}} size='huge'>Top 10 scores</Header>
+                <Container >
+                    <Table padded singleLine size="large" style={{  backgroundColor: 'black', color:'white'}}>
+                        <Table.Header style={{ backgroundColor: 'black', color:''}}>
+                        <Table.Row style={{ backgroundColor: 'black', color:'white'}}>
+                            <Table.HeaderCell width={7} style={{ backgroundColor: 'black', color:'blue'}}>Score</Table.HeaderCell >
+                            <Table.HeaderCell width={8} style={{ backgroundColor: 'black', color:'blue'}}>Category</Table.HeaderCell>
+                            <Table.HeaderCell width={8} style={{ backgroundColor: 'black', color:'blue'}}>Name</Table.HeaderCell>
+                        </Table.Row>
+                        </Table.Header>
+
+                        <Table.Body>
+                            
+                        {sGames.slice(0,10).map((game) => {
+                            
                     return (
                         <GameCard
-                        key={game.id}
-                        score={game.score}
+                            key={game}
+                            score={game.score}
+                            id={game.id}
+                            userId={game.userId}
+                            categoryId={game.categoryId}
+                            userName={game.user.userName}
+                            categoryName={game.category.name}
                         />);
+                    })}
+                        
+                        </Table.Body>
+                    </Table>
+
                     
-            })}
                 </Container>
+                <Button     
+                                    animated='fade'
+                                    size='massive' 
+                                    attached='bottom' 
+                                    basic color='green'
+                                    onClick={event => {
+                                        history.push('/')
+                                     }}>
+                                    <Button.Content visible>Back to main menu</Button.Content>
+                                    <Button.Content hidden>GO!</Button.Content>
+                                </Button>
+                </Container>
+                </GridColumn>
+                </Grid>
             </>
         )
 

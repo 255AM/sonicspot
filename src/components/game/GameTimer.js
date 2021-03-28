@@ -2,9 +2,9 @@ import React, { useState, useContext, createContext, useEffect } from "react"
 import { Progress, Container, Icon, Header } from 'semantic-ui-react'
 
 
-export const Timer = ({endGame}, x) =>{
+export const Timer = ({endGame}) =>{
   
-        const [seconds, setSeconds] = useState(1000)
+        const [seconds, setSeconds] = useState(90)
         const [minutes, setMinutes] = useState(0)
         
         function updateTime() {

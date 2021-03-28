@@ -114,7 +114,7 @@ export const GameScreen = () =>{
        <Menu className = "menu">
             <Menu.Menu position='right'>
             </Menu.Menu>
-                <Header size='huge'>A game that is a game</Header>
+            <Header style={{ marginLeft:150, fontSize:50}}size='huge'>A game that is a game</Header>
             <Menu.Menu position='right'>
                 <Menu.Item
                     name= 'user'
