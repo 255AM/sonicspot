@@ -1,12 +1,23 @@
-import React, { useState, useContext, useEffect } from "react"
-import { GameContext } from './GameInformationProvider'
+import React, { useContext, useEffect, useState, Component } from "react"
+import { GameContext } from "./GameInformationProvider"
+import {Button, Container,} from "semantic-ui-react"
+
+import ReactDOM from 'react-dom';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+import './Leaderboard.css'
+import brit1 from "./assets/brit1"
+
+
+
 import { Card, Menu, Divider, Grid, Header, Image } from 'semantic-ui-react'
 import './GameSelect.css'
 import { useHistory } from "react-router-dom"
 
 
 //present user a series of boxes that represent categories. Each categories will have a unique id. Each unique id will have an associated uri to use for playlist retrieval from spotify.
-    export const GameSelect = () => {
+    export const GameSelect = ()=> {
+
         const history  = useHistory()
         const {getUri, handleLogoutClick, currentUserObject, getCurrentUserObject} = useContext(GameContext)
         const handleCatgoryChoice = (x) => {
@@ -17,86 +28,126 @@ import { useHistory } from "react-router-dom"
         useEffect(() => {
            getCurrentUserObject(localStorage.getItem("sonic_user")) 
         },[])
-
-        return(
+        
+        return (
             <>
-                < Menu>
-                    <Menu.Menu position='right'>
-                    <Menu.Item
+        <Menu className = "menu">
+            <Menu.Menu position='right'>
+            </Menu.Menu>
+                <Header size='huge'>A game that is a game</Header>
+            <Menu.Menu position='right'>
+                <Menu.Item
                     name= 'user'
-                    >
+                 >
                     Welcome {currentUserObject.userName}
-                    </Menu.Item>
                     <Menu.Item
-                        name='logout'
-                        onClick={handleLogoutClick}
-                    />
-                    </Menu.Menu>
-                    
-                </Menu>
-            
-                <Grid columns={5} textAlign='center'  style={{ height: '100vh' }}verticalAlign='middle' >
-                    <Grid.Row >
-                        <h1 className='selectHeader' color='black'>
-                            Game that plays music
-                        </h1>
-                    </Grid.Row>
+                    className="menu-text"
+                    name='logout'
+                    onClick={handleLogoutClick}
+            />
+                </Menu.Item>
                 
-                    <Grid.Row >
-                        <Grid.Column>
-                                <Card
-                                    color='blue'
-                                    header="Classic Rock's Greatest"
-                                    onClick={event => {
-                                       handleCatgoryChoice(1)
-                                    }}
-                                />
-                            </Grid.Column>
-                        <Grid.Column>
-                            <Card
-                                    color='blue'
-                                    header="80s Country Hits"
+            </Menu.Menu>
+            
+        </Menu>
+             
+            <Grid textAlign='center' style={{ height: '100vh', backgroundColor:'black' }} verticalAlign='middle' >
+                <Grid.Column style={{ maxWidth: 700 }}
+                style={{backgroundColor:'black'}}>
+                    <Container>
+                        <Carousel 
+                        infiniteLoop
+                        showThumbs={false}
+                        showIndicators={false}
+                        showStatus={false}
+                        >
+                            <div>
+                                <img src="https://www.savingcountrymusic.com/wp-content/uploads/2018/05/willie-nelson-family-live.jpg" />
+                                <Button     
+                                    animated='fade'
+                                    size='massive' 
+                                    attached='bottom' 
+                                    basic color='green'
                                     onClick={event => {
                                         handleCatgoryChoice(2)
-                                    }}
-                                />
-                        </Grid.Column>
-                        <Grid.Column>
-                            <Card
-                                    color='blue'
-                                    header="Hot Country Hits"
+                                     }}>
+                                    <Button.Content visible>Classic Country</Button.Content>
+                                    <Button.Content hidden>Play Now</Button.Content>
+                                </Button>
+                                
+                            </div>
+                                
+                            <div>
+                                <img src={brit1}/>
+                                <Button     
+                                    animated='fade'
+                                    size='massive' 
+                                    attached='bottom' 
+                                    basic color='green'
                                     onClick={event => {
                                         handleCatgoryChoice(3)
-                                    }}
-                                />
-                         </Grid.Column>
-                        <Grid.Column>
-                            <Card
-                                    color='blue'
-                                    header="Hits of the 90s"
+                                     }}
+                                     >
+                                    <Button.Content visible>90s Hits</Button.Content>
+                                    <Button.Content hidden>Play Now</Button.Content>
+                                </Button>
+                            </div>
+                                
+                            <div>
+                                <img src="https://cdn.mos.cms.futurecdn.net/Er7f2aS9ukBKBsVfR2Z9uE.jpg" />
+                                <Button     
+                                    animated='fade'
+                                    size='massive' 
+                                    attached='bottom' 
+                                    basic color='green'
+                                    onClick={event => {
+                                        handleCatgoryChoice(1)
+                                     }}
+                                     >
+                                    <Button.Content visible>Classic Rocks greatest </Button.Content>
+                                    <Button.Content hidden>Play Now</Button.Content>
+                                    
+                                </Button>
+                            </div>
+                                
+                            <div>
+                                <img src="https://images.squarespace-cdn.com/content/56858337cbced60d3b293aef/1511882901578-XAM9BXOBM951U6GRT8UP/Albumism_MichaelJackson_Thriller_MainImage1.jpg?content-type=image%2Fjpeg" />
+                                <Button     
+                                    animated='fade'
+                                    size='massive' 
+                                    attached='bottom' 
+                                    basic color='green'
                                     onClick={event => {
                                         handleCatgoryChoice(4)
-                                    }}
-                                />
-                        </Grid.Column>
-                    </Grid.Row>
-                    <Grid.Row  >
-                        <Grid.Column >
-                            <Card
-                                color='blue'
-                                header="Leaderboard"
-                                meta='Leaderboard'
-                                description="Leaderboard"
-                                onClick={event => {
-                                    history.push('/leaderboard')
-                                }}
-                            />
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid>
-            </>     
-        )
+                                     }}
+                                     >
+                                    <Button.Content visible>Best of the 80s </Button.Content>
+                                    <Button.Content hidden>Play Now</Button.Content>
+                                </Button>
+                            </div>
+                        </Carousel>  
+                    </Container> 
+                </Grid.Column>
+            </Grid>
+
+
+            
+           </>  
+        );
+
+        
+
+                
+           
     }
 
-   
-    
+
+
+
+// Don't forget to include the css in your page
+
+// Using webpack or parcel with a style loader
+// import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
+
+// Using html tag:
+// <link rel="stylesheet" href="<NODE_MODULES_FOLDER>/react-responsive-carousel/lib/styles/carousel.min.css"/>

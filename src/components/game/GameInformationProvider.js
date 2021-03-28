@@ -19,6 +19,7 @@ export const GameInformationProvider = (props) => {
     const [userName, setUserName] = useState('')
     //all data of currently logged in user
     const [currentUserObject, setCurrentUserObject]=useState({})
+    const [games, setGames]=useState({})
     
     //user id of current user. held in local storage
     let id = localStorage.getItem('sonic_user')
@@ -144,10 +145,20 @@ export const GameInformationProvider = (props) => {
         })
       })
     }
+
+    //Get top 10 scores for Leaderboard
+    const getGames = () => {
+      return fetch(`http://localhost:8088/games/`)
+      .then(res => res.json())
+      .then(setGames)
+      
+      
+  }
+
                   
     return (
         <GameContext.Provider value={{
-            uri, getUri, categoryId, playerId, getPlayerIdStartPlayer, startAlbum, nextTrack, getTrackInfo, trackInfo, getUserName, userName, handleLogoutClick, getCurrentUserObject, currentUserObject, setCurrentGameRecord
+            uri, getUri, categoryId, playerId, getPlayerIdStartPlayer, startAlbum, nextTrack, getTrackInfo, trackInfo, getUserName, userName, handleLogoutClick, getCurrentUserObject, currentUserObject, setCurrentGameRecord, getGames, games
         }}>
             {props.children}
         </GameContext.Provider>

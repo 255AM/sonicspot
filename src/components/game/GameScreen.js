@@ -22,11 +22,11 @@ export const GameScreen = () =>{
     //get userOBject to set userName to gameObject
     
     
-    const {getPlayerIdStartPlayer,nextTrack,trackInfo,handleLogoutClick,setCurrentGameRecord,categoryId}=useContext(GameContext)
+    const {getPlayerIdStartPlayer,nextTrack,trackInfo,handleLogoutClick,setCurrentGameRecord,categoryId,currentUserObject, }=useContext(GameContext)
     //data that is being entered by user at form inputs is set to state
     const [answerState, setAnswerState] = useState({
-      answerSong: ' ',
-      answerArtist: ' '
+      answerSong: '',
+      answerArtist: ''
     })
     //handling form inputs(user guess)
     const handleControlledInputChange = (event) => {
@@ -111,16 +111,27 @@ export const GameScreen = () =>{
   
     return(
       <>
-        <Menu>
-          <Menu.Menu position='right'>
-            <Menu.Item
-              name='logout'
-              onClick={handleLogoutClick}
+       <Menu className = "menu">
+            <Menu.Menu position='right'>
+            </Menu.Menu>
+                <Header size='huge'>A game that is a game</Header>
+            <Menu.Menu position='right'>
+                <Menu.Item
+                    name= 'user'
+                 >
+                    Welcome {currentUserObject.userName}
+                    <Menu.Item
+                    className="menu-text"
+                    name='logout'
+                    onClick={handleLogoutClick}
             />
-          </Menu.Menu>
+                </Menu.Item>
+                
+            </Menu.Menu>
+            
         </Menu>
 
-        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+        <Grid  textAlign='center' verticalAlign='middle' style={{ backgroundColor: 'white', height: '100vh' }}  >
           <Grid.Column style={{ maxWidth: 900 }}>
             <Container>
               {/* //on game start(triggered by start modal button) start timer// If no game, no timer */}
@@ -132,7 +143,7 @@ export const GameScreen = () =>{
             </Container>
           
             <Form size='large'>
-              <Segment stacked>
+              <Segment stacked style={{backgroundColor:'darkgrey'}}>
                 <Form.Input
                   size='big' 
                   placeholder='Song Title'
