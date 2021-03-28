@@ -48,3 +48,8 @@ track players games
 track player starts
 enable "add to playlist " fx
 
+
+
+first screen: tell people to choose a category
+choose a category, then modal should tell people "here's what you chose," random pic frm that catalog, description of the category, option to go back to choose another category or proceed.
+

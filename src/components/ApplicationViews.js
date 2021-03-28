@@ -3,7 +3,10 @@ import { Route } from "react-router-dom"
 import {GameInformationProvider} from './game/GameInformationProvider'
 import {GameScreen} from './game/GameScreen'
 import {GameSelect} from './game/GameSelect'
-import {Leaderboard} from './game/Leaderboard'
+import { Leaderboard } from "./game/Leaderboard"
+//import Leaderboard from "./game/GameSelect"
+
+
 
 
 export const ApplicationViews = () => {
@@ -17,7 +20,7 @@ export const ApplicationViews = () => {
                     <GameScreen />
                 </Route>
                 <Route exact path="/leaderboard">
-                    <Leaderboard />
+                  <Leaderboard /> 
                 </Route>
             </GameInformationProvider> 
         </>
