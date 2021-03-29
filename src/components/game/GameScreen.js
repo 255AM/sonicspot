@@ -5,6 +5,7 @@ import { useHistory, Link } from "react-router-dom";
 import {Timer} from "./GameTimer"
 import { Form, Container, Modal, Button, Image, Header, Grid, Icon, Segment, Menu} from 'semantic-ui-react'
 import { AnswerCard } from "./AnswerResponse";
+import Fuse from 'fuse.js'
 
 export const GameScreen = () =>{
     const history = useHistory();
@@ -21,6 +22,8 @@ export const GameScreen = () =>{
     const [currentScore, setCurrentScore] = useState(0)
     //get userOBject to set userName to gameObject
     
+
+   
     
     const {getPlayerIdStartPlayer,nextTrack,trackInfo,handleLogoutClick,setCurrentGameRecord,categoryId,currentUserObject, }=useContext(GameContext)
     //data that is being entered by user at form inputs is set to state
@@ -36,20 +39,44 @@ export const GameScreen = () =>{
     }
     //on submit, compare guesses to actual data
     const compareTrackAnswer=(trackInfo,answerState )=>{
-      let userAnswer = trackInfo.songName.toLowerCase()
-      let correctAnswer = answerState.answerSong.toLowerCase()
-      if (userAnswer.includes(correctAnswer)||correctAnswer.includes(userAnswer) === answerState.answerArtist){
-        correctTrackAnswer()
-      }else{
-        incorrectTrackAnswer()
-      }
+      let userAnswer = answerState.answerSong
+      let results
+      let fcorrectAnswer = new Fuse(trackInfo,{
+        keys:[
+          'answerSong'
+        ]
+      })
+      results = fcorrectAnswer.search(userAnswer)
+      console.log('user', userAnswer);
+      console.log('answer', fcorrectAnswer);
+      console.log('user', results);
+      //   if (results[0].score < .4){
+      //     correctTrackAnswer()
+      //   }else{
+      //     incorrectTrackAnswer()
+      //   }
+        
+      
     }
+    //const fCorrectAnser = new Fuse(correctAnswer, {
+      //keys:['answerSong']
+      
+ 
+
+
+    
+
+    
+    
+
+
     //on submit, compare guesses to actual data    ***look into combining this and previous fx*****
     const compareArtistAnswer=(trackInfo,answerState )=>{
       
       let userAnswer = trackInfo.artistName.toLowerCase()
       let correctAnswer = answerState.answerArtist.toLowerCase()
-      if (userAnswer.includes(correctAnswer)||correctAnswer.includes(userAnswer) === answerState.answerArtist){
+
+      if (userAnswer=== correctAnswer){
         correctArtistAnswer()
       }else{
         incorrectArtistAnswer()
