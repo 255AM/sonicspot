@@ -28,25 +28,30 @@ import {GameCard} from './GameCard'
               "name": "Chance Lane",
               "userName": "2:55AM",
               "id": 1
+            },
+            {
+              "email": "erica@email.com",
+              "name": "Erica Lane",
+              "userName": "erica1",
+              "id": 2
             }
           ]
           
         
-        let x = new Fuse(users, {
-            keys: [
-              'name',
-              'email'
-            ],
-            includeScore: true
-          });
-          let results 
-          results = x.search("chbnce L4ne")
-          console.log(results);
-          if(results[0].score < .4){
-              console.log('iwnwiwnwinw');
-          }else{
-              console.log('nononoonon')
-          }
+        // let x = new Fuse(users, {
+        //     keys: [
+        //       'name',
+        //       'email'
+        //     ],
+        //     includeScore: true
+        //   });
+        //   let results 
+        //   results = x.search("chbnce L4ne")
+        //   if(results[0].score < .4){
+        //       console.log('iwnwiwnwinw');
+        //   }else{
+        //       console.log('nononoonon')
+        //   }
          
           
 

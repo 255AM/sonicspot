@@ -14,7 +14,7 @@ export const GameInformationProvider = (props) => {
     //local instance of spotify player (sdk). Need this info to start player in beginning, but afterwards it will be the only player existing and unneeded info
     const [playerId, setPlayerId] = useState('')
     //track info currently playing. from spotiy api, used to compare answers to
-    const [trackInfo, setTrackInfo] = useState({})
+    const [trackInfo, setTrackInfo] = useState([{}])
     //currently logged in userName
     const [userName, setUserName] = useState('')
     //all data of currently logged in user
@@ -111,7 +111,7 @@ export const GameInformationProvider = (props) => {
         };
         fetch("https://api.spotify.com/v1/me/player/currently-playing", requestOptions)
           .then(response => response.json())
-          .then(result => setTrackInfo({ artistName:result.item.artists[0].name, songName:result.item.name }))
+          .then(result => setTrackInfo([{ artistName:result.item.artists[0].name, songName:result.item.name }]))
     }
     //take userid of localstorage and return current users userName
     const getUserName = () =>{

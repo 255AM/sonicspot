@@ -41,42 +41,36 @@ export const GameScreen = () =>{
     const compareTrackAnswer=(trackInfo,answerState )=>{
       let userAnswer = answerState.answerSong
       let results
-      let fcorrectAnswer = new Fuse(trackInfo,{
+      let ftcorrectAnswer = new Fuse(trackInfo,{
         keys:[
-          'answerSong'
-        ]
+          "songName"
+        ], includeScore:true
       })
-      results = fcorrectAnswer.search(userAnswer)
-      console.log('user', userAnswer);
-      console.log('answer', fcorrectAnswer);
-      console.log('user', results);
-      //   if (results[0].score < .4){
-      //     correctTrackAnswer()
-      //   }else{
-      //     incorrectTrackAnswer()
-      //   }
-        
-      
+      // console.log(userAnswer);
+      results = ftcorrectAnswer.search(userAnswer)
+      // console.log('user', userAnswer);
+      // console.log('tingo', trackInfo);
+      // console.log('user', results);
+      // console.log('f', ftcorrectAnswer);
+      // console.log('og corr answer',trackInfo.songName);
+        if (results[0] && results[0].score < .01){
+          correctTrackAnswer()
+        }else{
+          incorrectTrackAnswer()
+        }
     }
-    //const fCorrectAnser = new Fuse(correctAnswer, {
-      //keys:['answerSong']
-      
- 
-
-
-    
-
-    
-    
-
-
     //on submit, compare guesses to actual data    ***look into combining this and previous fx*****
     const compareArtistAnswer=(trackInfo,answerState )=>{
       
-      let userAnswer = trackInfo.artistName.toLowerCase()
-      let correctAnswer = answerState.answerArtist.toLowerCase()
-
-      if (userAnswer=== correctAnswer){
+      let userAnswer = answerState.answerArtist 
+      let aresults
+      let facorrectAnswer = new Fuse(trackInfo,{
+        keys:[
+          'artistName'
+        ],includeScore:true
+      })   
+      aresults = facorrectAnswer.search(userAnswer)
+      if (aresults[0] && aresults[0].score < .01){
         correctArtistAnswer()
       }else{
         incorrectArtistAnswer()
@@ -96,20 +90,20 @@ export const GameScreen = () =>{
       
     const correctTrackAnswer = () =>{
       setCurrentScore(currentScore => currentScore + 1)
-      setSongResponse(`Thats it!!!! the song is "${trackInfo.songName}". You earn 1 point!`)
+      setSongResponse(`Thats it!!!! the song is "${trackInfo[0].songName}". You earn 1 point!`)
     }
 
     const incorrectTrackAnswer = ()=>{
-      setSongResponse( `Better luck next time. The name of this song is "${trackInfo.songName}"`)
+      setSongResponse( `Better luck next time. The name of this song is "${trackInfo[0].songName}"`)
     }
     
     const correctArtistAnswer = () =>{
       setCurrentScore(currentScore => currentScore + 1)
-      setArtistResponse( `Thats it!!!! the song is "${trackInfo.artistName}" You earn 1 point!`)
+      setArtistResponse( `Thats it!!!! the song is "${trackInfo[0].artistName}" You earn 1 point!`)
     }
     
     const incorrectArtistAnswer = ()=>{
-      setArtistResponse( `Wrong. That was a song by "${trackInfo.artistName}"`)
+      setArtistResponse( `Wrong. That was a song by "${trackInfo[0].artistName}"`)
     }
 
     const startPlayer = () =>{
