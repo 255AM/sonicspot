@@ -5,6 +5,7 @@ import { useHistory, Link } from "react-router-dom";
 import {Timer} from "./GameTimer"
 import { Form, Container, Modal, Button, Image, Header, Grid, Icon, Segment, Menu} from 'semantic-ui-react'
 import { AnswerCard } from "./AnswerResponse";
+import Fuse from 'fuse.js'
 
 export const GameScreen = () =>{
     const history = useHistory();
@@ -21,6 +22,8 @@ export const GameScreen = () =>{
     const [currentScore, setCurrentScore] = useState(0)
     //get userOBject to set userName to gameObject
     
+
+   
     
     const {getPlayerIdStartPlayer,nextTrack,trackInfo,handleLogoutClick,setCurrentGameRecord,categoryId,currentUserObject, }=useContext(GameContext)
     //data that is being entered by user at form inputs is set to state
@@ -36,20 +39,38 @@ export const GameScreen = () =>{
     }
     //on submit, compare guesses to actual data
     const compareTrackAnswer=(trackInfo,answerState )=>{
-      let userAnswer = trackInfo.songName.toLowerCase()
-      let correctAnswer = answerState.answerSong.toLowerCase()
-      if (userAnswer.includes(correctAnswer)||correctAnswer.includes(userAnswer) === answerState.answerArtist){
-        correctTrackAnswer()
-      }else{
-        incorrectTrackAnswer()
-      }
+      let userAnswer = answerState.answerSong
+      let results
+      let ftcorrectAnswer = new Fuse(trackInfo,{
+        keys:[
+          "songName"
+        ], includeScore:true
+      })
+      // console.log(userAnswer);
+      results = ftcorrectAnswer.search(userAnswer)
+      // console.log('user', userAnswer);
+      // console.log('tingo', trackInfo);
+      // console.log('user', results);
+      // console.log('f', ftcorrectAnswer);
+      // console.log('og corr answer',trackInfo.songName);
+        if (results[0] && results[0].score < .01){
+          correctTrackAnswer()
+        }else{
+          incorrectTrackAnswer()
+        }
     }
     //on submit, compare guesses to actual data    ***look into combining this and previous fx*****
     const compareArtistAnswer=(trackInfo,answerState )=>{
       
-      let userAnswer = trackInfo.artistName.toLowerCase()
-      let correctAnswer = answerState.answerArtist.toLowerCase()
-      if (userAnswer.includes(correctAnswer)||correctAnswer.includes(userAnswer) === answerState.answerArtist){
+      let userAnswer = answerState.answerArtist 
+      let aresults
+      let facorrectAnswer = new Fuse(trackInfo,{
+        keys:[
+          'artistName'
+        ],includeScore:true
+      })   
+      aresults = facorrectAnswer.search(userAnswer)
+      if (aresults[0] && aresults[0].score < .01){
         correctArtistAnswer()
       }else{
         incorrectArtistAnswer()
@@ -69,20 +90,20 @@ export const GameScreen = () =>{
       
     const correctTrackAnswer = () =>{
       setCurrentScore(currentScore => currentScore + 1)
-      setSongResponse(`Thats it!!!! the song is "${trackInfo.songName}". You earn 1 point!`)
+      setSongResponse(`Thats it!!!! the song is "${trackInfo[0].songName}". You earn 1 point!`)
     }
 
     const incorrectTrackAnswer = ()=>{
-      setSongResponse( `Better luck next time. The name of this song is "${trackInfo.songName}"`)
+      setSongResponse( `Better luck next time. The name of this song is "${trackInfo[0].songName}"`)
     }
     
     const correctArtistAnswer = () =>{
       setCurrentScore(currentScore => currentScore + 1)
-      setArtistResponse( `Thats it!!!! the song is "${trackInfo.artistName}" You earn 1 point!`)
+      setArtistResponse( `Thats it!!!! the song is "${trackInfo[0].artistName}" You earn 1 point!`)
     }
     
     const incorrectArtistAnswer = ()=>{
-      setArtistResponse( `Wrong. That was a song by "${trackInfo.artistName}"`)
+      setArtistResponse( `Wrong. That was a song by "${trackInfo[0].artistName}"`)
     }
 
     const startPlayer = () =>{

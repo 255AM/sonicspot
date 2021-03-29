@@ -40,7 +40,7 @@ add dark background colors to app components
 Do something with the select screen
 visualize the music playing or add a looping space video in a modal that only runs as music plays 
 shuffle the playlists (may need to create a custom array of songs instead of relying on the actual playlist)
-add carousel at select page
+-add carousel at select page
 circular countdown timer to game screen
 
 Bonus **
@@ -50,6 +50,6 @@ enable "add to playlist " fx
 
 
 
-first screen: tell people to choose a category
-choose a category, then modal should tell people "here's what you chose," random pic frm that catalog, description of the category, option to go back to choose another category or proceed.
+-first screen: tell people to choose a category
+--choose a category, then modal should tell people "here's what you chose," random pic frm that catalog, description of the category, option to go back to choose another category or proceed.
 

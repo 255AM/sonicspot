@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState, Component } from "react"
 import { GameContext } from "./GameInformationProvider"
 import {Button, Container, GridColumn, Table} from "semantic-ui-react"
+import Fuse from 'fuse.js'
 
 import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -20,6 +21,39 @@ import {GameCard} from './GameCard'
 
 //present user a series of boxes that represent categories. Each categories will have a unique id. Each unique id will have an associated uri to use for playlist retrieval from spotify.
     export const GameSelect = ()=> {
+
+        let users = [
+            {
+              "email": "lanecw@gmail.com",
+              "name": "Chance Lane",
+              "userName": "2:55AM",
+              "id": 1
+            },
+            {
+              "email": "erica@email.com",
+              "name": "Erica Lane",
+              "userName": "erica1",
+              "id": 2
+            }
+          ]
+          
+        
+        // let x = new Fuse(users, {
+        //     keys: [
+        //       'name',
+        //       'email'
+        //     ],
+        //     includeScore: true
+        //   });
+        //   let results 
+        //   results = x.search("chbnce L4ne")
+        //   if(results[0].score < .4){
+        //       console.log('iwnwiwnwinw');
+        //   }else{
+        //       console.log('nononoonon')
+        //   }
+         
+          
 
         const history  = useHistory()
         const {getGames, games} = useContext(GameContext)
