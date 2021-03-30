@@ -28,7 +28,7 @@ export const GameInformationProvider = (props) => {
     let id = localStorage.getItem('sonic_user')
     
     const history = useHistory()
-
+    let arrayOfUris = []
     
     //take category id(hard coded unique for each choice of game) go to server and return a spotify URI. Set URI to state
     const getUri = (categoryId) => {
@@ -55,14 +55,14 @@ export const GameInformationProvider = (props) => {
         redirect: 'follow'
       };
     //                                            albumUri here in url
-      fetch(`https://api.spotify.com/v1/playlists/${albumUri}/tracks?market=us&fields=items(track(uri))&limit=100`, requestOptions)
+    return  fetch(`https://api.spotify.com/v1/playlists/${albumUri}/tracks?market=us&fields=items(track(uri))&limit=100`, requestOptions)
         .then(response => response.json())
         .then(res => {
               let arr = res.items.map((currentSong) =>{
             return(JSON.stringify(currentSong.track.uri))
             })
             arr = arr.sort(() => Math.random() - 0.5)
-            setTrackUri(arr)
+            arrayOfUris =arr
         })
       }
 
@@ -96,7 +96,7 @@ export const GameInformationProvider = (props) => {
         myHeaders.append("Content-Type", "text/plain");
         
         
-        var raw = `{\r\n  \"uris\":[${trackUri}]\,\r\n  \"offset\": {\r\n    \"position\":0\r\n  },\r\n  \"position_ms\": 0\r\n}`;
+        var raw = `{\r\n  \"uris\":[${arrayOfUris}]\,\r\n  \"offset\": {\r\n    \"position\":0\r\n  },\r\n  \"position_ms\": 0\r\n}`;
 
         var requestOptions = {
           method: 'PUT',

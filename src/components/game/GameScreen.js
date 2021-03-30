@@ -145,16 +145,7 @@ export const GameScreen = () =>{
             </Menu.Menu>
             
         </Menu>
-        <Button
-              content="Take me Back"
-              labelPosition='right'
-              icon='checkmark'
-
-              onClick={event=>{
-                startPlayer()
-              }}
-              positive
-            />
+        
         <Grid  textAlign='center' verticalAlign='middle' style={{ backgroundColor: 'white', height: '100vh' }}  >
           <Grid.Column style={{ maxWidth: 900 }}>
             <Container>
@@ -229,7 +220,7 @@ export const GameScreen = () =>{
               onClick={event=>{
                 event.preventDefault()
                 setOpen2(false)
-                getPlaylistAndShuffle()
+                getPlaylistAndShuffle().then(startPlayer)
                 setGame(true)
                 //setTimeout(startPlayer, 5000);
                 //startPlayer()
@@ -273,11 +264,11 @@ export const GameScreen = () =>{
             />
           </Modal.Actions>
         </Modal>
-                
+              
         <div>
           <SpotifyPlayer
             token= {localStorage.getItem("spotifyAuthToken")}
-            uris={["spotify:playlist:6TeyryiZ2UEf3CbLXyztFA"]}
+            uris={["spotify:track:0BM8wPzuihqUE561Poj2b7", "spotify:track:4OpB5ExXiVjj1f3gMfTw4u", "spotify:track:5i3m1HZBzurdMu9zzjBY7r"]}
             styles={{
               activeColor: '#fff',
               bgColor: '#fff',

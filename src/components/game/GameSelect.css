@@ -1,11 +1,16 @@
-body{
-    overflow: hidden;
-}
+
 .selectHeader{
     font-size: 5rem;
     color:black;
     padding-top: 1em;
 }
-/* .ui.menu .item{
-    color:white!important
-} */
+.selectScreen{
+    background-color: black;
+    height: 100vh;
+}
+
+
+
+.card{
+    color:white
+}
