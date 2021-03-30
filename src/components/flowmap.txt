@@ -53,3 +53,4 @@ enable "add to playlist " fx
 -first screen: tell people to choose a category
 --choose a category, then modal should tell people "here's what you chose," random pic frm that catalog, description of the category, option to go back to choose another category or proceed.
 
+var raw = `{\r\n  \"uris\":[${trackUri}]\,\r\n  \"offset\": {\r\n    \"position\": 0\r\n  },\r\n  \"position_ms\": 0\r\n}`;

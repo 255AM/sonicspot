@@ -22,10 +22,7 @@ export const GameScreen = () =>{
     const [currentScore, setCurrentScore] = useState(0)
     //get userOBject to set userName to gameObject
     
-
-   
-    
-    const {getPlayerIdStartPlayer,nextTrack,trackInfo,handleLogoutClick,setCurrentGameRecord,categoryId,currentUserObject, }=useContext(GameContext)
+    const {getPlayerIdStartPlayer,nextTrack,trackInfo,handleLogoutClick,setCurrentGameRecord,categoryId,currentUserObject,getPlaylistAndShuffle, getUri,localPlaylist }=useContext(GameContext)
     //data that is being entered by user at form inputs is set to state
     const [answerState, setAnswerState] = useState({
       answerSong: '',
@@ -46,19 +43,15 @@ export const GameScreen = () =>{
           "songName"
         ], includeScore:true
       })
-      // console.log(userAnswer);
+      
       results = ftcorrectAnswer.search(userAnswer)
-      // console.log('user', userAnswer);
-      // console.log('tingo', trackInfo);
-      // console.log('user', results);
-      // console.log('f', ftcorrectAnswer);
-      // console.log('og corr answer',trackInfo.songName);
         if (results[0] && results[0].score < .01){
           correctTrackAnswer()
         }else{
           incorrectTrackAnswer()
         }
     }
+    
     //on submit, compare guesses to actual data    ***look into combining this and previous fx*****
     const compareArtistAnswer=(trackInfo,answerState )=>{
       
@@ -128,6 +121,7 @@ export const GameScreen = () =>{
 
     useEffect(() => {
       
+      
     },[])
   
     return(
@@ -151,7 +145,16 @@ export const GameScreen = () =>{
             </Menu.Menu>
             
         </Menu>
+        <Button
+              content="Take me Back"
+              labelPosition='right'
+              icon='checkmark'
 
+              onClick={event=>{
+                startPlayer()
+              }}
+              positive
+            />
         <Grid  textAlign='center' verticalAlign='middle' style={{ backgroundColor: 'white', height: '100vh' }}  >
           <Grid.Column style={{ maxWidth: 900 }}>
             <Container>
@@ -226,11 +229,14 @@ export const GameScreen = () =>{
               onClick={event=>{
                 event.preventDefault()
                 setOpen2(false)
-                startPlayer()
+                getPlaylistAndShuffle()
                 setGame(true)
+                //setTimeout(startPlayer, 5000);
+                //startPlayer()
               }}
                 positive
             />
+            
           </Modal.Actions>
         </Modal>
         
@@ -291,3 +297,5 @@ export const GameScreen = () =>{
       </>
     )
 }
+
+// var raw = `{\r\n  \"uris\":["spotify:track:0hCB0YR03f6AmQaHbwWDe8","spotify:track:0hCB0YR03f6AmQaHbwWDe8","spotify:track:0hCB0YR03f6AmQaHbwWDe8"],\r\n  \"offset\": {\r\n    \"position\": 0\r\n  },\r\n  \"position_ms\": 0\r\n}`;
