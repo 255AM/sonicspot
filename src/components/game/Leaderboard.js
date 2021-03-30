@@ -34,23 +34,30 @@ import { useHistory } from "react-router-dom"
         return (
             <>
         
-            <Menu className = "menu">
-                <Menu.Menu position='right'>
-                </Menu.Menu>
-                    <Header style={{ marginLeft:150, fontSize:50}} textAlign="center" size='huge'>A game that is a game</Header>
-                <Menu.Menu position='right'>
-                    <Menu.Item
-                     name= 'user'
-                    >
-                        Welcome {currentUserObject.userName}
+        <Menu style={{ backgroundColor: 'white', height: 10, fontSize:20}}>  
+                <Menu.Menu position='left'>
                         <Menu.Item
-                            className="menu-text"
+                            position='left'
+                            name='leaderboard'
+                            onClick={()=>history.push('./leaderboard')}
+                        >
+                        Leaderboard
+                        </Menu.Item>
+                        
+                    </Menu.Menu>
+                    <Menu.Menu position='right'>
+                        <Menu.Item
+                            position='right'
+                            name= 'user'
+                        >
+                        Welcome {currentUserObject.userName}
+                        </Menu.Item>
+                        <Menu.Item
                             name='logout'
-                        onClick={handleLogoutClick}
+                            onClick={handleLogoutClick}
                         />
-                    </Menu.Item>
-                
-                </Menu.Menu>
+                    </Menu.Menu>
+                   
                 </Menu>
                 <Grid style={{ backgroundColor: 'black', height: '100vh', fontSize:23}}>
                     <GridColumn>

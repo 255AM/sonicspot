@@ -10,7 +10,7 @@ export const GameInformationProvider = (props) => {
     //music genre/decade/band selected by user. use this to go to server and return spotify playlist uri
     const [categoryId, setCategoryId] =  useState(0)
     //spotify playlist uri
-    const [uri, setUri] = useState('')
+    const [albumUri, setAlbumUri] = useState('')
     //local instance of spotify player (sdk). Need this info to start player in beginning, but afterwards it will be the only player existing and unneeded info
     const [playerId, setPlayerId] = useState('')
     //track info currently playing. from spotiy api, used to compare answers to
@@ -20,24 +20,53 @@ export const GameInformationProvider = (props) => {
     //all data of currently logged in user
     const [currentUserObject, setCurrentUserObject]=useState({})
     const [games, setGames]=useState([])
+    //localplaylist
+    const [localPlaylist, setLocalPlaylist]=useState([])
+    const [trackUri, setTrackUri] =useState('')
     
     //user id of current user. held in local storage
     let id = localStorage.getItem('sonic_user')
-    let gameObject = {}
     
     const history = useHistory()
-
+    let arrayOfUris = []
     
     //take category id(hard coded unique for each choice of game) go to server and return a spotify URI. Set URI to state
     const getUri = (categoryId) => {
         return fetch(`http://localhost:8088/categories/${categoryId}`)
         .then(res => res.json())
-        .then(res => res.spotifyPlaylistUri)
-        .then(setUri)
+        
+        .then(res => {
+          console.log(res.spotifyPlaylistUri);
+          setAlbumUri(res.spotifyPlaylistUri)
+        })
         .then(setCategoryId(categoryId))
     }
 
-    //Call gets spotify sdk player id and uses that id to start album playback
+    //createa local playlist
+    const getPlaylistAndShuffle = () =>{
+      console.log('albume uri is ', albumUri);
+      var myHeaders = new Headers();
+      let toker = localStorage.getItem('spotifyAuthToken')
+      myHeaders.append("Authorization", `Bearer ${toker}`);
+
+      var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+    //                                            albumUri here in url
+    return  fetch(`https://api.spotify.com/v1/playlists/${albumUri}/tracks?market=us&fields=items(track(uri))&limit=100`, requestOptions)
+        .then(response => response.json())
+        .then(res => {
+              let arr = res.items.map((currentSong) =>{
+            return(JSON.stringify(currentSong.track.uri))
+            })
+            arr = arr.sort(() => Math.random() - 0.5)
+            arrayOfUris =arr
+        })
+      }
+
+//Call gets spotify sdk player id and uses that id to start album playback
     const getPlayerIdStartPlayer = () => {
     var myHeaders = new Headers();
       let toker = localStorage.getItem('spotifyAuthToken')
@@ -51,21 +80,23 @@ export const GameInformationProvider = (props) => {
     
       fetch("https://api.spotify.com/v1/me/player/devices", requestOptions)
         .then(response => response.json())
-        .then(result => startAlbum(result.devices[0].id))
+        .then(result => startTrack(result.devices[0].id))
         .then(getTrackInfo)
-    }
+      }
     
-    //actual album start call. is called above in getPlayerIdStartPlayer
-    const startAlbum = (deviceId) =>{
-      console.log(uri);
-      
+
+    //holy shit stringify thank you thank you thank you!
+    //actual track start call. is called above in getPlayerIdStartPlayer
+    const startTrack = (deviceId) =>{
+      console.log(trackUri);
       let toker = localStorage.getItem('spotifyAuthToken')
       var myHeaders = new Headers();
         
         myHeaders.append("Authorization",  `Bearer ${toker}`);
         myHeaders.append("Content-Type", "text/plain");
         
-        var raw = `{\r\n  \"context_uri\": \"${uri}\",\r\n  \"offset\": {\r\n    \"position\": 0\r\n  },\r\n  \"position_ms\": 0\r\n}`;
+        
+        var raw = `{\r\n  \"uris\":[${arrayOfUris}]\,\r\n  \"offset\": {\r\n    \"position\":0\r\n  },\r\n  \"position_ms\": 0\r\n}`;
 
         var requestOptions = {
           method: 'PUT',
@@ -80,7 +111,7 @@ export const GameInformationProvider = (props) => {
           .catch(error => console.log('error', error))
           .then(getTrackInfo)
     }
-
+    
     const nextTrack = () =>{
       var myHeaders = new Headers();
       let toker = localStorage.getItem('spotifyAuthToken')
@@ -146,6 +177,9 @@ export const GameInformationProvider = (props) => {
       })
     }
 
+    
+
+
     //Get top 10 scores for Leaderboard
     const getGames = () => {
       return fetch(`http://localhost:8088/games?_expand=user&_expand=category`)
@@ -159,7 +193,7 @@ export const GameInformationProvider = (props) => {
            
     return (
         <GameContext.Provider value={{
-            uri, getUri, categoryId, playerId, getPlayerIdStartPlayer, startAlbum, nextTrack, getTrackInfo, trackInfo, getUserName, userName, handleLogoutClick, getCurrentUserObject, currentUserObject, setCurrentGameRecord, getGames, games
+            getUri, categoryId, playerId, getPlayerIdStartPlayer, startTrack, nextTrack, getTrackInfo, trackInfo, getUserName, userName, handleLogoutClick, getCurrentUserObject, currentUserObject, setCurrentGameRecord, getGames, games, getPlaylistAndShuffle, localPlaylist,
         }}>
             {props.children}
         </GameContext.Provider>
