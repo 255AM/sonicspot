@@ -126,25 +126,31 @@ export const GameScreen = () =>{
   
     return(
       <>
-       <Menu className = "menu">
-            <Menu.Menu position='right'>
-            </Menu.Menu>
-            <Header style={{ marginLeft:150, fontSize:50}}size='huge'>A game that is a game</Header>
-            <Menu.Menu position='right'>
-                <Menu.Item
-                    name= 'user'
-                 >
-                    Welcome {currentUserObject.userName}
-                    <Menu.Item
-                    className="menu-text"
-                    name='logout'
-                    onClick={handleLogoutClick}
-            />
-                </Menu.Item>
-                
-            </Menu.Menu>
-            
-        </Menu>
+       <Menu style={{ backgroundColor: 'white', height: 10, fontSize:20}}>  
+                <Menu.Menu position='left'>
+                        <Menu.Item
+                            position='left'
+                            name='leaderboard'
+                            onClick={()=>history.push('./leaderboard')}
+                        >
+                        Leaderboard
+                        </Menu.Item>
+                        
+                    </Menu.Menu>
+                    <Menu.Menu position='right'>
+                        <Menu.Item
+                            position='right'
+                            name= 'user'
+                        >
+                        Welcome {currentUserObject.userName}
+                        </Menu.Item>
+                        <Menu.Item
+                            name='logout'
+                            onClick={handleLogoutClick}
+                        />
+                    </Menu.Menu>
+                   
+                </Menu>
         
         <Grid  textAlign='center' verticalAlign='middle' style={{ backgroundColor: 'white', height: '100vh' }}  >
           <Grid.Column style={{ maxWidth: 900 }}>

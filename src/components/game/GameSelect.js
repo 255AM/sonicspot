@@ -26,6 +26,16 @@ import { useHistory } from "react-router-dom"
             <div className = "selectScreen">
             
                 <Menu style={{ backgroundColor: 'white', height: 10, fontSize:20}}>  
+                <Menu.Menu position='left'>
+                        <Menu.Item
+                            position='left'
+                            name='leaderboard'
+                            onClick={()=>history.push('./leaderboard')}
+                        >
+                        Leaderboard
+                        </Menu.Item>
+                        
+                    </Menu.Menu>
                     <Menu.Menu position='right'>
                         <Menu.Item
                             position='right'
@@ -38,6 +48,7 @@ import { useHistory } from "react-router-dom"
                             onClick={handleLogoutClick}
                         />
                     </Menu.Menu>
+                   
                 </Menu>
                        
                     
