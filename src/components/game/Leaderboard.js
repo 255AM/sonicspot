@@ -32,16 +32,16 @@ import { useHistory } from "react-router-dom"
             
         
         return (
-            <>
-        
-        <Menu style={{ backgroundColor: 'white', height: 10, fontSize:20}}>  
+            
+            <div className = "leaderDiv"> 
+                <Menu style={{ backgroundColor: 'white', height: 10, fontSize:20}}>  
                 <Menu.Menu position='left'>
-                        <Menu.Item
+                    <Menu.Item
                             position='left'
-                            name='leaderboard'
-                            onClick={()=>history.push('./leaderboard')}
+                            name='Select'
+                            onClick={()=>history.push('./')}
                         >
-                        Leaderboard
+                        Game Select
                         </Menu.Item>
                         
                     </Menu.Menu>
@@ -108,7 +108,8 @@ import { useHistory } from "react-router-dom"
                 </Container>
                 </GridColumn>
                 </Grid>
-            </>
+            </div>
+            
         )
 
 

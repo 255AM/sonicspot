@@ -62,7 +62,7 @@ import { useHistory } from "react-router-dom"
                     
                     <Grid.Row>
                         <Grid.Column >
-                            <Card style={{backgroundColor: '#7cdf64',      height: 400, fontSize:20}}
+                            <Card style={{backgroundColor: '#7cdf64', height: 400, fontSize:20, marginLeft:250}}
                                     centered='true'
                                     onClick={event => {
                                        handleCatgoryChoice(1)
@@ -90,7 +90,7 @@ import { useHistory } from "react-router-dom"
                         </Card>
                         </Grid.Column>
                         <Grid.Column>
-                        <Card style={{backgroundColor: '#7cdf64',      height: 400, fontSize:20}}
+                        <Card style={{backgroundColor: '#7cdf64',      height: 400, fontSize:20, marginRight:250}}
                                     centered='true'
                                     onClick={event => {
                                        handleCatgoryChoice(3)
@@ -106,7 +106,7 @@ import { useHistory } from "react-router-dom"
                     </Grid.Row>
                     <Grid.Row >
                         <Grid.Column>
-                        <Card style={{backgroundColor: '#7cdf64', height: 400, fontSize:20}}
+                        <Card style={{backgroundColor: '#7cdf64', height: 400, fontSize:20, marginLeft:250}}
                                     centered='true'
                                     onClick={event => {
                                        handleCatgoryChoice(4)
@@ -134,7 +134,7 @@ import { useHistory } from "react-router-dom"
                         </Card>
                         </Grid.Column>
                         <Grid.Column>
-                        <Card style={{backgroundColor: '#7cdf64',      height: 400, fontSize:20}}
+                        <Card style={{backgroundColor: '#7cdf64',      height: 400, fontSize:20, marginRight:250}}
                                     centered='true'
                                     onClick={event => {
                                        handleCatgoryChoice(6)
