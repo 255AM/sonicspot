@@ -140,10 +140,11 @@ export const GameScreen = () =>{
                             
           </Menu.Menu>
             <Menu.Menu position='right'>
-              <Menu.Item
-                position='right'
-                name= 'user'
-              >
+            <Menu.Item
+                            position='right'
+                            name= 'user'
+                            onClick={()=>history.push('/stats')}
+                        >
                 Welcome {currentUserObject.userName}
               </Menu.Item>
               <Menu.Item
@@ -174,7 +175,7 @@ export const GameScreen = () =>{
               ""}
               </Container>
             <Form size='large'>
-              <Segment stacked style={{backgroundColor:'#648767'}}>
+              <Segment stacked style={{backgroundColor:'#7cdf64'}}>
                 <Form.Input
                   style={{ color: 'yellow', }}
                   size='big' 

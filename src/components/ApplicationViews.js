@@ -4,6 +4,7 @@ import {GameInformationProvider} from './game/GameInformationProvider'
 import {GameScreen} from './game/GameScreen'
 import {GameSelect} from './game/GameSelect'
 import { Leaderboard } from "./game/Leaderboard"
+import {Stats} from "./game/Stats"
 //import Leaderboard from "./game/GameSelect"
 
 
@@ -21,6 +22,9 @@ export const ApplicationViews = () => {
                 </Route>
                 <Route exact path="/leaderboard">
                   <Leaderboard /> 
+                </Route>
+                <Route exact path="/stats">
+                  <Stats/> 
                 </Route>
             </GameInformationProvider> 
         </>
