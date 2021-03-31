@@ -23,6 +23,9 @@ export const GameInformationProvider = (props) => {
     //localplaylist
     const [localPlaylist, setLocalPlaylist]=useState([])
     const [trackUri, setTrackUri] =useState('')
+    const [playlistImage, setPlaylistImage]=useState('')
+    const [categoryName, setCategoryName]=useState('')
+    const [albumWriteup, setAlbumWriteup]=useState('')
     
     //user id of current user. held in local storage
     let id = localStorage.getItem('sonic_user')
@@ -36,11 +39,20 @@ export const GameInformationProvider = (props) => {
         .then(res => res.json())
         
         .then(res => {
-          console.log(res.spotifyPlaylistUri);
+          console.log(res.writeup);
           setAlbumUri(res.spotifyPlaylistUri)
+          setCategoryName(res.name)
+          setPlaylistImage(res.image)
+          setAlbumWriteup(res.writeup)
         })
         .then(setCategoryId(categoryId))
     }
+
+    
+
+
+
+
 
     //createa local playlist
     const getPlaylistAndShuffle = () =>{
@@ -177,23 +189,17 @@ export const GameInformationProvider = (props) => {
       })
     }
 
-    
-
-
     //Get top 10 scores for Leaderboard
     const getGames = () => {
       return fetch(`http://localhost:8088/games?_expand=user&_expand=category`)
       .then(res => res.json())
 
       .then(setGames)
-      
-      
-  }
+    }
 
-           
     return (
         <GameContext.Provider value={{
-            getUri, categoryId, playerId, getPlayerIdStartPlayer, startTrack, nextTrack, getTrackInfo, trackInfo, getUserName, userName, handleLogoutClick, getCurrentUserObject, currentUserObject, setCurrentGameRecord, getGames, games, getPlaylistAndShuffle, localPlaylist,
+            getUri, categoryId, playerId, getPlayerIdStartPlayer, startTrack, nextTrack, getTrackInfo, trackInfo, getUserName, userName, handleLogoutClick, getCurrentUserObject, currentUserObject, setCurrentGameRecord, getGames, games, getPlaylistAndShuffle, localPlaylist, playlistImage, categoryName, albumWriteup
         }}>
             {props.children}
         </GameContext.Provider>

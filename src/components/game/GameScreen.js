@@ -6,6 +6,7 @@ import {Timer} from "./GameTimer"
 import { Form, Container, Modal, Button, Image, Header, Grid, Icon, Segment, Menu} from 'semantic-ui-react'
 import { AnswerCard } from "./AnswerResponse";
 import Fuse from 'fuse.js'
+import './GameScreen.css'
 
 export const GameScreen = () =>{
     const history = useHistory();
@@ -22,7 +23,7 @@ export const GameScreen = () =>{
     const [currentScore, setCurrentScore] = useState(0)
     //get userOBject to set userName to gameObject
     
-    const {getPlayerIdStartPlayer,nextTrack,trackInfo,handleLogoutClick,setCurrentGameRecord,categoryId,currentUserObject,getPlaylistAndShuffle, getUri,localPlaylist }=useContext(GameContext)
+    const {getPlayerIdStartPlayer,nextTrack,trackInfo,handleLogoutClick,setCurrentGameRecord,categoryId,currentUserObject,getPlaylistAndShuffle, categoryName, playlistImage, albumWriteup}=useContext(GameContext)
     //data that is being entered by user at form inputs is set to state
     const [answerState, setAnswerState] = useState({
       answerSong: '',
@@ -45,7 +46,7 @@ export const GameScreen = () =>{
       })
       
       results = ftcorrectAnswer.search(userAnswer)
-        if (results[0] && results[0].score < .01){
+        if (results[0] && results[0].score < .40){
           correctTrackAnswer()
         }else{
           incorrectTrackAnswer()
@@ -63,7 +64,7 @@ export const GameScreen = () =>{
         ],includeScore:true
       })   
       aresults = facorrectAnswer.search(userAnswer)
-      if (aresults[0] && aresults[0].score < .01){
+      if (aresults[0] && aresults[0].score < .40){
         correctArtistAnswer()
       }else{
         incorrectArtistAnswer()
@@ -118,54 +119,65 @@ export const GameScreen = () =>{
         userId: localStorage.getItem('sonic_user')
       })
     }
-
+    
     useEffect(() => {
       
       
     },[])
   
     return(
-      <>
-       <Menu style={{ backgroundColor: 'white', height: 10, fontSize:20}}>  
-                <Menu.Menu position='left'>
-                        <Menu.Item
-                            position='left'
-                            name='leaderboard'
-                            onClick={()=>history.push('./leaderboard')}
-                        >
-                        Leaderboard
-                        </Menu.Item>
-                        
-                    </Menu.Menu>
-                    <Menu.Menu position='right'>
-                        <Menu.Item
+      
+      <div className = 'gameDiv'>
+        <Menu style={{ backgroundColor: '', height: 10,     fontSize:20}}>  
+          <Menu.Menu position='left'>
+            <Menu.Item
+              position='left'
+              name='leaderboard'
+              onClick={()=>history.push('./leaderboard')}
+            >
+              Leaderboard
+            </Menu.Item>
+                            
+          </Menu.Menu>
+            <Menu.Menu position='right'>
+            <Menu.Item
                             position='right'
                             name= 'user'
+                            onClick={()=>history.push('/stats')}
                         >
-                        Welcome {currentUserObject.userName}
-                        </Menu.Item>
-                        <Menu.Item
-                            name='logout'
-                            onClick={handleLogoutClick}
-                        />
-                    </Menu.Menu>
-                   
-                </Menu>
+                Welcome {currentUserObject.userName}
+              </Menu.Item>
+              <Menu.Item
+                name='logout'
+                onClick={handleLogoutClick}
+              />
+            </Menu.Menu>
+        </Menu>
+
+        <Grid.Row style={{ color: 'white', backgroundColor: 'black', height: 100, fontSize:35}} >
+                    <Header style={{ color: 'white', backgroundColor: '', height: 200, fontSize:55}}textAlign='center'>Can You Hear The Music</Header>
+
+        </Grid.Row>
+        <Grid.Row style={{ color: '', backgroundColor: '', height: 400, fontSize:35}} >
+                    <Header style={{ color: 'white', backgroundColor: '', height: 200, fontSize:55}}textAlign='center'></Header>
+
+        </Grid.Row>
         
-        <Grid  textAlign='center' verticalAlign='middle' style={{ backgroundColor: 'white', height: '100vh' }}  >
+        <Grid  textAlign='center' verticalAlign='middle' style={{ backgroundColor: 'black', }}  >
           <Grid.Column style={{ maxWidth: 900 }}>
-            <Container>
+            
+              <Container style={{ color: 'white', backgroundColor: 'white', height: 50, fontSize:10}}>
               {/* //on game start(triggered by start modal button) start timer// If no game, no timer */}
               {game?
               <Timer endGame = {endGame}
               />
               :
               ""}
-            </Container>
-          
+              </Container>
             <Form size='large'>
-              <Segment stacked style={{backgroundColor:'darkgrey'}}>
+              <Segment stacked style={{backgroundColor:'#7cdf64'}}>
                 <Form.Input
+                  style={{ color: 'yellow', }}
                   size='big' 
                   placeholder='Song Title'
                   name='answerSong'
@@ -192,34 +204,49 @@ export const GameScreen = () =>{
                 <Icon name='fast forward' />
                 </Button.Content>
                 </Button>
-              </Segment>
-              <AnswerCard 
+                <AnswerCard 
                 songResponse = {songResponse}
                 artistResponse = {artistResponse}
               />
+              </Segment>
+              
             </Form>
           </Grid.Column>
-        </Grid>
-        {/* //Modal that opens on game start//timer begins after start button pressed//strectch goal, random photos from spotify album covers */}
-        <Modal
+          </Grid>
+          {/* //Modal that opens on game start//timer begins after start button pressed//strectch goal, random photos from spotify album covers */}
+          <Modal
+          size='large'
           onClose={() => setOpen2(false)}
           onOpen={() => setOpen2(true)}
           open={open2}
-          trigger={<Button>Show Modal Start</Button>}
-        >
+          
+          >
           <Modal.Header>Are You ready?</Modal.Header>
           <Modal.Content image>
-            <Image size='medium' src='https://cdn.playlists.net/images/playlists/image/medium/be12e4184e26063a2e68c1accad6f370.jpg' wrapped />
+            <Image size='large' src={playlistImage} wrapped />
             <Modal.Description>
-              <Header>Come on it's time to go</Header>
-                <h2 class="ui block header">
-                  Begin
-                </h2>
+              <Header style={{ fontSize:30,backgroundColor:"#7cdf64"}}>{categoryName}</Header>
+              <Container style={{ fontSize:15,  }}><Header>{albumWriteup}</Header></Container>
+                
             </Modal.Description>
-          </Modal.Content>
-          <Modal.Actions>
+            </Modal.Content>
+            <Modal.Actions>
             <Button
-              content="Enter"
+              content="Back To Menu"
+              labelPosition='center'
+              icon='caret square left'
+              color='black'
+
+              onClick={event=>{
+                event.preventDefault()
+                setOpen2(false)
+                history.push('/')
+              }}
+                
+            />
+            
+            <Button
+              content="Play!"
               labelPosition='right'
               icon='checkmark'
 
@@ -228,35 +255,35 @@ export const GameScreen = () =>{
                 setOpen2(false)
                 getPlaylistAndShuffle().then(startPlayer)
                 setGame(true)
-                //setTimeout(startPlayer, 5000);
-                //startPlayer()
+                
               }}
                 positive
             />
             
-          </Modal.Actions>
-        </Modal>
+            
+            </Modal.Actions>
+            </Modal>
         
-        {/* //Modal on game end// in future add song stop when show modal true */}
-        <Modal
-          onClose={() => setOpen1(false)}
-          onOpen={() => setOpen1(true)}
-          open={open1}
-          trigger={<Button>Show Modal End</Button>}
-        >
-          <Modal.Header ><h2 class="ui block blue header">It's all over now</h2></Modal.Header>
-          <Modal.Content image>
-            <Image size='medium' src='https://cdn.mos.cms.futurecdn.net/Er7f2aS9ukBKBsVfR2Z9uE.jpg' wrapped />
-            <Modal.Description>
-              <Header>This is the end</Header>
+            {/* //Modal on game end// in future add song stop when show modal true */}
+            <Modal
+             onClose={() => setOpen1(false)}
+              onOpen={() => setOpen1(true)}
+              open={open1}
+              
+            >
+              <Modal.Header ><h2 class="ui block blue header">It's all over now</h2></Modal.Header>
+              <Modal.Content image>
+                  <Image size='medium' src='https://cdn.mos.cms.futurecdn.net/Er7f2aS9ukBKBsVfR2Z9uE.jpg' wrapped />
+                <Modal.Description>
+                <Header>This is the end</Header>
                 <h2 class="ui block header">
                   You're out of time
                   Your final score is {currentScore}
                 </h2>
             </Modal.Description>
-          </Modal.Content>
-          <Modal.Actions>
-            <Button
+              </Modal.Content>
+              <Modal.Actions>
+                <Button
               content="Take me Back"
               labelPosition='right'
               icon='checkmark'
@@ -269,8 +296,13 @@ export const GameScreen = () =>{
               positive
             />
           </Modal.Actions>
-        </Modal>
+          </Modal>
               
+          <Grid.Row style={{ color: 'white', backgroundColor: 'black', height: 300, fontSize:35}} >
+                    
+
+          </Grid.Row>
+        
         <div>
           <SpotifyPlayer
             token= {localStorage.getItem("spotifyAuthToken")}
@@ -288,11 +320,10 @@ export const GameScreen = () =>{
               height: 1,
             }}
           /> 
-
-          
         </div>
-      </>
+        </div>
+      
     )
 }
 
-// var raw = `{\r\n  \"uris\":["spotify:track:0hCB0YR03f6AmQaHbwWDe8","spotify:track:0hCB0YR03f6AmQaHbwWDe8","spotify:track:0hCB0YR03f6AmQaHbwWDe8"],\r\n  \"offset\": {\r\n    \"position\": 0\r\n  },\r\n  \"position_ms\": 0\r\n}`;
+
