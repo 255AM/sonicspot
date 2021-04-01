@@ -63,3 +63,25 @@ var raw = `{\r\n  \"uris\":[${trackUri}]\,\r\n  \"offset\": {\r\n    \"position\
   },
   "position_ms": 0
 }
+games played 
+songs played
+songs right
+progress how many right each day
+
+let nums = usersGames.map((a)=>(a.category))
+        let mostPlayedCategory = topKFrequent(nums,1)
+        
+        function topKFrequent(nums, k) {
+            
+            let hash = {}
+        
+            for (let num of nums) {
+                if (!hash[num]) hash[num] = 0
+                hash[num]++
+            }
+        
+            const hashToArray = Object.entries(hash)
+            const sortedArray = hashToArray.sort((a,b) => b[1] - a[1])
+            const sortedElements = sortedArray.map(num => parseInt(num[0]))
+            return sortedElements.slice(0, k)
+        }

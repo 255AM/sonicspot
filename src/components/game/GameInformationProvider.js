@@ -47,7 +47,6 @@ export const GameInformationProvider = (props) => {
         })
         .then(setCategoryId(categoryId))
     }
-
     
 
 
@@ -154,7 +153,7 @@ export const GameInformationProvider = (props) => {
         };
         fetch("https://api.spotify.com/v1/me/player/currently-playing", requestOptions)
           .then(response => response.json())
-          .then(result => setTrackInfo([{ artistName:result.item.artists[0].name, songName:result.item.name }]))
+          .then(result => setTrackInfo([{ artistName:result.item.artists[0].name, songName:result.item.name, uri:result.item.uri }]))
     }
     //take userid of localstorage and return current users userName
     const getUserName = () =>{
@@ -184,7 +183,11 @@ export const GameInformationProvider = (props) => {
         body: JSON.stringify({
             score: gameObject.score,
             categoryId: gameObject.category,
-            userId:gameObject.userId
+            userId:gameObject.userId,
+            artistGuessCorrect: gameObject.artistGuessCorrect,
+            songGuessCorrect: gameObject.songGuessCorrect,
+            avgAnswerTime: gameObject.avgAnswerTime,
+            songsPlayed: gameObject.songsPlayed
         })
       })
     }
@@ -199,7 +202,7 @@ export const GameInformationProvider = (props) => {
 
     return (
         <GameContext.Provider value={{
-            getUri, categoryId, playerId, getPlayerIdStartPlayer, startTrack, nextTrack, getTrackInfo, trackInfo, getUserName, userName, handleLogoutClick, getCurrentUserObject, currentUserObject, setCurrentGameRecord, getGames, games, getPlaylistAndShuffle, localPlaylist, playlistImage, categoryName, albumWriteup
+            getUri, categoryId, playerId, getPlayerIdStartPlayer, startTrack, nextTrack, getTrackInfo, trackInfo, getUserName, userName, handleLogoutClick, getCurrentUserObject, currentUserObject, setCurrentGameRecord, getGames, games, getPlaylistAndShuffle, localPlaylist, playlistImage, categoryName, albumWriteup, 
         }}>
             {props.children}
         </GameContext.Provider>

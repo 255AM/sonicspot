@@ -8,6 +8,12 @@ import { AnswerCard } from "./AnswerResponse";
 import Fuse from 'fuse.js'
 import './GameScreen.css'
 
+let songsPlayed=0
+    let artistGuessCorrect=0
+    let songGuessCorrect=0
+    let avgAnswerTime
+    let postGamePlaylist=[]
+
 export const GameScreen = () =>{
     const history = useHistory();
     //flag to control a modal
@@ -22,6 +28,7 @@ export const GameScreen = () =>{
     //keeping current score in state
     const [currentScore, setCurrentScore] = useState(0)
     //get userOBject to set userName to gameObject
+    
     
     const {getPlayerIdStartPlayer,nextTrack,trackInfo,handleLogoutClick,setCurrentGameRecord,categoryId,currentUserObject,getPlaylistAndShuffle, categoryName, playlistImage, albumWriteup}=useContext(GameContext)
     //data that is being entered by user at form inputs is set to state
@@ -39,6 +46,7 @@ export const GameScreen = () =>{
     const compareTrackAnswer=(trackInfo,answerState )=>{
       let userAnswer = answerState.answerSong
       let results
+      songsPlayed+=1
       let ftcorrectAnswer = new Fuse(trackInfo,{
         keys:[
           "songName"
@@ -79,12 +87,15 @@ export const GameScreen = () =>{
           answerSong: '',
           answerArtist: ''
         });
+        postGamePlaylist.push({trackName:trackInfo[0].songName, artistName:trackInfo[0].artistName,uri: trackInfo})
+        console.log(postGamePlaylist);
         nextTrack()
       }
       
     const correctTrackAnswer = () =>{
       setCurrentScore(currentScore => currentScore + 1)
       setSongResponse(`Thats it!!!! the song is "${trackInfo[0].songName}". You earn 1 point!`)
+      songGuessCorrect+=1
     }
 
     const incorrectTrackAnswer = ()=>{
@@ -94,6 +105,7 @@ export const GameScreen = () =>{
     const correctArtistAnswer = () =>{
       setCurrentScore(currentScore => currentScore + 1)
       setArtistResponse( `Thats it!!!! the song is "${trackInfo[0].artistName}" You earn 1 point!`)
+      artistGuessCorrect+=1
     }
     
     const incorrectArtistAnswer = ()=>{
@@ -102,6 +114,7 @@ export const GameScreen = () =>{
 
     const startPlayer = () =>{
       getPlayerIdStartPlayer()
+      songsPlayed+=1
       console.log('here');
     }
 
@@ -116,7 +129,11 @@ export const GameScreen = () =>{
       setCurrentGameRecord({
         score:currentScore,
         category:categoryId,
-        userId: localStorage.getItem('sonic_user')
+        userId: localStorage.getItem('sonic_user'),
+        artistGuessCorrect: artistGuessCorrect,
+        songGuessCorrect: songGuessCorrect,
+        avgAnswerTime: 0,
+        songsPlayed: songsPlayed
       })
     }
     
