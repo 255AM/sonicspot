@@ -22,8 +22,6 @@ import { useHistory } from "react-router-dom"
         const history  = useHistory()
         const {getUri, handleLogoutClick, currentUserObject, getCurrentUserObject} = useContext(GameContext)   
         const {getGames, games} = useContext(GameContext)
-         
-        
         let sGames = games.sort((a, b) => (a.score > b.score) ? -1 : 1)
         
         useEffect(() =>{
@@ -36,19 +34,20 @@ import { useHistory } from "react-router-dom"
             <div className = "leaderDiv"> 
                 <Menu style={{ backgroundColor: 'white', height: 10, fontSize:20}}>  
                 <Menu.Menu position='left'>
-                    <Menu.Item
+                        <Menu.Item
                             position='left'
-                            name='Select'
-                            onClick={()=>history.push('./')}
+                            name='leaderboard'
+                            onClick={()=>history.push('./leaderboard')}
                         >
-                        Game Select
+                        Leaderboard
                         </Menu.Item>
                         
                     </Menu.Menu>
                     <Menu.Menu position='right'>
-                        <Menu.Item
+                    <Menu.Item
                             position='right'
                             name= 'user'
+                            onClick={()=>history.push('/stats')}
                         >
                         Welcome {currentUserObject.userName}
                         </Menu.Item>
@@ -59,17 +58,17 @@ import { useHistory } from "react-router-dom"
                     </Menu.Menu>
                    
                 </Menu>
-                <Grid style={{ backgroundColor: 'black', height: '100vh', fontSize:23}}>
+                <Grid style={{  backgroundColor: '#272727',height: '100vh', fontSize:23}}>
                     <GridColumn>
                 <Container >
-                <Header textAlign='center' style={{  backgroundColor: 'black', color:'white'}} size='huge'>Top 10 scores</Header>
+                <Header textAlign='center' style={{  backgroundColor: '#272727', color:'white'}} size='huge'>Top 10 scores</Header>
                 <Container >
-                    <Table padded singleLine size="large" style={{  backgroundColor: 'black', color:'white'}}>
-                        <Table.Header style={{ backgroundColor: 'black', color:''}}>
-                        <Table.Row style={{ backgroundColor: 'black', color:'white'}}>
-                            <Table.HeaderCell width={7} style={{ backgroundColor: 'black', color:'blue'}}>Score</Table.HeaderCell >
-                            <Table.HeaderCell width={8} style={{ backgroundColor: 'black', color:'blue'}}>Category</Table.HeaderCell>
-                            <Table.HeaderCell width={8} style={{ backgroundColor: 'black', color:'blue'}}>Name</Table.HeaderCell>
+                    <Table padded singleLine size="large" style={{  backgroundColor: '#272727', color:'white'}}>
+                        <Table.Header style={{ color:''}}>
+                        <Table.Row style={{ color:'white'}}>
+                            <Table.HeaderCell width={7} style={{ backgroundColor: '#272727', color:'#1DB954'}}>Score</Table.HeaderCell >
+                            <Table.HeaderCell width={8} style={{ backgroundColor: '#272727', color:'#1DB954'}}>Category</Table.HeaderCell>
+                            <Table.HeaderCell width={8} style={{ backgroundColor: '#272727', color:'#1DB954'}}>Name</Table.HeaderCell>
                         </Table.Row>
                         </Table.Header>
 

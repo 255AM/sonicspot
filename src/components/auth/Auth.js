@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button} from 'semantic-ui-react'
+import {Button, Header} from 'semantic-ui-react'
 
 
 
@@ -86,8 +86,8 @@ class SpotifyAuth extends Component {
   render() {
       return (
         <div className="button_container">
-            <h1 className="title is-4"><font color="neonyellow">Welcome</font></h1>
-            <h3 className="title is-4"><font color="purple">Please log into a premium Spotify account to play</font></h3>
+            
+            <Header style={{fontSize: 50}}className="title is-4"><font color="black">Please log into a premium Spotify account to play</font></Header>
             <div className="Line" /><br/>
             <Button color='green' fluid size='large' type="submit" onClick={(event) => this.handleRedirect(event)}>
             LINK YOUR SPOTIFY ACCOUNT

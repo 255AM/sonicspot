@@ -70,7 +70,7 @@ export const Login = props => {
                         type='password'
                         /> */}
             
-                        <Button color='blue' fluid size='large' type="submit">
+                        <Button color='green' fluid size='large' type="submit">
                         Login
                         </Button>
                     </Segment>

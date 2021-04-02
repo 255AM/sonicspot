@@ -171,16 +171,16 @@ export const GameScreen = () =>{
             </Menu.Menu>
         </Menu>
 
-        <Grid.Row style={{ color: 'white', backgroundColor: 'black', height: 100, fontSize:35}} >
+        <Grid.Row style={{ color: 'white', backgroundColor: '#272727', height: 100, fontSize:35}} >
                     <Header style={{ color: 'white', backgroundColor: '', height: 200, fontSize:55}}textAlign='center'>Can You Hear The Music</Header>
 
         </Grid.Row>
-        <Grid.Row style={{ color: '', backgroundColor: '', height: 400, fontSize:35}} >
+        <Grid.Row style={{ color: '', backgroundColor: '#272727', height: 400, fontSize:35}} >
                     <Header style={{ color: 'white', backgroundColor: '', height: 200, fontSize:55}}textAlign='center'></Header>
 
         </Grid.Row>
         
-        <Grid  textAlign='center' verticalAlign='middle' style={{ backgroundColor: 'black', }}  >
+        <Grid  textAlign='center' verticalAlign='middle' style={{ backgroundColor: '#272727', }}  >
           <Grid.Column style={{ maxWidth: 900 }}>
             
               <Container style={{ color: 'white', backgroundColor: 'white', height: 50, fontSize:10}}>
@@ -192,7 +192,7 @@ export const GameScreen = () =>{
               ""}
               </Container>
             <Form size='large'>
-              <Segment stacked style={{backgroundColor:'#7cdf64'}}>
+              <Segment stacked style={{backgroundColor:'#1DB954'}}>
                 <Form.Input
                   style={{ color: 'yellow', }}
                   size='big' 
@@ -242,7 +242,7 @@ export const GameScreen = () =>{
           <Modal.Content image>
             <Image size='large' src={playlistImage} wrapped />
             <Modal.Description>
-              <Header style={{ fontSize:30,backgroundColor:"#7cdf64"}}>{categoryName}</Header>
+              <Header style={{ fontSize:30,backgroundColor:"#1DB954"}}>{categoryName}</Header>
               <Container style={{ fontSize:15,  }}><Header>{albumWriteup}</Header></Container>
                 
             </Modal.Description>
@@ -315,7 +315,7 @@ export const GameScreen = () =>{
           </Modal.Actions>
           </Modal>
               
-          <Grid.Row style={{ color: 'white', backgroundColor: 'black', height: 300, fontSize:35}} >
+          <Grid.Row style={{ color: 'white', backgroundColor: '#272727', height: 300, fontSize:35}} >
                     
 
           </Grid.Row>
