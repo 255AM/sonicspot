@@ -58,17 +58,17 @@ import { useHistory } from "react-router-dom"
                     </Menu.Menu>
                    
                 </Menu>
-                <Grid style={{  backgroundColor: '#272727',height: '100vh', fontSize:23}}>
+                <Grid style={{  backgroundColor: '#121212',height: '100vh', fontSize:23}}>
                     <GridColumn>
                 <Container >
-                <Header textAlign='center' style={{  backgroundColor: '#272727', color:'white'}} size='huge'>Top 10 scores</Header>
+                <Header textAlign='center' style={{  backgroundColor: '#121212', color:'white'}} size='huge'>Top 10 scores</Header>
                 <Container >
-                    <Table padded singleLine size="large" style={{  backgroundColor: '#272727', color:'white'}}>
+                    <Table padded singleLine size="large" style={{  backgroundColor: '#121212', color:'white'}}>
                         <Table.Header style={{ color:''}}>
                         <Table.Row style={{ color:'white'}}>
-                            <Table.HeaderCell width={7} style={{ backgroundColor: '#272727', color:'#1DB954'}}>Score</Table.HeaderCell >
-                            <Table.HeaderCell width={8} style={{ backgroundColor: '#272727', color:'#1DB954'}}>Category</Table.HeaderCell>
-                            <Table.HeaderCell width={8} style={{ backgroundColor: '#272727', color:'#1DB954'}}>Name</Table.HeaderCell>
+                            <Table.HeaderCell width={7} style={{ backgroundColor: '#121212', color:'#1DB954'}}>Score</Table.HeaderCell >
+                            <Table.HeaderCell width={8} style={{ backgroundColor: '#121212', color:'#1DB954'}}>Category</Table.HeaderCell>
+                            <Table.HeaderCell width={8} style={{ backgroundColor: '#121212', color:'#1DB954'}}>Name</Table.HeaderCell>
                         </Table.Row>
                         </Table.Header>
 

@@ -26,6 +26,7 @@ export const GameInformationProvider = (props) => {
     const [playlistImage, setPlaylistImage]=useState('')
     const [categoryName, setCategoryName]=useState('')
     const [albumWriteup, setAlbumWriteup]=useState('')
+    const [currentImage, setCurrentImage]=useState('')
     
     //user id of current user. held in local storage
     let id = localStorage.getItem('sonic_user')
@@ -153,7 +154,12 @@ export const GameInformationProvider = (props) => {
         };
         fetch("https://api.spotify.com/v1/me/player/currently-playing", requestOptions)
           .then(response => response.json())
-          .then(result => setTrackInfo([{ artistName:result.item.artists[0].name, songName:result.item.name, uri:result.item.uri }]))
+          .then(result=>{
+            
+            setTrackInfo([{ artistName:result.item.artists[0].name, songName:result.item.name, uri:result.item.uri, }])
+            setCurrentImage(result.item.album.images[0].url)
+          })
+          
     }
     //take userid of localstorage and return current users userName
     const getUserName = () =>{
@@ -202,7 +208,7 @@ export const GameInformationProvider = (props) => {
 
     return (
         <GameContext.Provider value={{
-            getUri, categoryId, playerId, getPlayerIdStartPlayer, startTrack, nextTrack, getTrackInfo, trackInfo, getUserName, userName, handleLogoutClick, getCurrentUserObject, currentUserObject, setCurrentGameRecord, getGames, games, getPlaylistAndShuffle, localPlaylist, playlistImage, categoryName, albumWriteup, 
+            getUri, categoryId, playerId, getPlayerIdStartPlayer, startTrack, nextTrack, getTrackInfo, trackInfo, getUserName, userName, handleLogoutClick, getCurrentUserObject, currentUserObject, setCurrentGameRecord, getGames, games, getPlaylistAndShuffle, localPlaylist, playlistImage, currentImage, categoryName, albumWriteup, 
         }}>
             {props.children}
         </GameContext.Provider>

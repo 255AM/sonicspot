@@ -44,10 +44,10 @@ export const Login = props => {
                     <Container>
                         <SpotifyAuth/>
                     </Container>
-                    <Header as='h1' color='black' textAlign='center'>Can you hear the music?
+                    <Header as='h1' color='#121212' textAlign='center'>Can you hear the music?
                     </Header>
                     
-                    <Header as='h2' color='black' textAlign='center'>
+                    <Header as='h2' color='#121212' textAlign='center'>
                      Sign in to your account
                     </Header>
                     <Form size='large' onSubmit={handleLogin}>

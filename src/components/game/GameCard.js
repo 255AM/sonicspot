@@ -10,7 +10,7 @@ export function GameCard(game) {
     console.log(game);
     return(
 
-            <Table.Row style={{ backgroundColor: '#272727', color:'white'}}>
+            <Table.Row style={{ backgroundColor: '#121212', color:'white'}}>
                 <Table.Cell>{game.score}</Table.Cell>
                 <Table.Cell>{game.categoryName}</Table.Cell>
                 <Table.Cell>{game.userName}</Table.Cell>

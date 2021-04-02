@@ -87,7 +87,7 @@ class SpotifyAuth extends Component {
       return (
         <div className="button_container">
             
-            <Header style={{fontSize: 50}}className="title is-4"><font color="black">Please log into a premium Spotify account to play</font></Header>
+            <Header style={{fontSize: 50}}className="title is-4"><font color="#121212">Please log into a premium Spotify account to play</font></Header>
             <div className="Line" /><br/>
             <Button color='green' fluid size='large' type="submit" onClick={(event) => this.handleRedirect(event)}>
             LINK YOUR SPOTIFY ACCOUNT

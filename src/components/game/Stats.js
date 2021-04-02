@@ -114,14 +114,14 @@ import { BarChart } from './Chart';
                     </Menu.Menu>
                    
                 </Menu>
-                <Grid style={{ backgroundColor: '#272727', fontSize:23,}}>
+                <Grid style={{ backgroundColor: '#121212', fontSize:23,}}>
                     <GridColumn>
                         <Container >
                             <Header textAlign='center' style={{  height: 100,color:'#121212'}} ></Header>
                         </Container>
                     </GridColumn>
                 </Grid>
-                <Grid style={{ backgroundColor: '#272727', }}>
+                <Grid style={{ backgroundColor: '#121212', }}>
                     <Grid.Column>
                         <Grid.Row >
                             <Card.Group centered>
@@ -136,7 +136,7 @@ import { BarChart } from './Chart';
                                     <Card.Content color='black' style={{backgroundColor: "#1DB954"}}><Header textAlign='center'>Overall</Header></Card.Content>
                                     <Card.Content><Header textAlign='center'>Total Answers: {totalAnswers}</Header></Card.Content>
                                     <Card.Content><Header textAlign='center'>Total Correct Answers: {totalCorrectGuesses}</Header></Card.Content>
-                                    <Card.Content><Header textAlign='center'>Total Answer Sccuracy:  {totalGuessPercentages} %</Header></Card.Content> 
+                                    <Card.Content><Header textAlign='center'>Total Answer Accuracy:  {totalGuessPercentages} %</Header></Card.Content> 
                                 </Card>
 
                                 <Card fluid style={{  width: 300, }}>

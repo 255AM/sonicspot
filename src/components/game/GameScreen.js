@@ -30,7 +30,7 @@ export const GameScreen = () =>{
     //get userOBject to set userName to gameObject
     
     
-    const {getPlayerIdStartPlayer,nextTrack,trackInfo,handleLogoutClick,setCurrentGameRecord,categoryId,currentUserObject,getPlaylistAndShuffle, categoryName, playlistImage, albumWriteup}=useContext(GameContext)
+    const {getPlayerIdStartPlayer,nextTrack,trackInfo,handleLogoutClick,setCurrentGameRecord,categoryId,currentUserObject,getPlaylistAndShuffle, categoryName, playlistImage, currentImage, albumWriteup}=useContext(GameContext)
     //data that is being entered by user at form inputs is set to state
     const [answerState, setAnswerState] = useState({
       answerSong: '',
@@ -104,7 +104,7 @@ export const GameScreen = () =>{
     
     const correctArtistAnswer = () =>{
       setCurrentScore(currentScore => currentScore + 1)
-      setArtistResponse( `Thats it!!!! the song is "${trackInfo[0].artistName}" You earn 1 point!`)
+      setArtistResponse( `Thats it!!!! the song is by"${trackInfo[0].artistName}" You earn 1 point!`)
       artistGuessCorrect+=1
     }
     
@@ -171,16 +171,16 @@ export const GameScreen = () =>{
             </Menu.Menu>
         </Menu>
 
-        <Grid.Row style={{ color: 'white', backgroundColor: '#272727', height: 100, fontSize:35}} >
+        <Grid.Row style={{ color: 'white', backgroundColor: '#121212', height: 100, fontSize:35}} >
                     <Header style={{ color: 'white', backgroundColor: '', height: 200, fontSize:55}}textAlign='center'>Can You Hear The Music</Header>
 
         </Grid.Row>
-        <Grid.Row style={{ color: '', backgroundColor: '#272727', height: 400, fontSize:35}} >
+        <Grid.Row style={{ color: '', backgroundColor: '#121212', height: 400, fontSize:35}} >
                     <Header style={{ color: 'white', backgroundColor: '', height: 200, fontSize:55}}textAlign='center'></Header>
 
         </Grid.Row>
         
-        <Grid  textAlign='center' verticalAlign='middle' style={{ backgroundColor: '#272727', }}  >
+        <Grid  textAlign='center' verticalAlign='middle' style={{ backgroundColor: '#121212', }}  >
           <Grid.Column style={{ maxWidth: 900 }}>
             
               <Container style={{ color: 'white', backgroundColor: 'white', height: 50, fontSize:10}}>
@@ -290,7 +290,7 @@ export const GameScreen = () =>{
             >
               <Modal.Header ><h2 class="ui block blue header">It's all over now</h2></Modal.Header>
               <Modal.Content image>
-                  <Image size='medium' src='https://cdn.mos.cms.futurecdn.net/Er7f2aS9ukBKBsVfR2Z9uE.jpg' wrapped />
+                  <Image size='medium' src={currentImage} wrapped />
                 <Modal.Description>
                 <Header>This is the end</Header>
                 <h2 class="ui block header">
@@ -315,7 +315,7 @@ export const GameScreen = () =>{
           </Modal.Actions>
           </Modal>
               
-          <Grid.Row style={{ color: 'white', backgroundColor: '#272727', height: 300, fontSize:35}} >
+          <Grid.Row style={{ color: 'white', backgroundColor: '#121212', height: 300, fontSize:35}} >
                     
 
           </Grid.Row>
