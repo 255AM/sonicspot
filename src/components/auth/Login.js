@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom"
 import { Button, Form, Grid, Header, Image, Message, Segment, Container } from 'semantic-ui-react'
 import SpotifyAuth from "./Auth";
-import "./Login.css"
+
 
 export const Login = props => {
     
     const email = useRef()
-    const password = useRef()
     const existDialog = useRef()
     const history = useHistory()
+
 
     const existingUserCheck = () => {
         return fetch(`http://localhost:8088/users?email=${email.current.value}`)
@@ -22,6 +22,7 @@ export const Login = props => {
         e.preventDefault()
 
         existingUserCheck()
+        //if email entered exists in users, set userid as user in local storage and go to select menu if doesnt exist alert user
             .then(exists => {
                 if (exists) {
                     localStorage.setItem("sonic_user", exists.id)
@@ -35,8 +36,8 @@ export const Login = props => {
     return (
         <>    
                 <dialog className="dialog dialog--auth" ref={existDialog}>
-                <div>User does not exist</div>
-                <button className="button--close" onClick={e => existDialog.current.close()}>Close</button>
+                    <div>User does not exist</div>
+                    <button className="button--close" onClick={e => existDialog.current.close()}>Close</button>
                 </dialog>
 
                 <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
@@ -44,10 +45,10 @@ export const Login = props => {
                     <Container>
                         <SpotifyAuth/>
                     </Container>
-                    <Header as='h1' color='black' textAlign='center'>Can you hear the music?
+                    <Header as='h1' color='#121212' textAlign='center'>Can you hear the music?
                     </Header>
                     
-                    <Header as='h2' color='black' textAlign='center'>
+                    <Header as='h2' color='#121212' textAlign='center'>
                      Sign in to your account
                     </Header>
                     <Form size='large' onSubmit={handleLogin}>
@@ -62,13 +63,7 @@ export const Login = props => {
                         placeholder='E-mail address' 
                         />
                         
-                        {/* <input
-                        fluid
-                        icon='lock'
-                        iconPosition='left'
-                        placeholder='Password'
-                        type='password'
-                        /> */}
+                        
             
                         <Button color='green' fluid size='large' type="submit">
                         Login

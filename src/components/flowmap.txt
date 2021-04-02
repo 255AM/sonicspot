@@ -90,3 +90,12 @@ let nums = usersGames.map((a)=>(a.category))
         //leave out the the api part 
         dont apologize
         
+
+        <Message fluid
+                    style={{backgroundColor:'', width:830, height:50}}>{songResponse.includes('!')?<Header class="ui block green header">{songResponse}</Header>:<Header class="ui block red header">{songResponse}</Header>}
+            </Message>
+        
+                    <Message
+                    style={{backgroundColor:'', width:830, marginTop:20, height:50}}>{artistResponse.includes('!')?<Header class="ui block green header">{artistResponse}</Header>:<Header class="ui block red header">{artistResponse}</Header>}
+                    </Message>
+       
