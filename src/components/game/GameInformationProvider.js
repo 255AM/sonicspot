@@ -1,11 +1,11 @@
-import React, { useState, useContext, createContext } from "react"
+import React, { useState, createContext } from "react"
 import { useHistory } from "react-router-dom"
 
-// The context is imported and used by individual components that need data. ie gameselect/gamescreen. Info can be passed down to child elements through props at the bottom of the page
+
 
 export const GameContext = createContext()
 
-// Establsihing data to be used thtoughout, as well as spotify api navigation and spotify sdk navigation.
+// Establsihing data to be used throughout, as well as spotify api navigation and spotify sdk navigation.
 export const GameInformationProvider = (props) => {
     //music genre/decade/band selected by user. use this to go to server and return spotify playlist uri
     const [categoryId, setCategoryId] =  useState(0)
@@ -13,19 +13,25 @@ export const GameInformationProvider = (props) => {
     const [albumUri, setAlbumUri] = useState('')
     //local instance of spotify player (sdk). Need this info to start player in beginning, but afterwards it will be the only player existing and unneeded info
     const [playerId, setPlayerId] = useState('')
-    //track info currently playing. from spotiy api, used to compare answers to
+    //track info currently playing. from spotiy api, used to compare answers
     const [trackInfo, setTrackInfo] = useState([{}])
     //currently logged in userName
     const [userName, setUserName] = useState('')
     //all data of currently logged in user
     const [currentUserObject, setCurrentUserObject]=useState({})
+    //all games
     const [games, setGames]=useState([])
-    //localplaylist
+    //localplaylist creating an array of tracks and shuffling tracks to avoid the same playlist
     const [localPlaylist, setLocalPlaylist]=useState([])
+    //individual song uri
     const [trackUri, setTrackUri] =useState('')
+    //image presented at select menu and select confirm modal
     const [playlistImage, setPlaylistImage]=useState('')
+    //name of category
     const [categoryName, setCategoryName]=useState('')
+    //small writeup presented at select confirm screen
     const [albumWriteup, setAlbumWriteup]=useState('')
+    //image of currently playing song. display at timer expiration
     const [currentImage, setCurrentImage]=useState('')
     
     //user id of current user. held in local storage
@@ -34,7 +40,7 @@ export const GameInformationProvider = (props) => {
     const history = useHistory()
     let arrayOfUris = []
     
-    //take category id(hard coded unique for each choice of game) go to server and return a spotify URI. Set URI to state
+    //take category id(hard coded unique for each choice of game) go to server and return a spotify URI. set uri, name, playlist image and blurb
     const getUri = (categoryId) => {
         return fetch(`http://localhost:8088/categories/${categoryId}`)
         .then(res => res.json())
@@ -49,24 +55,18 @@ export const GameInformationProvider = (props) => {
         .then(setCategoryId(categoryId))
     }
     
-
-
-
-
-
     //createa local playlist
     const getPlaylistAndShuffle = () =>{
-      console.log('albume uri is ', albumUri);
       var myHeaders = new Headers();
       let toker = localStorage.getItem('spotifyAuthToken')
-      myHeaders.append("Authorization", `Bearer ${toker}`);
+          myHeaders.append("Authorization", `Bearer ${toker}`);
 
       var requestOptions = {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow'
       };
-    //                                            albumUri here in url
+    // return entire list of individual uris from selected spotify playlist and shuffle them                                           
     return  fetch(`https://api.spotify.com/v1/playlists/${albumUri}/tracks?market=us&fields=items(track(uri))&limit=100`, requestOptions)
         .then(response => response.json())
         .then(res => {
@@ -106,8 +106,6 @@ export const GameInformationProvider = (props) => {
         
         myHeaders.append("Authorization",  `Bearer ${toker}`);
         myHeaders.append("Content-Type", "text/plain");
-        
-        
         var raw = `{\r\n  \"uris\":[${arrayOfUris}]\,\r\n  \"offset\": {\r\n    \"position\":0\r\n  },\r\n  \"position_ms\": 0\r\n}`;
 
         var requestOptions = {
@@ -179,7 +177,7 @@ export const GameInformationProvider = (props) => {
         .then(res => res.json())
         .then(setCurrentUserObject)
     }
-    //upon end of game, send data to jserver as object
+    //upon end of game, send data object
     const setCurrentGameRecord = (gameObject)=>{
       fetch("http://localhost:8088/games", {
         method: "POST",

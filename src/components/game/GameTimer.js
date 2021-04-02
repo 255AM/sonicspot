@@ -4,7 +4,7 @@ import { Progress, Container, Icon, Header } from 'semantic-ui-react'
 
 export const Timer = ({endGame}) =>{
   
-        const [seconds, setSeconds] = useState(45)
+        const [seconds, setSeconds] = useState(90)
         const [minutes, setMinutes] = useState(0)
         
         function updateTime() {

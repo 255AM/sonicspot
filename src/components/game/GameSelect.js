@@ -1,6 +1,6 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useContext, useEffect } from "react"
 import { GameContext } from './GameInformationProvider'
-import { Card, Menu,Grid,Icon, Header, Image } from 'semantic-ui-react'
+import { Card, Menu,Grid, Header, Image } from 'semantic-ui-react'
 import './GameSelect.css'
 import { useHistory } from "react-router-dom"
 
@@ -8,14 +8,13 @@ import { useHistory } from "react-router-dom"
 //present user a series of boxes that represent categories. Each categories will have a unique id. Each unique id will have an associated uri to use for playlist retrieval from spotify.
     export const GameSelect = () => {
 
-        
         const history  = useHistory()
         const {getUri, handleLogoutClick, currentUserObject, getCurrentUserObject} = useContext(GameContext)
         const handleCatgoryChoice = (x) => {
             getUri(x)
             history.push("/game")
         }
-        //on each render, get current users dataObject
+        //on each render, get current users 
         useEffect(() => {
            getCurrentUserObject(localStorage.getItem("sonic_user")) 
         },[])
@@ -156,20 +155,5 @@ import { useHistory } from "react-router-dom"
     }
 
     
-  
 
-    
-
-    
-
-
-{/* <Card className='card'
-                                    
-                                    style={{ color: 'white', backgroundColor: '#7cdf64', height: 100, fontSize:20}}
-                                    centered='true'
-                                    header="Prime Country"
-                                    onClick={event => {
-                                       handleCatgoryChoice(1)
-                                    }}
-                                ><Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false} /></Card> */}
 

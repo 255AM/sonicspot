@@ -1,10 +1,9 @@
-import React, { useContext, useState } from "react"
-import { Link } from "react-router-dom"
+import React from "react"
 import {Table} from "semantic-ui-react"
 
 
 
-// How article is being printed to the DOM 
+// rendor each row of leaderboard
 export function GameCard(game) {
 
     console.log(game);

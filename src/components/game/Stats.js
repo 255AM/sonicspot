@@ -1,21 +1,12 @@
-import React, { useContext, useEffect, useState, Component } from "react"
+import React, { useContext, useEffect } from "react"
 import { GameContext } from "./GameInformationProvider"
-import {Button, Label, Container,GridColumn,Table, Segment, Header} from "semantic-ui-react"
-
-import ReactDOM from 'react-dom';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
+import { Container,GridColumn, Header} from "semantic-ui-react"
 import './Leaderboard.css'
-import brit1 from "./assets/brit1"
-import {GameCard} from './GameCard'
 import './Stats.css'
-
-
-
-import { Card, Menu, Divider, Grid, Image } from 'semantic-ui-react'
+import { Card, Menu,  Grid, } from 'semantic-ui-react'
 import './GameSelect.css'
 import { useHistory } from "react-router-dom"
-import { BarChart } from './Chart';
+
 
 
 

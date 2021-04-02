@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { GameContext } from "./GameInformationProvider"
 import SpotifyPlayer from 'react-spotify-web-playback';
-import { useHistory, Link } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import {Timer} from "./GameTimer"
 import { Form, Container, Modal, Button, Image, Header, Grid, Icon, Segment, Menu} from 'semantic-ui-react'
 import { AnswerCard } from "./AnswerResponse";
@@ -11,7 +11,7 @@ import './GameScreen.css'
 let songsPlayed=0
     let artistGuessCorrect=0
     let songGuessCorrect=0
-    let avgAnswerTime
+    //later feature let avgAnswerTime
     let postGamePlaylist=[]
 
 export const GameScreen = () =>{
@@ -42,7 +42,7 @@ export const GameScreen = () =>{
       newAnswer[event.target.name] = event.target.value
       setAnswerState(newAnswer)
     }
-    //on submit, compare guesses to actual data
+    //on submit, compare guesses to actual data// using Fuse Js package to allow close but not perfect responses/ see Fuse.JS for details. .40 is strictness, closer to 0 the stricter the answer must be
     const compareTrackAnswer=(trackInfo,answerState )=>{
       let userAnswer = answerState.answerSong
       let results
@@ -123,7 +123,7 @@ export const GameScreen = () =>{
       
       setOpen1(true)
     }
-    //This could and was done on the endGame fx above, but a timer glitch was running it 2x. Here for now on button press
+    // record game object on game end
     const recordGame = () =>{
       console.log('im runnign');
       setCurrentGameRecord({
@@ -138,7 +138,6 @@ export const GameScreen = () =>{
     }
     
     useEffect(() => {
-      
       
     },[])
   
@@ -182,7 +181,8 @@ export const GameScreen = () =>{
         
         <Grid  textAlign='center' verticalAlign='middle' style={{ backgroundColor: '#121212', }}  >
           <Grid.Column style={{ maxWidth: 900 }}>
-            
+
+              <Header dividing textAlign='center' centered style = {{backgroundColor: 'white', fontSize:30, height:40}}>You currently have {currentScore} points!</Header>
               <Container style={{ color: 'white', backgroundColor: 'white', height: 50, fontSize:10}}>
               {/* //on game start(triggered by start modal button) start timer// If no game, no timer */}
               {game?
@@ -194,6 +194,7 @@ export const GameScreen = () =>{
             <Form size='large'>
               <Segment stacked style={{backgroundColor:'#1DB954'}}>
                 <Form.Input
+                  focus='true'
                   style={{ color: 'yellow', }}
                   size='big' 
                   placeholder='Song Title'
@@ -281,7 +282,7 @@ export const GameScreen = () =>{
             </Modal.Actions>
             </Modal>
         
-            {/* //Modal on game end// in future add song stop when show modal true */}
+            {/* //Modal on game end//  */}
             <Modal
              onClose={() => setOpen1(false)}
               onOpen={() => setOpen1(true)}
@@ -294,7 +295,6 @@ export const GameScreen = () =>{
                 <Modal.Description>
                 <Header>This is the end</Header>
                 <h2 class="ui block header">
-                  You're out of time
                   Your final score is {currentScore}
                 </h2>
             </Modal.Description>
@@ -319,7 +319,7 @@ export const GameScreen = () =>{
                     
 
           </Grid.Row>
-        
+        {/* spotify react player. it is hidden from view ingame screen */}
         <div>
           <SpotifyPlayer
             token= {localStorage.getItem("spotifyAuthToken")}

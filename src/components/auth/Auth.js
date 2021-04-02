@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Button, Header} from 'semantic-ui-react'
 
 
-
+//get spotify auth and return token from hash
 class SpotifyAuth extends Component {  
   constructor (props) {
     super(props);
@@ -12,8 +12,6 @@ class SpotifyAuth extends Component {
     };
     this.state.handleRedirect = this.handleRedirect.bind(this);
   };
-
-
   generateRandomString(length) {
     let text = '';
     const possible =
@@ -84,19 +82,16 @@ class SpotifyAuth extends Component {
   };
 
   render() {
-      return (
-        <div className="button_container">
-            
-            <Header style={{fontSize: 50}}className="title is-4"><font color="#121212">Please log into a premium Spotify account to play</font></Header>
-            <div className="Line" /><br/>
-            <Button color='green' fluid size='large' type="submit" onClick={(event) => this.handleRedirect(event)}>
-            LINK YOUR SPOTIFY ACCOUNT
-            </Button>
-              
-              
-              
-        </div>
-      )
+    return (
+      <div className="button_container">
+          
+          <Header style={{fontSize: 50}}className="title is-4"><font color="#121212">Please log into a premium Spotify account to play</font></Header>
+          <div className="Line" /><br/>
+          <Button color='green' fluid size='large' type="submit" onClick={(event) => this.handleRedirect(event)}>
+          LINK YOUR SPOTIFY ACCOUNT
+          </Button>
+      </div>
+    )
   }
 }
 export default SpotifyAuth;
