@@ -85,3 +85,8 @@ let nums = usersGames.map((a)=>(a.category))
             const sortedElements = sortedArray.map(num => parseInt(num[0]))
             return sortedElements.slice(0, k)
         }
+
+
+        //leave out the the api part 
+        dont apologize
+        

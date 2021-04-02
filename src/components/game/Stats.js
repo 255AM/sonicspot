@@ -8,12 +8,14 @@ import { Carousel } from 'react-responsive-carousel';
 import './Leaderboard.css'
 import brit1 from "./assets/brit1"
 import {GameCard} from './GameCard'
+import './Stats.css'
 
 
 
 import { Card, Menu, Divider, Grid, Image } from 'semantic-ui-react'
 import './GameSelect.css'
 import { useHistory } from "react-router-dom"
+import { BarChart } from './Chart';
 
 
 
@@ -27,6 +29,7 @@ import { useHistory } from "react-router-dom"
         console.log(usersGames);
         //let sGames = games.sort((a, b) => (a.score > b.score) ? -1 : 1)
         let totalGames = usersGames.length
+        
         let totalPoints = usersGames.reduce((a, b) => a + b.score , 0)
         let totalSongs =  usersGames.reduce((a, b) => a + b.songsPlayed, 0)
         let totalCorrectGuesses =  usersGames.reduce((a, b) => a + b.artistGuessCorrect + b.songGuessCorrect, 0)
@@ -35,14 +38,16 @@ import { useHistory } from "react-router-dom"
         let totalGuessPercentages = Math.trunc(totalCorrectGuesses/(totalSongs*2)*100)
         let songGuessPercentages = Math.trunc(songCorrectGuesses/totalSongs*100)
         let artistGuessPercentages = Math.trunc(artistCorrectGuesses/totalSongs*100)
-        let averageScore = usersGames.reduce((a, b) => a + b.score, 0)/ usersGames.length.toFixed(1)
-        let sortedByScore =  usersGames.sort((a, b) => (a.score > b.score) ? -1 : 1)
+        let averageScore = usersGames.reduce((a, b) => a + b.score, 0)/(usersGames.length) 
+        let fAverageScore = averageScore.toFixed(1)
+        let sortedByScore =  usersGames?.sort((a, b) => (a.score > b.score) ? -1 : 1)
+        let totalAnswers = totalSongs*2
         console.log(usersGames);
         console.log(sortedByScore);
         
         
-        let userHighScore = sortedByScore[0].score
-        let userHighScoreCategory = sortedByScore[0].category.name
+        let userHighScore = sortedByScore[0]?.score
+        let userHighScoreCategory = sortedByScore[0]?.category.name
         
         
         console.log(usersGames);
@@ -73,14 +78,6 @@ import { useHistory } from "react-router-dom"
             const sortedElements = sortedArray.map(num => parseInt(num[0]))
             return sortedElements.slice(0, k)
         }
-        
-        
-        
-        
-        
-        
-  
-        
         useEffect(() =>{
             getGames()
         },[])
@@ -117,55 +114,56 @@ import { useHistory } from "react-router-dom"
                     </Menu.Menu>
                    
                 </Menu>
-                <Grid style={{ backgroundColor: 'white', fontSize:23}}>
+                <Grid style={{ backgroundColor: '#272727', fontSize:23,}}>
                     <GridColumn>
                         <Container >
-                            <Header textAlign='center' style={{  height: 100,color:'white'}} ></Header>
+                            <Header textAlign='center' style={{  height: 100,color:'#121212'}} ></Header>
                         </Container>
                     </GridColumn>
                 </Grid>
-                <Grid>
+                <Grid style={{ backgroundColor: '#272727', }}>
                     <Grid.Column>
                         <Grid.Row >
                             <Card.Group centered>
                                 <Card fluid style={{  width: 300, }}>
-                                    <Card.Content><Header textAlign='center'>Games</Header></Card.Content>
-                                    <Card.Content><Header textAlign='center'>Total games played: {usersGames.length}</Header></Card.Content>
+                                    <Card.Content style={{backgroundColor: "#1DB954" , color: 'white'}}><Header textAlign='center'>Games</Header></Card.Content>
+                                    <Card.Content><Header textAlign='center'>Total Games Played: {usersGames.length}</Header></Card.Content>
                                     <Card.Content><Header textAlign='center'>Total Points Scored: {totalPoints}</Header></Card.Content>
-                                    <Card.Content><Header textAlign='center'>Average score: {averageScore}</Header></Card.Content> 
+                                    <Card.Content><Header textAlign='center'>Average Score: {fAverageScore}</Header></Card.Content> 
                                 </Card>
                                 
-                                <Card fluid style={{  width: 300, }}>
-                                    <Card.Content><Header textAlign='center'>Overall</Header></Card.Content>
-                                    <Card.Content><Header textAlign='center'>Total songs played: {totalSongs}</Header></Card.Content>
-                                    <Card.Content><Header textAlign='center'>Total correct answers: {totalCorrectGuesses}</Header></Card.Content>
-                                    <Card.Content><Header textAlign='center'>Total answer accuracy: % {totalGuessPercentages}</Header></Card.Content> 
+                                <Card fluid color='black' style={{  width: 300, }}>
+                                    <Card.Content color='black' style={{backgroundColor: "#1DB954"}}><Header textAlign='center'>Overall</Header></Card.Content>
+                                    <Card.Content><Header textAlign='center'>Total Answers: {totalAnswers}</Header></Card.Content>
+                                    <Card.Content><Header textAlign='center'>Total Correct Answers: {totalCorrectGuesses}</Header></Card.Content>
+                                    <Card.Content><Header textAlign='center'>Total Answer Sccuracy:  {totalGuessPercentages} %</Header></Card.Content> 
                                 </Card>
 
                                 <Card fluid style={{  width: 300, }}>
-                                    <Card.Content><Header textAlign='center'>Songs</Header></Card.Content>
-                                    <Card.Content><Header textAlign='center'>Total songs played: {totalSongs}</Header></Card.Content>
-                                    <Card.Content><Header textAlign='center'>Correct song name answers: {songCorrectGuesses}</Header></Card.Content>
-                                    <Card.Content><Header textAlign='center'>Song name answer accuracy: % {songGuessPercentages}</Header></Card.Content> 
+                                    <Card.Content style={{backgroundColor: "#1DB954"}}><Header textAlign='center'>Songs</Header></Card.Content>
+                                    <Card.Content><Header textAlign='center'>Total Songs Played: {totalSongs}</Header></Card.Content>
+                                    <Card.Content><Header textAlign='center'>Correct Song Answers: {songCorrectGuesses}</Header></Card.Content>
+                                    <Card.Content><Header textAlign='center'>Song Answer Accuracy:  {songGuessPercentages} % </Header></Card.Content> 
                                 </Card>
 
                                 <Card fluid style={{  width: 300, }}>
-                                    <Card.Content><Header textAlign='center'>Artists</Header></Card.Content>
-                                    <Card.Content><Header textAlign='center'>Total songs played: {totalSongs}</Header></Card.Content>
-                                    <Card.Content><Header textAlign='center'>Correct artist name answers: {artistCorrectGuesses}</Header></Card.Content>
-                                    <Card.Content><Header textAlign='center'>Artist name answer accuracy: % {artistGuessPercentages}</Header></Card.Content> 
+                                    <Card.Content style={{backgroundColor: "#1DB954"}}><Header textAlign='center'>Artists</Header></Card.Content>
+                                    <Card.Content><Header textAlign='center'>Songs Played: {totalSongs}</Header></Card.Content>
+                                    <Card.Content><Header textAlign='center'>Correct Artist Answers: {artistCorrectGuesses}</Header></Card.Content>
+                                    <Card.Content><Header textAlign='center'>Artist Answer Accuracy:  {artistGuessPercentages} %</Header></Card.Content> 
                                 </Card>
 
                                 <Card fluid style={{  width: 300, }}>
-                                    <Card.Content><Header textAlign='center'>Categories</Header></Card.Content>
+                                    <Card.Content style={{backgroundColor: "#1DB954"}}><Header textAlign='center'>Categories</Header></Card.Content>
                                         <Card.Content><Header textAlign='center'>Most Played: {mpc[0]}</Header></Card.Content>
-                                    <Card.Content><Header textAlign='center'>Highest Score:{userHighScore} </Header></Card.Content>
-                                    <Card.Content><Header textAlign='center'>High Score Category:{userHighScoreCategory} </Header></Card.Content> 
+                                    <Card.Content><Header textAlign='center'>Highest Score: {userHighScore} </Header></Card.Content>
+                                    <Card.Content><Header textAlign='center'>Best Category: {userHighScoreCategory} </Header></Card.Content> 
                                 </Card>
                             </Card.Group>
                         </Grid.Row>
                     </Grid.Column>
                 </Grid>
+               
             </div>
         )
     }
