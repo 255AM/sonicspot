@@ -14,7 +14,7 @@ export const Register = (props) => {
     const userName = useHistory()
 
     const existingUserCheck = () => {
-        return fetch(`https://git.heroku.com/sonicserve.git/users?email=${email.current.value}`)
+        return fetch(`https://sonicserve.herokuapp.com/users?email=${email.current.value}`)
             .then(res => res.json())
             .then(user => !!user.length)
     }
@@ -28,7 +28,7 @@ export const Register = (props) => {
         existingUserCheck()
             .then((userExists) => {
                 if (!userExists) {
-                    fetch("https://git.heroku.com/sonicserve.git/users", {
+                    fetch("https://sonicserve.herokuapp.com/users", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
