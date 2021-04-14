@@ -75,7 +75,7 @@ class SpotifyAuth extends Component {
     url += '?response_type=token';
     url += '&client_id=' + encodeURIComponent('6129ade14f2c4dbda3511c026bd444ad');
     url += '&scope=' + encodeURIComponent('user-read-private%20streaming%20user-read-email%20streaming%20user-read-email%20user-read-private%20user-read-playback-state%20user-modify-playback-state%20user-library-read%20user-library-modify');
-    url += '&redirect_uri=' + encodeURIComponent('http://localhost:3000/login');
+    url += '&redirect_uri=' + encodeURIComponent('https://git.heroku.com/sonicserve.git/login');
     url += '&state=' + encodeURIComponent(state);
     url += '&show_dialog=' + encodeURIComponent(true);
     window.location = url; 
