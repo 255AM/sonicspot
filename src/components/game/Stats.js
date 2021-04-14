@@ -9,18 +9,17 @@ import { useHistory } from "react-router-dom"
 
 
 
-
+    //simply precessing a bunch of data for a stats page. consider storing all data in object
     export const Stats = ()=>{
         let i=0
         const history  = useHistory()
-        const {getUri, handleLogoutClick, currentUserObject, getCategoryName} = useContext(GameContext)   
+        const { handleLogoutClick, currentUserObject} = useContext(GameContext)   
         const {getGames, games} = useContext(GameContext)
          
         let usersGames = games.filter((a) => (a.userId === localStorage.getItem("sonic_user")))
         console.log(usersGames);
         //let sGames = games.sort((a, b) => (a.score > b.score) ? -1 : 1)
         let totalGames = usersGames.length
-        
         let totalPoints = usersGames.reduce((a, b) => a + b.score , 0)
         let totalSongs =  usersGames.reduce((a, b) => a + b.songsPlayed, 0)
         let totalCorrectGuesses =  usersGames.reduce((a, b) => a + b.artistGuessCorrect + b.songGuessCorrect, 0)
@@ -33,28 +32,14 @@ import { useHistory } from "react-router-dom"
         let fAverageScore = averageScore.toFixed(1)
         let sortedByScore =  usersGames?.sort((a, b) => (a.score > b.score) ? -1 : 1)
         let totalAnswers = totalSongs*2
-        console.log(usersGames);
-        console.log(sortedByScore);
-        
         
         let userHighScore = sortedByScore[0]?.score
         let userHighScoreCategory = sortedByScore[0]?.category.name
-        
-        
-        console.log(usersGames);
         let nums = usersGames.map((a)=>(a.categoryId))
-        console.log(usersGames);
-        console.log(nums);
         let mostPlayedCategoryId = topKFrequent(nums,1)
-       
-        let mpc = ( usersGames.filter(function(item) {return item.categoryId === mostPlayedCategoryId[0]})
+       let mpc = ( usersGames.filter(function(item) {return item.categoryId === mostPlayedCategoryId[0]})
         .map(function(item) {return item.category.name})); 
           
-        
-        
-        
-        
-        
         function topKFrequent(nums, k) {
             
             let hash = {}
@@ -73,20 +58,17 @@ import { useHistory } from "react-router-dom"
             getGames()
         },[])
 
-        
-            
-        
         return (
             
             <div className = "statsDiv"> 
                 <Menu style={{ backgroundColor: 'white', height: 10, fontSize:20}}>  
-                <Menu.Menu position='left'>
-                    <Menu.Item
+                    <Menu.Menu position='left'>
+                        <Menu.Item
                             position='left'
                             name='Select'
                             onClick={()=>history.push('./')}
                         >
-                        Game Select
+                            Game Select
                         </Menu.Item>
                         
                     </Menu.Menu>
@@ -96,15 +78,15 @@ import { useHistory } from "react-router-dom"
                             name= 'user'
                             onClick={()=>history.push('/stats')}
                         >
-                        Welcome {currentUserObject.userName}
+                            Welcome {currentUserObject.userName}
                         </Menu.Item>
                         <Menu.Item
                             name='logout'
                             onClick={handleLogoutClick}
                         />
                     </Menu.Menu>
-                   
                 </Menu>
+
                 <Grid style={{ backgroundColor: '#121212', fontSize:23,}}>
                     <GridColumn>
                         <Container >
@@ -158,4 +140,4 @@ import { useHistory } from "react-router-dom"
             </div>
         )
     }
-    // style={{  height: 60, }}><TextContainer textAlign='center' verticalAlign='middle'>Total </TextContainer>
+    

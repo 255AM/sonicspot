@@ -42,7 +42,7 @@ export const GameInformationProvider = (props) => {
     
     //take category id(hard coded unique for each choice of game) go to server and return a spotify URI. set uri, name, playlist image and blurb
     const getUri = (categoryId) => {
-        return fetch(`http://localhost:8088/categories/${categoryId}`)
+        return fetch(`https://git.heroku.com/sonicserve.git/categories/${categoryId}`)
         .then(res => res.json())
         
         .then(res => {
@@ -161,7 +161,7 @@ export const GameInformationProvider = (props) => {
     }
     //take userid of localstorage and return current users userName
     const getUserName = () =>{
-      return fetch(`http://localhost:8088/users/${id}`)
+      return fetch(`https://git.heroku.com/sonicserve.git/users/${id}`)
         .then(res => res.json())
         .then(res => res.userName)
         .then(setUserName)
@@ -173,13 +173,13 @@ export const GameInformationProvider = (props) => {
     }
     //send id in localStorage and return current users dataObject
     const getCurrentUserObject = (currentUserId)=>{
-     return fetch(`http://localhost:8088/users/${currentUserId}`)
+     return fetch(`https://git.heroku.com/sonicserve.git/${currentUserId}`)
         .then(res => res.json())
         .then(setCurrentUserObject)
     }
     //upon end of game, send data object
     const setCurrentGameRecord = (gameObject)=>{
-      fetch("http://localhost:8088/games", {
+      fetch("https://git.heroku.com/sonicserve.git/games", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -198,7 +198,7 @@ export const GameInformationProvider = (props) => {
 
     //Get top 10 scores for Leaderboard
     const getGames = () => {
-      return fetch(`http://localhost:8088/games?_expand=user&_expand=category`)
+      return fetch(`https://git.heroku.com/sonicserve.git/games?_expand=user&_expand=category`)
       .then(res => res.json())
 
       .then(setGames)
