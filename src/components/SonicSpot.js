@@ -7,10 +7,24 @@ import "./SonicSpot.css";
 
 
 export const SonicSpot = () => (
+
+
+
   <>
-    <Route exact path="/">
-      <Redirect to="/login" /> 
-    </Route>
+    <Route
+      path='/'
+      render={() => {
+        if (localStorage.getItem("sonic_user") && localStorage.getItem("sonic_user")!=='undefined' && localStorage.getItem("spotifyAuthToken") && localStorage.getItem("spotifyAuthToken")!=='undefined')  {
+          return (
+            <>
+              <ApplicationViews />
+            </>
+          );
+        } else {
+          return <Redirect to="/login" />;
+        }
+      }}
+    />
     <Route path="/login">
       <Login />
     </Route>
