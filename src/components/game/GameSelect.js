@@ -17,6 +17,7 @@ import { useHistory } from "react-router-dom"
         //on each render, get current users 
         useEffect(() => {
            getCurrentUserObject(localStorage.getItem("sonic_user")) 
+           console.log("First thing I remember knowin', is a lonesome whistle blowin' ,and a yougins dream of growing up to ride. On a freight train leavin' town, not knowin' where Im bound...");
         },[])
 
         return(

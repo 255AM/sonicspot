@@ -8,19 +8,7 @@ import "./SonicSpot.css";
 
 export const SonicSpot = () => (
   <>
-    <Route
-      render={() => {
-        if (localStorage.getItem("sonic_user") && localStorage.getItem("sonic_user")!=='undefined')  {
-          return (
-            <>
-              <ApplicationViews />
-            </>
-          );
-        } else {
-          //return <Redirect to="/login" />;
-        }
-      }}
-    />
+    
     <Route path="/login">
       <Login />
     </Route>
