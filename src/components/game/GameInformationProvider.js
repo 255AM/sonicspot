@@ -161,6 +161,7 @@ export const GameInformationProvider = (props) => {
     }
     //take userid of localstorage and return current users userName
     const getUserName = () =>{
+      
       return fetch(`https://sonicserve.herokuapp.com/users/${id}`)
         .then(res => res.json())
         .then(res => res.userName)
@@ -173,7 +174,7 @@ export const GameInformationProvider = (props) => {
     }
     //send id in localStorage and return current users dataObject
     const getCurrentUserObject = (currentUserId)=>{
-     return fetch(`https://sonicserve.herokuapp.com/${currentUserId}`)
+     return fetch(`https://sonicserve.herokuapp.com/users/${currentUserId}`)
         .then(res => res.json())
         .then(setCurrentUserObject)
     }

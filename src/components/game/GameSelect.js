@@ -120,7 +120,7 @@ import { useHistory } from "react-router-dom"
                         </Card>
                         </Grid.Column>
                         <Grid.Column>
-                        <Card style={{marginTop: 20,backgroundColor: '#1db954',      height: 380, fontSize:20}}
+                        <Card style={{marginTop: 20,backgroundColor: '#1db954', height: 380, fontSize:20}}
                                     centered='true'
                                     onClick={event => {
                                        handleCatgoryChoice(5)
