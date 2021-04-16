@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom"
 import { Button, Form, Grid, Header, Image, Message, Segment, Container } from 'semantic-ui-react'
@@ -10,12 +10,20 @@ export const Login = props => {
     const email = useRef()
     const existDialog = useRef()
     const history = useHistory()
+    const [loggedIn, setLoggedIn] = useState('')
 
 
     const existingUserCheck = () => {
         return fetch(`https://sonicserve.herokuapp.com/users?email=${email.current.value}`)
             .then(res => res.json())
             .then(user => user.length ? user[0] : false)
+    }
+
+    const checkLogged=()=>{
+        localStorage.getItem('spotifyAuthToken') && localStorage.getItem('spotifyAuthToken') != 'undefined' ?
+        setLoggedIn(true)
+        :
+        setLoggedIn(false)
     }
 
     const handleLogin = (e) => {
@@ -33,6 +41,10 @@ export const Login = props => {
             })
     }
 
+    useEffect(() => {
+      checkLogged()
+    },[])
+
     return (
         <>    
                 <dialog className="dialog dialog--auth" ref={existDialog}>
@@ -40,49 +52,54 @@ export const Login = props => {
                     <button className="button--close" onClick={e => existDialog.current.close()}>Close</button>
                 </dialog>
 
-                <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-                <Grid.Column style={{ maxWidth: 450 }}>
-                    <Container>
-                        <SpotifyAuth/>
-                    </Container>
-                    <Header as='h1' color='#121212' textAlign='center'>Can you hear the music?
-                    </Header>
-                    
-                    <Header as='h2' color='#121212' textAlign='center'>
-                     Sign in to your account
-                    </Header>
-                    <Form size='large' onSubmit={handleLogin}>
-                    <Segment stacked>
-                        {/* <Form.Input  */}
-                        <input ref={email} 
-                        type="email"
-                        id="email" 
-                        required autoFocus
-                        fluid icon='user' 
-                        iconPosition='left' 
-                        placeholder='E-mail address' 
-                        />
-                        
-                        
+                
+                    {loggedIn ? (
+                        <>       
+                        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+                            <Grid.Column style={{ maxWidth: 450 }}>       
+                                <Header as='h2' color='#121212' textAlign='center'>
+                                Sign in to your account
+                                </Header>
+                                <Form size='large' onSubmit={handleLogin}>
+                                    <Segment stacked>
+                            
+                                        <input ref={email} 
+                                            type="email"
+                                            id="email" 
+                                            required autoFocus
+                                            fluid icon='user' 
+                                            iconPosition='left' 
+                                            placeholder='E-mail address' 
+                                        />
+                                        <Button color='green' fluid size='large' type="submit">
+                                        Login
+                                        </Button>
+                                    </Segment>
+                                </Form>
+                                <Message>
+                                    New to us? <Link to="/register">Sign Up</Link>
+                                </Message>
+                            </Grid.Column>
+                        </Grid>
+                    </>
+                    ) : (
+                        <>
+                        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+                        <Grid.Column style={{ maxWidth: 450 }}>
+                            <Container>
+                                <SpotifyAuth/>
+                            </Container>
+                            <Header as='h1' color='#121212' textAlign='center'>Can you hear the music?
+                            </Header>
+                        </Grid.Column>
+                        </Grid>
+                        </>
+      )
+      
+      }
+                              
+       </>)
+}             
+                
             
-                        <Button color='green' fluid size='large' type="submit">
-                        Login
-                        </Button>
-                    </Segment>
-                    </Form>
-                    <Message>
-                    New to us? <Link to="/register">Sign Up</Link>
-                    </Message>
-                </Grid.Column>
-                </Grid>
-            </>
-               
-          )
-        }
-        
-        
-        
-        
-        
-        
-   
+              

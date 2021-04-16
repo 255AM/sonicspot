@@ -10,14 +10,14 @@ export const SonicSpot = () => (
   <>
     <Route
       render={() => {
-        if (localStorage.getItem("sonic_user") && localStorage.getItem("sonic_user")!== 'undefined') {
+        if (localStorage.getItem("sonic_user") && localStorage.getItem("sonic_user")!=='undefined')  {
           return (
             <>
               <ApplicationViews />
             </>
           );
         } else {
-          return <Redirect to="/login" />;
+          //return <Redirect to="/login" />;
         }
       }}
     />
