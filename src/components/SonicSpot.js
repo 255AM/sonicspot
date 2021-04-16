@@ -8,7 +8,9 @@ import "./SonicSpot.css";
 
 export const SonicSpot = () => (
   <>
-    
+    <Route exact path="/">
+      <Redirect to="/login" /> 
+    </Route>
     <Route path="/login">
       <Login />
     </Route>
