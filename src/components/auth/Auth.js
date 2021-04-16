@@ -78,8 +78,9 @@ class SpotifyAuth extends Component {
     
     
     //***********************************************************************************************FJKDFHDHFHJKDHFJKHDJKFH */
-    ////////////#$%$#%$#$#%^#%^$#$#$  If running local, change to localhost
-    url += '&redirect_uri=' + encodeURIComponent('http://localhost:3000/login');
+    ////////////#$%$#%$#$#%^#%^$#$#$  If running local, change to localhost//if heroku change to https://sonicspot.herokuapp.com/login
+
+    url += '&redirect_uri=' + encodeURIComponent('https://sonicspot.herokuapp.com/login');
     url += '&state=' + encodeURIComponent(state);
     url += '&show_dialog=' + encodeURIComponent(true);
     window.location = url; 
