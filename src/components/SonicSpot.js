@@ -8,20 +8,19 @@ import "./SonicSpot.css";
 
 export const SonicSpot = () => (
 
-
-
   <>
     <Route
       path='/'
       render={() => {
-        if (localStorage.getItem("sonic_user") && localStorage.getItem("sonic_user")!=='undefined' && localStorage.getItem("spotifyAuthToken") && localStorage.getItem("spotifyAuthToken")!=='undefined')  {
+        if (localStorage.getItem("sonic_user") && localStorage.getItem("sonic_user")!=='undefined' )  {
           return (
             <>
               <ApplicationViews />
             </>
           );
         } else {
-          return <Redirect to="/login" />;
+          setTimeout(() => {  return <Redirect to="/login" />; }, 2000)
+          
         }
       }}
     />
@@ -31,6 +30,5 @@ export const SonicSpot = () => (
     <Route path="/register">
       <Register />
     </Route>
-
-   </> 
+  </> 
 )

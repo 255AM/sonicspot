@@ -25,10 +25,10 @@ export const ApplicationViews = () => {
                   <Stats/> 
                 </Route>
                 <Route exact path="/chart">
-                  
                 </Route>
             </GameInformationProvider> 
         </>
     )
 }
+
 

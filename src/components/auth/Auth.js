@@ -64,9 +64,9 @@ class SpotifyAuth extends Component {
     event.preventDefault()
     console.log('You linked your Spotify account!', 'success');
 
-    //const params = this.getHashParams();
-    //const access_token = params.access_token;
-    //console.log(access_token);
+    const params = this.getHashParams();
+    const access_token = params.access_token;
+    console.log(access_token);
 
     const state = this.generateRandomString(16);
     localStorage.setItem('stateKey', state);
@@ -80,7 +80,7 @@ class SpotifyAuth extends Component {
     //***********************************************************************************************FJKDFHDHFHJKDHFJKHDJKFH */
     ////////////#$%$#%$#$#%^#%^$#$#$  If running local, change to http://localhost:3000/login if heroku change to https://sonicspot.herokuapp.com/login
 
-    url += '&redirect_uri=' + encodeURIComponent('https://sonicspot.herokuapp.com/login');
+    url += '&redirect_uri=' + encodeURIComponent('http://localhost:3000/login');
     url += '&state=' + encodeURIComponent(state);
     url += '&show_dialog=' + encodeURIComponent(true);
     window.location = url; 
