@@ -36,7 +36,6 @@ export const GameInformationProvider = (props) => {
     
     //user id of current user. held in local storage
     let id = localStorage.getItem('sonic_user')
-    
     const history = useHistory()
     let arrayOfUris = []
     
@@ -170,6 +169,7 @@ export const GameInformationProvider = (props) => {
     //on logout set user to undefined and go to login page
     const handleLogoutClick = () =>{
       localStorage.setItem('sonic_user', 'undefined')
+      localStorage.setItem('spotifyAuthToken', 'undefined')
       history.push('/login')
     }
     //send id in localStorage and return current users dataObject
