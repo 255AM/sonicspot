@@ -12,15 +12,14 @@ export const SonicSpot = () => (
     <Route
       path='/'
       render={() => {
-        if (localStorage.getItem("sonic_user") && localStorage.getItem("sonic_user")!=='undefined' )  {
+        if (localStorage.getItem("sonic_user")==true && localStorage.getItem("sonic_user")!=='undefined') {
           return (
             <>
               <ApplicationViews />
             </>
           );
         } else {
-          setTimeout(() => {  return <Redirect to="/login" />; }, 2000)
-          
+          return <Redirect to="/login" />
         }
       }}
     />

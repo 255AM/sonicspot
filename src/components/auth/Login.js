@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react"
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom"
 import { Button, Form, Grid, Header, Image, Message, Segment, Container } from 'semantic-ui-react'
 import SpotifyAuth from "./Auth";
@@ -20,7 +20,7 @@ export const Login = props => {
     }
 
     const checkLogged=()=>{
-        localStorage.getItem('spotifyAuthToken') && localStorage.getItem('spotifyAuthToken') != 'undefined' ?
+        localStorage.getItem('sonic_user')==true && localStorage.getItem('sonic_user') != 'undefined' ?
         setLoggedIn(true)
         :
         setLoggedIn(false)
@@ -34,7 +34,8 @@ export const Login = props => {
             .then(exists => {
                 if (exists) {
                     localStorage.setItem("sonic_user", exists.id)
-                    history.push("/")
+                    setLoggedIn(true)
+                    history.push('/login')
                 } else {
                     existDialog.current.showModal()
                 }
@@ -43,7 +44,7 @@ export const Login = props => {
 
     useEffect(() => {
       checkLogged()
-    },[])
+    },[loggedIn])
 
     return (
         <>    
@@ -54,6 +55,18 @@ export const Login = props => {
 
                 
                     {loggedIn ? (
+                        <>
+                        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+                        <Grid.Column style={{ maxWidth: 450 }}>
+                            <Container>
+                                <SpotifyAuth/>
+                            </Container>
+                            <Header as='h1' color='#121212' textAlign='center'>Can you hear the music?
+                            </Header>
+                        </Grid.Column>
+                        </Grid>
+                        </>
+                    ) : (
                         <>       
                         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
                             <Grid.Column style={{ maxWidth: 450 }}>       
@@ -82,18 +95,6 @@ export const Login = props => {
                             </Grid.Column>
                         </Grid>
                     </>
-                    ) : (
-                        <>
-                        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-                        <Grid.Column style={{ maxWidth: 450 }}>
-                            <Container>
-                                <SpotifyAuth/>
-                            </Container>
-                            <Header as='h1' color='#121212' textAlign='center'>Can you hear the music?
-                            </Header>
-                        </Grid.Column>
-                        </Grid>
-                        </>
       )
       
       }
