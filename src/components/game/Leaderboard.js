@@ -28,9 +28,9 @@ import { useHistory } from "react-router-dom"
                         <Menu.Item
                             position='left'
                             name='leaderboard'
-                            onClick={()=>history.push('./leaderboard')}
+                            onClick={()=>history.push('/')}
                         >
-                        Leaderboard
+                        Game Select
                         </Menu.Item>
                         
                     </Menu.Menu>
@@ -51,21 +51,21 @@ import { useHistory } from "react-router-dom"
                 </Menu>
                 {/* end of menu code */}
                 {/* sort scores in ascedning order.return first 10 aling with associated data  */}
-                <Grid style={{  backgroundColor: '#121212',height: '100vh', fontSize:23}}>
-                    <GridColumn>
+                <Grid style={{  backgroundColor: '#222222',height: '110vh', fontSize:23}}>
+                    <GridColumn style={{  backgroundColor: '#222222'}}>
                         <Container >
-                            <Header textAlign='center' style={{  backgroundColor: '#121212', color:'white'}} size='huge'>Top 10 scores</Header>
+                            <Header textAlign='center' style={{  backgroundColor: '#222222', color:'white'}} size='huge'>Top 10 scores</Header>
                         <Container >
-                            <Table padded singleLine size="large" style={{  backgroundColor: '#121212', color:'white'}}>
-                                <Table.Header style={{ color:''}}>
-                                    <Table.Row style={{ color:'white'}}>
-                                        <Table.HeaderCell width={7} style={{ backgroundColor: '#121212', color:'#1DB954'}}>Score</Table.HeaderCell >
-                                        <Table.HeaderCell width={8} style={{ backgroundColor: '#121212', color:'#1DB954'}}>Category</Table.HeaderCell>
-                                        <Table.HeaderCell width={8} style={{ backgroundColor: '#121212', color:'#1DB954'}}>Name</Table.HeaderCell>
+                            <Table padded singleLine size="large" style={{  backgroundColor: '#222222', color:'white'}}>
+                                <Table.Header style={{ backgroundColor: '#222222'}}>
+                                    <Table.Row style={{backgroundColor: '#222222'}}>
+                                        <Table.HeaderCell width={7} style={{ backgroundColor: '#222222', color:'#1DB954'}}>Score</Table.HeaderCell >
+                                        <Table.HeaderCell width={8} style={{ backgroundColor: '#222222', color:'#1DB954'}}>Category</Table.HeaderCell>
+                                        <Table.HeaderCell width={8} style={{ backgroundColor: '#222222', color:'#1DB954'}}>Name</Table.HeaderCell>
                                     </Table.Row>
                                  </Table.Header>
 
-                                <Table.Body>
+                                <Table.Body style={{backgroundColor: '#222222'}}>
                             
                                 {sGames.slice(0,10).map((game) => {
                             

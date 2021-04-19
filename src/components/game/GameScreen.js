@@ -170,11 +170,11 @@ export const GameScreen = () =>{
             </Menu.Menu>
         </Menu>
 
-        <Grid.Row style={{ color: 'white', backgroundColor: '#121212', height: 100, fontSize:35}} >
-                    <Header style={{ color: 'white', backgroundColor: '', height: 200, fontSize:55}}textAlign='center'>Can You Hear The Music</Header>
+        <Grid.Row style={{ color: 'white', backgroundColor: '#121212', height: 10, fontSize:35}} >
+                    <Header style={{ color: 'white', backgroundColor: '', height: 300, fontSize:55}}textAlign='center'>Can You Hear The Music</Header>
 
         </Grid.Row>
-        <Grid.Row style={{ color: '', backgroundColor: '#121212', height: 400, fontSize:35}} >
+        <Grid.Row style={{ color: '', backgroundColor: '#121212', height: 100, fontSize:35}} >
                     <Header style={{ color: 'white', backgroundColor: '', height: 200, fontSize:55}}textAlign='center'></Header>
 
         </Grid.Row>
@@ -325,16 +325,16 @@ export const GameScreen = () =>{
             token= {localStorage.getItem("spotifyAuthToken")}
             uris={["spotify:track:0BM8wPzuihqUE561Poj2b7", "spotify:track:4OpB5ExXiVjj1f3gMfTw4u", "spotify:track:5i3m1HZBzurdMu9zzjBY7r"]}
             styles={{
-              activeColor: '#fff',
-              bgColor: '#fff',
-              color: '#fff',
-              loaderColor: '#fff',
-              sliderColor: '#fff',
-              sliderTrackColor: '#fff',
-              sliderHandleColor: '#fff',
-              trackArtistColor: '#fff',
-              trackNameColor: '#fff',
-              height: 1,
+              activeColor: 'black',
+              bgColor: 'black',
+              color: 'black',
+              loaderColor: 'black',
+              sliderColor: 'black',
+              sliderTrackColor: 'black',
+              sliderHandleColor: 'black',
+              trackArtistColor: 'black',
+              trackNameColor: 'black',
+              height: 0,
             }}
           /> 
         </div>

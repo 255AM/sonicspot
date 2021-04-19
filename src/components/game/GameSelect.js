@@ -54,16 +54,16 @@ import { useHistory } from "react-router-dom"
                        
                     
                 
-                <Grid.Row style={{ color: 'white', backgroundColor: '#444444', height: 100, fontSize:35}} >
+                <Grid.Row style={{ color: 'white', backgroundColor: '#222222', height: 100, fontSize:35}} >
                     <Header style={{ color: 'white', backgroundColor: '', height: 200, fontSize:55}}textAlign='center'>Select a Category</Header>
 
                 </Grid.Row>
             
-                <Grid  columns={3} textAlign='center' style={{  backgroundColor: '#444444', height: '', fontSize:20}} >
+                <Grid  columns={3} textAlign='center' style={{  backgroundColor: '#222222', height: '', fontSize:20}} >
                     
                     <Grid.Row>
                         <Grid.Column stackable>
-                            <Card style={{backgroundColor: '#444444', height: 380, fontSize:20, marginLeft:250}}
+                            <Card style={{backgroundColor: '#1db954', height: 380, fontSize:20, }}
                                     centered='true'
                                     onClick={event => {
                                        handleCatgoryChoice(1)
@@ -91,7 +91,7 @@ import { useHistory } from "react-router-dom"
                         </Card>
                         </Grid.Column>
                         <Grid.Column>
-                        <Card style={{backgroundColor: '#1db954',      height: 380, fontSize:20, marginRight:250}}
+                        <Card style={{backgroundColor: '#1db954',      height: 380, fontSize:20, }}
                                     centered='true'
                                     onClick={event => {
                                        handleCatgoryChoice(3)
@@ -107,7 +107,7 @@ import { useHistory } from "react-router-dom"
                     </Grid.Row>
                     <Grid.Row >
                         <Grid.Column>
-                        <Card style={{backgroundColor: '#1db954', height: 380, fontSize:20, marginTop: 20,marginLeft:250}}
+                        <Card style={{backgroundColor: '#1db954', height: 380, fontSize:20, marginTop: 20,}}
                                     centered='true'
                                     onClick={event => {
                                        handleCatgoryChoice(4)
@@ -135,7 +135,7 @@ import { useHistory } from "react-router-dom"
                         </Card>
                         </Grid.Column>
                         <Grid.Column>
-                        <Card style={{marginTop: 20,backgroundColor: '#1db954',      height: 380, fontSize:20, marginRight:250}}
+                        <Card style={{marginTop: 20,backgroundColor: '#1db954',      height: 380, fontSize:20, }}
                                     centered='true'
                                     onClick={event => {
                                        handleCatgoryChoice(6)

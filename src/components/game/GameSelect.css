@@ -1,11 +1,11 @@
 
 .selectHeader{
     font-size: 5rem;
-    color:#4444;
+    color:#222222;
     padding-top: 1em;
 }
 .selectScreen{
-    background-color: #4444;
+    background-color: #222222;
     height: 100vh;
 }
 
