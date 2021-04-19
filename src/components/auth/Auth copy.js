@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router';
 import {Button, Header} from 'semantic-ui-react'
 
 
@@ -68,9 +67,11 @@ class SpotifyAuth extends Component {
     const params = this.getHashParams();
     const access_token = params.access_token;
     console.log(access_token);
+    localStorage.setItem('spotifyAuthToken', access_token)
 
     const state = this.generateRandomString(16);
     localStorage.setItem('stateKey', state);
+    
 
     let url = 'https://accounts.spotify.com/authorize';
     url += '?response_type=token';
@@ -81,26 +82,14 @@ class SpotifyAuth extends Component {
     //***********************************************************************************************FJKDFHDHFHJKDHFJKHDJKFH */
     ////////////#$%$#%$#$#%^#%^$#$#$  If running local, change to http://localhost:3000/login if heroku change to https://sonicspot.herokuapp.com/ 
 
-    url += '&redirect_uri=' + encodeURIComponent('http://localhost:3000/login');
+    url += '&redirect_uri=' + encodeURIComponent('http://localhost:3000/');
     url += '&state=' + encodeURIComponent(state);
     url += '&show_dialog=' + encodeURIComponent(true);
     window.location = url; 
   };
-  
-  render() {
-    {return (localStorage.getItem('spotifyAuthToken') && localStorage.getItem('spotifyAuthToken') != 'undefined') ?
-    
-    <div className="button_container">
-          
-    <Header style={{fontSize: 50}}className="title is-4"><font color="#121212">You're All Set!</font></Header>
-    <div className="Line" /><br/>
-    <Button color='green' fluid size='large' type="submit" onClick={event =>  window.location.href='/'}>
-    Continue
-    </Button>
-</div>
 
-    :
-    (
+  render() {
+    return (
       <div className="button_container">
           
           <Header style={{fontSize: 50}}className="title is-4"><font color="#121212">Please Log In To Your Premium Spotify Account</font></Header>
@@ -110,7 +99,6 @@ class SpotifyAuth extends Component {
           </Button>
       </div>
     )
-    }
   }
 }
 export default SpotifyAuth;

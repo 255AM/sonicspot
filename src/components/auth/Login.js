@@ -11,6 +11,7 @@ export const Login = props => {
     const existDialog = useRef()
     const history = useHistory()
     const [loggedIn, setLoggedIn] = useState('')
+    const [spotifyLoggedIn, setSpotifyLoggedIn] = useState('')
 
 
     const existingUserCheck = () => {
@@ -24,6 +25,12 @@ export const Login = props => {
         setLoggedIn(true)
         :
         setLoggedIn(false)
+    }
+    const checkSpotifyLogged=()=>{
+        localStorage.getItem('spotifyAuthToken')==true && localStorage.getItem('spotifyAuthToken') != 'undefined' ?
+        setSpotifyLoggedIn(true)
+        :
+        setSpotifyLoggedIn(false)
     }
 
     const handleLogin = (e) => {
@@ -44,7 +51,8 @@ export const Login = props => {
 
     useEffect(() => {
       checkLogged()
-    },[loggedIn])
+     let x=()=>setTimeout(checkSpotifyLogged(),5000)
+    },[loggedIn], [spotifyLoggedIn])
 
     return (
         <>    
@@ -55,6 +63,10 @@ export const Login = props => {
 
                 
                     {loggedIn ? (
+                        spotifyLoggedIn ? <Button color='green' fluid size='large' type="submit">
+                                            Login
+                                        </Button>:
+
                         <>
                         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
                         <Grid.Column style={{ maxWidth: 450 }}>
