@@ -75,6 +75,7 @@ export const GameInformationProvider = (props) => {
             arr = arr.sort(() => Math.random() - 0.5)
             arrayOfUris =arr
         })
+        .catch(error => history.push('./login'));
       }
 
 //Call gets spotify sdk player id and uses that id to start album playback
@@ -93,6 +94,7 @@ export const GameInformationProvider = (props) => {
         .then(response => response.json())
         .then(result => startTrack(result.devices[0].id))
         .then(getTrackInfo)
+        .catch(error => history.push('./login'))
       }
     
 

@@ -171,19 +171,19 @@ export const GameScreen = () =>{
         </Menu>
 
         <Grid.Row style={{ color: 'white', backgroundColor: '#121212', height: 10, fontSize:35}} >
-                    <Header style={{ color: 'white', backgroundColor: '', height: 300, fontSize:55}}textAlign='center'>Can You Hear The Music</Header>
+                    <Header style={{ color: 'white', backgroundColor: '', height: 300, fontSize:45}}textAlign='center'>Can You Hear The Music</Header>
 
         </Grid.Row>
         <Grid.Row style={{ color: '', backgroundColor: '#121212', height: 100, fontSize:35}} >
-                    <Header style={{ color: 'white', backgroundColor: '', height: 200, fontSize:55}}textAlign='center'></Header>
+                    <Header style={{ color: 'white', backgroundColor: '', height: 200, fontSize:45}}textAlign='center'></Header>
 
         </Grid.Row>
         
         <Grid  textAlign='center' verticalAlign='middle' style={{ backgroundColor: '#121212', }}  >
           <Grid.Column style={{ maxWidth: 900 }}>
 
-              <Header dividing textAlign='center' centered style = {{backgroundColor: 'white', fontSize:30, height:40}}>You currently have {currentScore} points!</Header>
-              <Container style={{ color: 'white', backgroundColor: 'white', height: 50, fontSize:10}}>
+              <Header dividing textAlign='center' centered style = {{backgroundColor: 'white', fontSize:30, height:35}}>You currently have {currentScore} points!</Header>
+              <Container fluid style={{ color: 'white', backgroundColor: 'white', height: 50, fontSize:10}}>
               {/* //on game start(triggered by start modal button) start timer// If no game, no timer */}
               {game?
               <Timer endGame = {endGame}

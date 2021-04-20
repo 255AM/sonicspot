@@ -65,6 +65,7 @@ import { useHistory } from "react-router-dom"
                         <Grid.Column stackable>
                             <Card style={{backgroundColor: '#1db954', height: 380, fontSize:20, }}
                                     centered='true'
+                                    stackable='true'
                                     onClick={event => {
                                        handleCatgoryChoice(1)
                                     }}
@@ -79,6 +80,7 @@ import { useHistory } from "react-router-dom"
                         <Grid.Column>
                         <Card style={{backgroundColor: '#1db954',      height: 380, fontSize:20}}
                                     centered='true'
+                                    stackable='true'
                                     onClick={event => {
                                        handleCatgoryChoice(2)
                                     }}
@@ -93,6 +95,7 @@ import { useHistory } from "react-router-dom"
                         <Grid.Column>
                         <Card style={{backgroundColor: '#1db954',      height: 380, fontSize:20, }}
                                     centered='true'
+                                    stackable='true'
                                     onClick={event => {
                                        handleCatgoryChoice(3)
                                     }}
@@ -109,6 +112,7 @@ import { useHistory } from "react-router-dom"
                         <Grid.Column>
                         <Card style={{backgroundColor: '#1db954', height: 380, fontSize:20, marginTop: 20,}}
                                     centered='true'
+                                    stackable='true'
                                     onClick={event => {
                                        handleCatgoryChoice(4)
                                     }}
@@ -123,6 +127,7 @@ import { useHistory } from "react-router-dom"
                         <Grid.Column>
                         <Card style={{marginTop: 20,backgroundColor: '#1db954', height: 380, fontSize:20}}
                                     centered='true'
+                                    stackable='true'
                                     onClick={event => {
                                        handleCatgoryChoice(5)
                                     }}
@@ -137,6 +142,7 @@ import { useHistory } from "react-router-dom"
                         <Grid.Column>
                         <Card style={{marginTop: 20,backgroundColor: '#1db954',      height: 380, fontSize:20, }}
                                     centered='true'
+                                    stackable='true'
                                     onClick={event => {
                                        handleCatgoryChoice(6)
                                     }}
