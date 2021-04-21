@@ -46,10 +46,10 @@ class SpotifyAuth extends Component {
     const state = params.state;
     const storedState = localStorage.getItem('stateKey');
     localStorage.setItem('spotifyAuthToken', access_token);
-    localStorage.getItem('spotifyAuthToken');
+    //localStorage.getItem('spotifyAuthToken');
     
 
-    if (window.localStorage.getItem('spotifyAuthToken')) {
+    if (window.localStorage.getItem('spotifyAuthToken') && window.localStorage.getItem('spotifyAuthToken') != 'undefined') {
       this.setState({ isAuthenticatedWithSpotify: true });
     };
     if (access_token && (state == null || state !== storedState)) {
@@ -81,7 +81,7 @@ class SpotifyAuth extends Component {
     //***********************************************************************************************FJKDFHDHFHJKDHFJKHDJKFH */
     ////////////#$%$#%$#$#%^#%^$#$#$  If running local, change to http://localhost:3000/login if heroku change to https://sonicspot.herokuapp.com/login 
 
-    url += '&redirect_uri=' + encodeURIComponent('https://sonicspot.herokuapp.com/login');
+    url += '&redirect_uri=' + encodeURIComponent('http://localhost:3000/login');
     url += '&state=' + encodeURIComponent(state);
     url += '&show_dialog=' + encodeURIComponent(true);
     window.location = url; 
