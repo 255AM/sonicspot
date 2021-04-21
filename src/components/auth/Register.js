@@ -10,6 +10,7 @@ export const Register = (props) => {
     const email = useRef()
     const verifyPassword = useRef()
     const conflictDialog = useRef()
+    const newUser = useRef()
     const history = useHistory()
     const userName = useHistory()
 
@@ -43,7 +44,8 @@ export const Register = (props) => {
                         .then(createdUser => {
                             if (createdUser.hasOwnProperty("id")) {
                                 localStorage.setItem("sonic_user", createdUser.id)
-                                history.push("/")
+                                newUser.current.showModal()
+                                
                             }
                         })
                 }
@@ -59,6 +61,15 @@ export const Register = (props) => {
             <Grid textAlign='center' style={{ height: '100vh' , width: '500'}}  verticalAlign='middle'>
                 <Grid.Column style={{ maxWidth: 700 }}>
                     <Grid.Row >
+                    <dialog className="dialog dialog--new" ref={newUser}>
+                            <div>User created successfully!</div>
+                            <button className="button--close" onClick={e => {
+                                newUser.current.close()
+                                history.push("/login")
+                                }
+                                }>Close</button>
+                        </dialog>
+
                         <dialog className="dialog dialog--password" ref={conflictDialog}>
                             <div>Account with that email address already exists</div>
                             <button className="button--close" onClick={e => conflictDialog.current.close()}>Close</button>
