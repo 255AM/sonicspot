@@ -21,13 +21,13 @@ export const Login = props => {
     }
 
     const checkLogged=()=>{
-        localStorage.getItem('sonic_user')==true && localStorage.getItem('sonic_user') != 'undefined' ?
+        localStorage.getItem('sonic_user') && localStorage.getItem('sonic_user') != 'undefined' ?
         setLoggedIn(true)
         :
         setLoggedIn(false)
     }
     const checkSpotifyLogged=()=>{
-        localStorage.getItem('spotifyAuthToken')==true && localStorage.getItem('spotifyAuthToken') != 'undefined' ?
+        localStorage.getItem('spotifyAuthToken') && localStorage.getItem('spotifyAuthToken') != 'undefined' ?
         setSpotifyLoggedIn(true)
         :
         setSpotifyLoggedIn(false)
@@ -51,8 +51,8 @@ export const Login = props => {
 
     useEffect(() => {
       checkLogged()
-     let x=()=>setTimeout(checkSpotifyLogged(),5000)
-    },[loggedIn], [spotifyLoggedIn])
+     
+    },[loggedIn])
 
     return (
         <>    
