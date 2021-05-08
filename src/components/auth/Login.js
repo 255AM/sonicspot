@@ -56,6 +56,15 @@ export const Login = props => {
 
     return (
         <>    
+                <Grid.Row style={{ margin: 50, color: '#121212', backgroundColor: 'white', height: 100, fontSize:35}} >
+                    <Header style={{ color: '#121212', backgroundColor: '', height: 200, fontSize:55}}textAlign='center'>Welcome to Sonicspot!</Header>
+
+                </Grid.Row>
+                <Grid.Row style={{ margin: 50, color: '#121212', backgroundColor: 'white', height: 100, fontSize:35}} >
+                    <Header style={{ color: '#121212', backgroundColor: '', height: 200, fontSize:35}}textAlign='center'>A name that tune game</Header>
+
+                </Grid.Row>
+                
                 <dialog className="dialog dialog--auth" ref={existDialog}>
                     <div>User does not exist</div>
                     <button className="button--close" onClick={e => existDialog.current.close()}>Close</button>
@@ -68,7 +77,7 @@ export const Login = props => {
                                         </Button>:
 
                         <>
-                        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+                        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='top'>
                         <Grid.Column style={{ maxWidth: 450 }}>
                             <Container>
                                 <SpotifyAuth/>
@@ -80,7 +89,7 @@ export const Login = props => {
                         </>
                     ) : (
                         <>       
-                        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+                        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='top'>
                             <Grid.Column style={{ maxWidth: 450 }}>       
                                 <Header as='h2' color='#121212' textAlign='center'>
                                 Sign in to your account
@@ -102,7 +111,7 @@ export const Login = props => {
                                     </Segment>
                                 </Form>
                                 <Message>
-                                    New to us? <Link to="/register">Sign Up</Link>
+                                    First Time Player? <Link to="/register">Sign Up</Link>
                                 </Message>
                             </Grid.Column>
                         </Grid>

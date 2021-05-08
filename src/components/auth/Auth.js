@@ -88,10 +88,12 @@ class SpotifyAuth extends Component {
   };
   
   render() {
+
+    
     {return (localStorage.getItem('spotifyAuthToken') && localStorage.getItem('spotifyAuthToken') != 'undefined') ?
     
     <div className="button_container">
-          
+    
     <Header style={{fontSize: 50}}className="title is-4"><font color="#121212">You're All Set!</font></Header>
     <div className="Line" /><br/>
     <Button color='green' fluid size='large' type="submit" onClick={event =>  window.location.href='/'}>
