@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router';
+
 import {Button, Header} from 'semantic-ui-react'
 
 
@@ -49,7 +49,7 @@ class SpotifyAuth extends Component {
     //localStorage.getItem('spotifyAuthToken');
     
 
-    if (window.localStorage.getItem('spotifyAuthToken') && window.localStorage.getItem('spotifyAuthToken') != 'undefined') {
+    if (window.localStorage.getItem('spotifyAuthToken') && window.localStorage.getItem('spotifyAuthToken') !== 'undefined') {
       this.setState({ isAuthenticatedWithSpotify: true });
     };
     if (access_token && (state == null || state !== storedState)) {
@@ -90,7 +90,7 @@ class SpotifyAuth extends Component {
   render() {
 
     
-    {return (localStorage.getItem('spotifyAuthToken') && localStorage.getItem('spotifyAuthToken') != 'undefined') ?
+    {return (localStorage.getItem('spotifyAuthToken') && localStorage.getItem('spotifyAuthToken') !== 'undefined') ?
     
     <div className="button_container">
     

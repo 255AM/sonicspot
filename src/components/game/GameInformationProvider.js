@@ -12,7 +12,7 @@ export const GameInformationProvider = (props) => {
     //spotify playlist uri
     const [albumUri, setAlbumUri] = useState('')
     //local instance of spotify player (sdk). Need this info to start player in beginning, but afterwards it will be the only player existing and unneeded info
-    const [playerId, setPlayerId] = useState('')
+    const [playerId] = useState('')
     //track info currently playing. from spotiy api, used to compare answers
     const [trackInfo, setTrackInfo] = useState([{}])
     //currently logged in userName
@@ -22,9 +22,9 @@ export const GameInformationProvider = (props) => {
     //all games
     const [games, setGames]=useState([])
     //localplaylist creating an array of tracks and shuffling tracks to avoid the same playlist
-    const [localPlaylist, setLocalPlaylist]=useState([])
+    const [localPlaylist]=useState([])
     //individual song uri
-    const [trackUri, setTrackUri] =useState('')
+    const [trackUri] =useState('')
     //image presented at select menu and select confirm modal
     const [playlistImage, setPlaylistImage]=useState('')
     //name of category

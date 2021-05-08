@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react"
-import { Link, Redirect } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { useHistory } from "react-router-dom"
-import { Button, Form, Grid, Header, Image, Message, Segment, Container } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Message, Segment, Container } from 'semantic-ui-react'
 import SpotifyAuth from "./Auth";
 
 
@@ -11,7 +11,7 @@ export const Login = props => {
     const existDialog = useRef()
     const history = useHistory()
     const [loggedIn, setLoggedIn] = useState('')
-    const [spotifyLoggedIn, setSpotifyLoggedIn] = useState('')
+    const [spotifyLoggedIn] = useState('')
 
 
     const existingUserCheck = () => {
@@ -21,17 +21,17 @@ export const Login = props => {
     }
 
     const checkLogged=()=>{
-        localStorage.getItem('sonic_user') && localStorage.getItem('sonic_user') != 'undefined' ?
+        localStorage.getItem('sonic_user') && localStorage.getItem('sonic_user') !== 'undefined' ?
         setLoggedIn(true)
         :
         setLoggedIn(false)
     }
-    const checkSpotifyLogged=()=>{
-        localStorage.getItem('spotifyAuthToken') && localStorage.getItem('spotifyAuthToken') != 'undefined' ?
-        setSpotifyLoggedIn(true)
-        :
-        setSpotifyLoggedIn(false)
-    }
+    // const checkSpotifyLogged=()=>{
+    //     localStorage.getItem('spotifyAuthToken') && localStorage.getItem('spotifyAuthToken') !== 'undefined' ?
+    //     setSpotifyLoggedIn(true)
+    //     :
+    //     setSpotifyLoggedIn(false)
+    // }
 
     const handleLogin = (e) => {
         e.preventDefault()
@@ -100,10 +100,11 @@ export const Login = props => {
                                         <input ref={email} 
                                             type="email"
                                             id="email" 
-                                            required autoFocus
+                                            // required autoFocus
                                             fluid icon='user' 
                                             iconPosition='left' 
                                             placeholder='E-mail address' 
+                                            
                                         />
                                         <Button color='green' fluid size='large' type="submit">
                                         Login
@@ -111,7 +112,8 @@ export const Login = props => {
                                     </Segment>
                                 </Form>
                                 <Message>
-                                    First Time Player? <Link to="/register">Sign Up</Link>
+                                    First Time? <Link to="/register">Sign Up</Link> Or 
+                                     <Link onClick={handleLogin} > Be My Guest</Link> 
                                 </Message>
                             </Grid.Column>
                         </Grid>
