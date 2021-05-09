@@ -3,6 +3,8 @@
 Sonicspot- A name that tune style game using react hooks and spotify api
 
 try it out: https://sonicspot.herokuapp.com/login
+The server refreshes every 24 hours deleting user high scores.
+
 
 I created this app as a front end capstone project for NewForce in a 2 week sprint.
 
