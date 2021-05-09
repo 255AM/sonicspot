@@ -144,7 +144,7 @@ export const GameScreen = () =>{
     return(
       
       <div className = 'gameDiv'>
-        <Menu style={{ backgroundColor: '', height: 10,     fontSize:20}}>  
+        <Menu stackable style={{ backgroundColor: '',  fontSize:20}}>  
           <Menu.Menu position='left'>
             <Menu.Item
               position='left'
@@ -170,20 +170,17 @@ export const GameScreen = () =>{
             </Menu.Menu>
         </Menu>
 
-        <Grid.Row style={{ color: 'white', backgroundColor: '#121212', height: 10, fontSize:35}} >
-                    <Header style={{ color: 'white', backgroundColor: '', height: 300, fontSize:45}}textAlign='center'>Can You Hear The Music</Header>
-
-        </Grid.Row>
-        <Grid.Row style={{ color: '', backgroundColor: '#121212', height: 100, fontSize:35}} >
-                    <Header style={{ color: 'white', backgroundColor: '', height: 200, fontSize:45}}textAlign='center'></Header>
+        
+        <Grid.Row doubling style={{ color: '', backgroundColor: '#121212', fontSize:35}} >
+                    <Header style={{ color: 'white', backgroundColor: '', fontSize:45}}textAlign='center'></Header>
 
         </Grid.Row>
         
-        <Grid  textAlign='center' verticalAlign='middle' style={{ backgroundColor: '#121212', }}  >
+        <Grid  doubling textAlign='center' verticalAlign='middle' style={{ backgroundColor: '#121212', }}  >
           <Grid.Column style={{ maxWidth: 900 }}>
 
-              <Header dividing textAlign='center' centered style = {{backgroundColor: 'white', fontSize:30, height:35}}>You currently have {currentScore} points!</Header>
-              <Container fluid style={{ color: 'white', backgroundColor: 'white', height: 50, fontSize:10}}>
+              <Header dividing textAlign='center' centered style = {{backgroundColor: 'white', fontSize:30, }}>You currently have {currentScore} points!</Header>
+              <Container fluid style={{ color: 'white', backgroundColor: 'white', fontSize:10}}>
               {/* //on game start(triggered by start modal button) start timer// If no game, no timer */}
               {game?
               <Timer endGame = {endGame}

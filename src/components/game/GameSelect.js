@@ -25,7 +25,7 @@ import { useHistory } from "react-router-dom"
 
             <div className = "selectScreen">
             
-                <Menu style={{ backgroundColor: 'white', height: 10, fontSize:20}}>  
+                <Menu stackable style={{ backgroundColor: 'white',  fontSize:20}}>  
                 <Menu.Menu position='left'>
                         <Menu.Item
                             position='left'
@@ -54,12 +54,12 @@ import { useHistory } from "react-router-dom"
                        
                     
                 
-                <Grid.Row style={{ color: 'white', backgroundColor: '#222222', height: 100, fontSize:35}} >
+                <Grid.Row style={{ color: 'white', backgroundColor: '#222222', fontSize:35}} >
                     <Header style={{ color: 'white', backgroundColor: '', height: 200, fontSize:55}}textAlign='center'>Select a Category</Header>
 
                 </Grid.Row>
             
-                <Grid  columns={3} textAlign='center' style={{  backgroundColor: '#222222', height: '', fontSize:20}} >
+                <Grid  doubling columns={3} textAlign='center' style={{  backgroundColor: '#222222', height: '', fontSize:20}} >
                     
                     <Grid.Row>
                         <Grid.Column stackable>
