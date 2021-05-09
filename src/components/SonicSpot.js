@@ -4,6 +4,7 @@ import { ApplicationViews } from "./ApplicationViews";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import "./SonicSpot.css";
+import 'semantic-ui-css/semantic.min.css'
 
 
 export const SonicSpot = () => (
