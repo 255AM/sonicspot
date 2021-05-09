@@ -13,7 +13,7 @@ Years ago, friends and I would listen to the radio and compete to see who could 
 
 During this project, I learned a lot about React. How React hooks operate. How to solve problems with React. How there is a lot left to learn about React (like everything in programming/development). I learned a lot about the Spotify api, as well as the Spotify SDK. I enjoyed getting extensive practice with CRUD operations and utilizing a database.
 
-Please contact me with any suggestions, bugs, ideas for improvements and job offers ;)
+Please contact me with any suggestions, bugs and job offers ;)
 
 
 
