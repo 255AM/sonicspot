@@ -3,6 +3,7 @@
 Sonicspot- A name that tune style game using react hooks and spotify api
 
 try it out: https://sonicspot.herokuapp.com/
+Occassionaly Heroku returns an H12 error, requiring a second page load. I havent isolated the reason for this yet, as it runs quickly locally.
 The server refreshes every 24 hours deleting user high scores.
 
 
