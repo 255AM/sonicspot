@@ -5,12 +5,13 @@ Sonicspot- A name that tune style game using react hooks and spotify api
 try it out: https://sonicspot.herokuapp.com/
 A premium spotify account is required to play.
 Occassionaly Heroku returns an H12 error, usually on first load of a device. Allow load to throw error, click link again and app usually loads. May need to repeat.
+The app was created for desktop with some changes afterwards to give at least the capablility of mobile play
 
 Years ago, friends and I would listen to the radio and compete to see who could name the artist and title of the song that played to show off our music knowledge. This was the motivation for this app. Music and music info has always been a big relationshio builder for me. 
 
 I created this app as a front end capstone project for NewForce in a 2 week sprint. 
 
-The design and layout of the app can still be greatly improved. If I had more time to create it, I would have started with a mobile first layout, but, this was my first attempt using a framework (semantic) with React and time was an issue. 
+The design and layout of the app can still be greatly improved. If I had more time to create it, I would have started with a mobile first layout, but, this was my first attempt using a framework (semantic) with React and given the time constraints, design wasnt my priority. 
 
 The app uses multiple fetch calls for CRUD operations to both spotify and a json server. THe app pulls data, and controls player playback through the spotify API. The Spotify SDK is used for playback. I utilized the react-spotify-web-player library created by Gil Barbara. It can be found at https://github.com/gilbarbara/react-spotify-web-playback.
 
