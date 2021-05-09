@@ -61,31 +61,31 @@ import { useHistory } from "react-router-dom"
         return (
             
             <div className = "statsDiv"> 
-                <Menu style={{ backgroundColor: 'white', height: 10, fontSize:20}}>  
-                    <Menu.Menu position='left'>
-                        <Menu.Item
-                            position='left'
-                            name='Select'
-                            onClick={()=>history.push('./')}
-                        >
-                            Game Select
-                        </Menu.Item>
-                        
-                    </Menu.Menu>
-                    <Menu.Menu position='right'>
-                        <Menu.Item
+                <Menu stackable style={{ backgroundColor: '',  fontSize:20}}>  
+          <Menu.Menu position='left'>
+            <Menu.Item
+              position='left'
+              name='leaderboard'
+              onClick={()=>history.push('./leaderboard')}
+            >
+              Leaderboard
+            </Menu.Item>
+                            
+          </Menu.Menu>
+            <Menu.Menu position='right'>
+            <Menu.Item
                             position='right'
                             name= 'user'
                             onClick={()=>history.push('/stats')}
                         >
-                            Welcome {currentUserObject.userName}
-                        </Menu.Item>
-                        <Menu.Item
-                            name='logout'
-                            onClick={handleLogoutClick}
-                        />
-                    </Menu.Menu>
-                </Menu>
+                Welcome {currentUserObject.userName}
+              </Menu.Item>
+              <Menu.Item
+                name='logout'
+                onClick={handleLogoutClick}
+              />
+            </Menu.Menu>
+        </Menu>
 
                 <Grid style={{ backgroundColor: '#121212', fontSize:23,}}>
                     <GridColumn>

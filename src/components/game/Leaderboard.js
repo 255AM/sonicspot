@@ -23,32 +23,31 @@ import { useHistory } from "react-router-dom"
         return (
             
             <div className = "leaderDiv"> 
-                <Menu style={{ backgroundColor: 'white', height: 10, fontSize:20}}>  
-                    <Menu.Menu position='left'>
-                        <Menu.Item
-                            position='left'
-                            name='leaderboard'
-                            onClick={()=>history.push('/')}
-                        >
-                        Game Select
-                        </Menu.Item>
-                        
-                    </Menu.Menu>
-                    <Menu.Menu position='right'>
-                        <Menu.Item
+                <Menu stackable style={{ backgroundColor: '',  fontSize:20}}>  
+          <Menu.Menu position='left'>
+            <Menu.Item
+              position='left'
+              name='leaderboard'
+              onClick={()=>history.push('./leaderboard')}
+            >
+              Leaderboard
+            </Menu.Item>
+                            
+          </Menu.Menu>
+            <Menu.Menu position='right'>
+            <Menu.Item
                             position='right'
                             name= 'user'
                             onClick={()=>history.push('/stats')}
                         >
-                        Welcome {currentUserObject.userName}
-                        </Menu.Item>
-                        <Menu.Item
-                            name='logout'
-                            onClick={handleLogoutClick}
-                        />
-                    </Menu.Menu>
-                   
-                </Menu>
+                Welcome {currentUserObject.userName}
+              </Menu.Item>
+              <Menu.Item
+                name='logout'
+                onClick={handleLogoutClick}
+              />
+            </Menu.Menu>
+        </Menu>
                 {/* end of menu code */}
                 {/* sort scores in ascedning order.return first 10 aling with associated data  */}
                 <Grid style={{  backgroundColor: '#222222',height: '110vh', fontSize:23}}>
