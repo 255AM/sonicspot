@@ -56,12 +56,12 @@ export const Login = props => {
 
     return (
         <>    
-                <Grid.Row style={{ margin: 50, color: '#121212', backgroundColor: 'white', height: 100, fontSize:35}} >
-                    <Header style={{ color: '#121212', backgroundColor: '', height: 200, fontSize:55}}textAlign='center'>Welcome to Sonicspot!</Header>
+                <Grid.Row style={{ margin: 50, color: '#121212', backgroundColor: 'white', fontSize:35}} >
+                    <Header style={{ color: '#121212', backgroundColor: '',fontSize:55}}textAlign='center'>Welcome to Sonicspot!</Header>
 
                 </Grid.Row>
-                <Grid.Row style={{ margin: 50, color: '#121212', backgroundColor: 'white', height: 100, fontSize:35}} >
-                    <Header style={{ color: '#121212', backgroundColor: '', height: 200, fontSize:35}}textAlign='center'>A name that tune game</Header>
+                <Grid.Row style={{ margin: 50, color: '#121212', backgroundColor: 'white', fontSize:35}} >
+                    <Header style={{ color: '#121212', backgroundColor: '', fontSize:35}}textAlign='center'>A name that tune game</Header>
 
                 </Grid.Row>
                 
@@ -82,8 +82,7 @@ export const Login = props => {
                             <Container>
                                 <SpotifyAuth/>
                             </Container>
-                            <Header as='h1' color='#121212' textAlign='center'>Can you hear the music?
-                            </Header>
+                            
                         </Grid.Column>
                         </Grid>
                         </>
