@@ -1,5 +1,5 @@
 .gameDiv{
     background-color: black;
     height: 100vh;
-    overflow: hidden;
+    overflow: auto;
 }
