@@ -97,7 +97,7 @@ import { useHistory } from "react-router-dom"
                 <Grid style={{ backgroundColor: '#121212', }}>
                     <Grid.Column>
                         <Grid.Row >
-                            <Card.Group centered>
+                            <Card.Group centered = 'true'>
                                 <Card fluid style={{  width: 300, }}>
                                     <Card.Content style={{backgroundColor: "#1DB954" , color: 'white'}}><Header textAlign='center'>Games</Header></Card.Content>
                                     <Card.Content><Header textAlign='center'>Total Games Played: {usersGames.length}</Header></Card.Content>
